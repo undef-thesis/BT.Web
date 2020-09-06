@@ -1,0 +1,23 @@
+.carousel {
+  position: relative;
+}
+
+.search-bar {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 14rem;
+  bottom: 0;
+}
+
+.search-box {
+  width: 35rem;
+  height: 4rem;
+  display: inline-flex;
+  align-items: center;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 10px 10px 30px 15px rgba(0, 0, 0, 0.8);
+  border: 1px solid grey;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}

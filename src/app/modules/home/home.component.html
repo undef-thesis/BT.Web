@@ -1,5 +1,32 @@
-<section class="section mr-6 ml-6 bt-wrapper">
+<section class="hero carousel">
+  <div>
+    <slideshow
+      *ngIf="imageUrlArray.length"
+      [minHeight]="'80vh'"
+      [autoPlay]="true"
+      [showArrows]="false"
+      [imageUrls]="imageUrlArray"
+      [lazyLoad]="imageUrlArray?.length > 1"
+      [autoPlayWaitForLazyLoad]="true"
+      [autoPlayInterval]="7000"
+    >
+    </slideshow>
+  </div>
+  <div class="search-bar">
+    <div class="search-box">
+      <b class="mr-2">Wyszukaj:</b>
+      <input class="input" />
+      <button class="button">Search</button>
+    </div>
+  </div>
+</section>
+
+<section class="section my-6">
   <div class="container">
-    <h1 class="title">Hello bachelor's thesis</h1>
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+    </div>
   </div>
 </section>
