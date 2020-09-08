@@ -1,3 +1,4 @@
+import { ModalService } from './../../core/services/modal.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor() {}
+  constructor(private modalService: ModalService) {}
 
   ngOnInit(): void {
     var navbar = document.querySelector('nav');
@@ -18,5 +19,13 @@ export class NavbarComponent implements OnInit {
         navbar.classList.remove('scrolled');
       }
     };
+  }
+
+  openLoginModal(): void {
+    this.modalService.open('login-modal');
+  }
+
+  openRegisterModal(): void {
+    this.modalService.open('register-modal');
   }
 }

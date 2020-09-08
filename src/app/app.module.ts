@@ -3,26 +3,49 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from './layout/layout.module';
-import { ViewsModule } from './views/views.module';
 import { SharedModule } from './shared/shared.module';
 import { ModulesModule } from './modules/modules.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    ModulesModule,
-    SharedModule,
-    ViewsModule,
-    LayoutModule,
-    CoreModule,
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ModulesModule,
+    SharedModule,
+    LayoutModule,
+    CoreModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
   ],
 
   bootstrap: [AppComponent],
   exports: [],
 })
 export class AppModule {}
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+}
