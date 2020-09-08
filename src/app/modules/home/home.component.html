@@ -1,5 +1,31 @@
-<section class="section mr-6 ml-6 bt-wrapper">
+<section class="hero carousel">
+  <div>
+    <app-carousel
+      [images]="imageUrlArray"
+      [minHeight]="'80vh'"
+      [autoPlay]="true"
+      [showArrows]="false"
+      [autoPlayInterval]="7000"
+    ></app-carousel>
+  </div>
+  <!-- <div class="search-bar">
+    <div class="search-box">
+      <b class="mr-2">Wyszukaj:</b>
+      <input class="input" />
+      <span class="icon"><i class="fas fa-lg fa-search"></i></span>
+    </div>
+  </div> -->
+</section>
+
+<section class="section my-6">
   <div class="container">
-    <h1 class="title">Hello bachelor's thesis</h1>
+    <div class="columns">
+      <div class="column"></div>
+      <div class="column"></div>
+      <div class="column"></div>
+    </div>
   </div>
 </section>
+
+<app-login></app-login>
+<app-register></app-register>

@@ -1,0 +1,30 @@
+{
+  "header": {
+    "login": "Login",
+    "join-us": "Join us"
+  },
+  "footer": {
+    "author": "Aleksander Szatko",
+    "university": "Wrocław University of Sciencec and Technology",
+    "faculty": "Faculty of Microsystem Electronics and Photonics"
+  },
+  "common": {
+    "title": "bachelor's thesis",
+    "by": "by",
+    "is-required": "{{value}} is required"
+  },
+  "auth": {
+    "create-new-account": "Create new account",
+    "already-have-an-account": "Already have an account?",
+    "dont-have-an-account": "Don't have an account",
+    "diffrent-password": "Password doesn't match",
+    "login-to-your-account": "Login to your account"
+  },
+  "account": {
+    "email": "Email",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "password": "Password",
+    "confirm-password": "Confirm password"
+  }
+}

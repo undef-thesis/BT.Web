@@ -1,0 +1,11 @@
+<slideshow
+  *ngIf="images"
+  [minHeight]="minHeight"
+  [autoPlay]="autoPlay"
+  [showArrows]="showArrows"
+  [imageUrls]="images"
+  [lazyLoad]="images?.length > 1"
+  [autoPlayWaitForLazyLoad]="true"
+  [autoPlayInterval]="autoPlayInterval"
+>
+</slideshow>

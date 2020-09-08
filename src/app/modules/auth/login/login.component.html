@@ -1,0 +1,53 @@
+<app-modal
+  title="{{ 'auth.login-to-your-account' | translate }}"
+  id="login-modal"
+>
+  <ng-template let-item>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <input
+        class="input wrapper"
+        formControlName="email"
+        type="text"
+        placeholder="{{ 'account.email' | translate }}"
+      />
+      <div *ngIf="submitted && f.email.errors" class="error">
+        <div *ngIf="f.email.errors.required">
+          {{
+            "common.is-required"
+              | translate: { value: "account.email" | translate }
+          }}
+        </div>
+      </div>
+
+      <input
+        class="input wrapper"
+        formControlName="password"
+        type="password"
+        placeholder="{{ 'account.password' | translate }}"
+      />
+      <div *ngIf="submitted && f.password.errors" class="error">
+        <div *ngIf="f.password.errors.required">
+          {{
+            "common.is-required"
+              | translate: { value: "account.password" | translate }
+          }}
+        </div>
+      </div>
+
+      <div *ngIf="apiError" class="error">{{ apiError }}</div>
+      <div class="has-text-right">
+        <button
+          [ngClass]="{ 'is-loading': isLoading }"
+          class="button is-link mt-2"
+          type="submit"
+        >
+          {{ "header.login" | translate }}
+        </button>
+      </div>
+    </form>
+    <p>
+      {{ "auth.dont-have-an-account" | translate }}
+      {{ "header.join-us" | translate }}
+    </p>
+  </ng-template>
+</app-modal>

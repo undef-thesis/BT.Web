@@ -1,0 +1,112 @@
+<app-modal
+  title="{{ 'auth.create-new-account' | translate }}"
+  id="register-modal"
+>
+  <ng-template let-item>
+    <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+      <input
+        class="input wrapper"
+        formControlName="email"
+        type="text"
+        placeholder="{{ 'account.email' | translate }}"
+      />
+      <div *ngIf="submitted && f.email.errors" class="error">
+        <div *ngIf="f.email.errors.required">
+          {{
+            "common.is-required"
+              | translate: { value: "account.email" | translate }
+          }}
+        </div>
+      </div>
+
+      <input
+        class="input wrapper"
+        formControlName="firstname"
+        type="text"
+        placeholder="{{ 'account.firstname' | translate }}"
+      />
+      <div *ngIf="submitted && f.firstname.errors" class="error">
+        <div *ngIf="f.firstname.errors.required">
+          {{
+            "common.is-required"
+              | translate: { value: "account.firstname" | translate }
+          }}
+        </div>
+      </div>
+
+      <input
+        class="input wrapper"
+        formControlName="lastname"
+        type="text"
+        placeholder="{{ 'account.lastname' | translate }}"
+      />
+      <div *ngIf="submitted && f.lastname.errors" class="error">
+        {{
+          "common.is-required"
+            | translate: { value: "account.lastname" | translate }
+        }}
+      </div>
+
+      <input
+        class="input wrapper"
+        formControlName="password"
+        type="password"
+        placeholder="{{ 'account.password' | translate }}"
+      />
+      <div *ngIf="submitted && f.password.errors" class="error">
+        <div *ngIf="f.password.errors.required">
+          {{
+            "common.is-required"
+              | translate: { value: "account.password" | translate }
+          }}
+        </div>
+      </div>
+
+      <input
+        class="input wrapper"
+        formControlName="confirmPassword"
+        type="password"
+        placeholder="{{ 'account.confirm-password' | translate }}"
+      />
+      <div *ngIf="submitted && f.confirmPassword.errors" class="error">
+        <div *ngIf="f.confirmPassword.errors.required">
+          {{
+            "common.is-required"
+              | translate: { value: "account.confirm-password" | translate }
+          }}
+        </div>
+      </div>
+
+      <div *ngIf="submitted && registerForm.errors?.invalid" class="error">
+        {{ "auth.diffrent-password" | translate }}
+      </div>
+
+      <span *ngIf="apiError">
+        <div *ngFor="let error of apiError.username" class="error">
+          {{ error }}
+        </div>
+        <div *ngFor="let error of apiError.password" class="error">
+          {{ error }}
+        </div>
+        <div *ngFor="let error of apiError.email" class="error">
+          {{ error }}
+        </div>
+      </span>
+
+      <div class="has-text-right">
+        <button
+          [ngClass]="{ 'is-loading': isLoading }"
+          class="button is-link mt-2"
+          type="submit"
+        >
+          {{ "header.join-us" | translate }}
+        </button>
+      </div>
+    </form>
+
+    <p>
+      {{ "auth.already-have-an-account" | translate }}
+      {{ "header.login" | translate }}
+    </p>
+  </ng-template>
+</app-modal>

@@ -1,0 +1,32 @@
+.nav {
+  background: none;
+  position: fixed;
+  width: 100%;
+  transition: all 0.2s ease;
+
+  .navbar-burger {
+    color: white;
+  }
+
+  .navbar-burger > span {
+    height: 2px !important;
+  }
+
+  .logo {
+    color: white;
+  }
+}
+
+nav.scrolled {
+  background: white;
+  box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+
+  .navbar-burger {
+    color: black;
+  }
+
+  .logo {
+    color: black !important;
+  }
+}
