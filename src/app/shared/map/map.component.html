@@ -1,0 +1,12 @@
+<google-map (mapClick)="click($event)" height="100%" width="100%" [zoom]="zoom" [center]="center" [options]="options">
+    <!-- <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+        [title]="marker.title" [options]="marker.options">
+    </map-marker> -->
+    <map-marker *ngIf="marker" [position]="marker.position" [label]="marker.label" [title]="marker.title"
+      [options]="marker.options">
+    </map-marker>
+    <!-- <map-circle *ngFor="let city of citymap" [center]="city.center" [radius]="city.radius" [title]="city.name">
+  </map-circle> -->
+
+    <map-info-window>{{ "info" }}</map-info-window>
+</google-map>

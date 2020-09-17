@@ -1,0 +1,23 @@
+<div class="card-content">
+  {{ "meeting.address" | translate }} ({{
+    "meeting.choose-on-map" | translate
+  }}):
+  <ul>
+    <li>
+      <b>{{ "meeting.street" | translate }}: </b>{{ address.street }}
+    </li>
+    <li>
+      <b>{{ "meeting.city" | translate }}: </b>{{ address.city }}
+    </li>
+    <li>
+      <b>{{ "meeting.postal-code" | translate }}: </b>{{ address.postalCode }}
+    </li>
+    <li>
+      <b>{{ "meeting.province" | translate }}</b>
+      {{ address.province }}
+    </li>
+    <li>
+      <b>{{ "meeting.country" | translate }}: </b>{{ address.country }}
+    </li>
+  </ul>
+</div>
