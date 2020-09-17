@@ -11,7 +11,10 @@
   "common": {
     "title": "bachelor's thesis",
     "by": "by",
-    "is-required": "{{value}} is required"
+    "is-required": "{{value}} is required",
+    "cancel": "Cancel",
+    "choose-file": "Choose file",
+    "no-file-chosen": "No file chosen"
   },
   "auth": {
     "create-new-account": "Create new account",
@@ -26,5 +29,22 @@
     "lastname": "Lastname",
     "password": "Password",
     "confirm-password": "Confirm password"
+  },
+  "meeting": {
+    "add-meeting": "Add meeting",
+    "name": "Name",
+    "description": "Description",
+    "max-participants": "Max participants",
+    "date-time": "Datetime",
+    "category": "Category",
+    "address": "Adres",
+    "choose-on-map": "Choose on map",
+    "country": "country",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "province": "Province",
+    "city": "City",
+    "street": "Street",
+    "postal-code": "Postal code"
   }
 }

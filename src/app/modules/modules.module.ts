@@ -7,9 +7,11 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { AddMeetingComponent } from './add-meeting/add-meeting.component';
+import { AddressCardComponent } from './add-meeting/address-card/address-card.component';
 
 @NgModule({
-  declarations: [HomeComponent, LoginComponent, RegisterComponent],
+  declarations: [HomeComponent, LoginComponent, RegisterComponent, AddMeetingComponent, AddressCardComponent],
   imports: [
     SlideshowModule,
     SharedModule,

@@ -1,0 +1,106 @@
+<div class="section">
+  <div class="container">
+    <form (ngSubmit)="onSubmit(imagesInput)" [formGroup]="addMeetingForm">
+      <div class="columns">
+        <div class="column">
+          <div class="has-text-right">
+            <button class="button mt-2" (click)="onCancel()">
+              {{ "common.cancel" | translate }}
+            </button>
+            <button
+              [ngClass]="{ 'is-loading': isLoading }"
+              class="button is-link mt-2"
+              type="submit"
+            >
+              {{ "meeting.add-meeting" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <input
+            class="input wrapper mb-3"
+            formControlName="name"
+            type="text"
+            placeholder="{{ 'meeting.name' | translate }}"
+          />
+          <input
+            class="input wrapper mb-3"
+            formControlName="description"
+            type="text"
+            placeholder="{{ 'meeting.description' | translate }}"
+          />
+          <input
+            class="input wrapper mb-3"
+            formControlName="maxParticipants"
+            type="number"
+            placeholder="{{ 'meeting.max-participants' | translate }}"
+          />
+          <input
+            class="input wrapper mb-3"
+            formControlName="date"
+            type="datetime-local"
+            placeholder="{{ 'meeting.date-time' | translate }}"
+          />
+          <b class="mb-3">{{ "meeting.category" | translate }}</b>
+          <div class="control has-icons-left mb-3">
+            <div class="select">
+              <select formControlName="category">
+                <option
+                  *ngFor="let category of categories"
+                  [value]="category.id"
+                >
+                  {{ category.name }}
+                </option>
+              </select>
+            </div>
+            <span class="icon is-left">
+              <i class="fas fa-th-list"></i>
+            </span>
+          </div>
+        </div>
+        <div class="column">
+          <img
+            *ngFor="let file of selectedFiles"
+            class="meeting-img"
+            [src]="file"
+          />
+
+          <div class="has-text-right">
+            <input
+              id="file"
+              #imagesInput
+              type="file"
+              formControlName="images"
+              accept="image/*"
+              multiple
+              (change)="onFileChange($event)"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div
+          *ngFor="let address of addresses; let i = index"
+          class="card column address-card mx-2"
+          [ngClass]="{
+            'address-card-active': selectedAddress === i,
+            'has-text-grey': selectedAddress !== i
+          }"
+          (click)="selectAddress(i)"
+        >
+          <app-address-card [address]="address"></app-address-card>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column map">
+          <app-map
+            [readMode]="false"
+            (emittAddress)="emittAddress($event)"
+          ></app-map>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

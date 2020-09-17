@@ -11,7 +11,10 @@
   "common": {
     "title": "bachelor's thesis",
     "by": "zaprojektowane przez",
-    "is-required": "{{value}} jest wymagane"
+    "is-required": "{{value}} jest wymagane",
+    "cancel": "Anuluj",
+    "choose-file": "Wybierz plik",
+    "no-file-chosen": "Nie wybrano żadnego pliku"
   },
   "auth": {
     "create-new-account": "Utwórz nowe konto",
@@ -26,5 +29,22 @@
     "lastname": "Nazwisko",
     "password": "Hasło",
     "confirm-password": "Potwierdź hasło"
+  },
+  "meeting": {
+    "add-meeting": "Dodaj nowy meeting",
+    "name": "Nazwa",
+    "description": "Opis",
+    "max-participants": "Maksymalna liczba uczestników",
+    "date-time": "Data i godzina",
+    "category": "Kategoria",
+    "address": "Adres",
+    "choose-on-map": "Wybierz na mapie",
+    "country": "Państwo",
+    "latitude": "Szerokość geograficzna",
+    "longitude": "Długość geograficzna",
+    "province": "Województwo",
+    "city": "Miasto",
+    "street": "Ulica",
+    "postal-code": "Kod pocztowy"
   }
 }
