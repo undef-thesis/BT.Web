@@ -1,0 +1,66 @@
+<div class="section">
+  <h1 class="title">User profile</h1>
+  <div *ngIf="profile" class="container">
+    <b>Firstname: </b> {{ profile.firstname }} <b>Lastname: </b>
+    {{ profile.lastname }}
+    <figure class="image is-128x128">
+      <img class="is-rounded" src="data:image/JPEG;base64,{{ profile.avatar }}" />
+    </figure>
+
+    <form (ngSubmit)="onSubmit(avatar)" [formGroup]="profileForm">
+      <input
+        class="input wrapper"
+        formControlName="firstname"
+        type="text"
+        placeholder="{{ 'account.firstname' | translate }}"
+      />
+      <div *ngIf="submitted && f.firstname.errors" class="error">
+        <div *ngIf="f.firstname.errors.required">
+          {{
+            "common.is-required"
+              | translate: { value: "account.firstname" | translate }
+          }}
+        </div>
+      </div>
+
+      <input
+        class="input wrapper"
+        formControlName="lastname"
+        type="text"
+        placeholder="{{ 'account.lastname' | translate }}"
+      />
+      <div *ngIf="submitted && f.lastname.errors" class="error">
+        {{
+          "common.is-required"
+            | translate: { value: "account.lastname" | translate }
+        }}
+      </div>
+
+      <input #avatar type="file" formControlName="avatar" accept="image/*" />
+
+      <div class="has-text-right">
+        <button
+          [ngClass]="{ 'is-loading': isLoading }"
+          class="button is-link mt-2"
+          type="submit"
+        >
+          Update
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <h1 class="title">Organized meetings</h1>
+  <div class="container">
+    <app-meeting-card-list
+      [meetings]="organizedMeetings"
+    ></app-meeting-card-list>
+  </div>
+
+  <h1 class="title">Enrolled meetings</h1>
+  <div class="container">
+    <app-meeting-card-list
+      [meetings]="enrolledMeetings"
+    ></app-meeting-card-list>
+  </div>
+</div>

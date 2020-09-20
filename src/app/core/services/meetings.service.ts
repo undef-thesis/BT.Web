@@ -18,6 +18,30 @@ export class MeetingsService {
     );
   }
 
+  public getOrganizedMeetings() {
+    return this.http.get<any>(`${environment.API_URL}/meetings/organized`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
+  public getEnrolledMeetings() {
+    return this.http.get<any>(`${environment.API_URL}/meetings/enrolled`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
+  public getMeetingDetails(id: number) {
+    return this.http.get<any>(`${environment.API_URL}/meetings/${id}`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
   public addMeeting(meeting: Meeting): any {
     const formData = new FormData();
 

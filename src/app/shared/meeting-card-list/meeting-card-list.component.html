@@ -1,1 +1,11 @@
-<app-meeting-card></app-meeting-card>
+<div class="grid2x2">
+  <ng-container *ngFor="let meeting of meetings; let i = index">
+    <app-meeting-card
+      class="card-size"
+      [id]="meeting.id"
+      [name]="meeting.name"
+      [description]="meeting.description"
+      [meeting]="meeting"
+    ></app-meeting-card>
+  </ng-container>
+</div>

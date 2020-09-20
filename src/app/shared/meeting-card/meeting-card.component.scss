@@ -1,0 +1,10 @@
+.card-size {
+  max-width: 20rem !important;
+  min-width: 20rem !important;
+}
+
+.content {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
