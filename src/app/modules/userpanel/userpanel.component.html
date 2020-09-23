@@ -1,66 +1,73 @@
 <div class="section">
-  <h1 class="title">User profile</h1>
-  <div *ngIf="profile" class="container">
-    <b>Firstname: </b> {{ profile.firstname }} <b>Lastname: </b>
-    {{ profile.lastname }}
-    <figure class="image is-128x128">
-      <img class="is-rounded" src="data:image/JPEG;base64,{{ profile.avatar }}" />
-    </figure>
-
-    <form (ngSubmit)="onSubmit(avatar)" [formGroup]="profileForm">
-      <input
-        class="input wrapper"
-        formControlName="firstname"
-        type="text"
-        placeholder="{{ 'account.firstname' | translate }}"
-      />
-      <div *ngIf="submitted && f.firstname.errors" class="error">
-        <div *ngIf="f.firstname.errors.required">
-          {{
-            "common.is-required"
-              | translate: { value: "account.firstname" | translate }
-          }}
+  <div class="container">
+    <div class="columns bt-panel">
+      <div class="column is-3 bt-settings-panel bt-shadow">
+        <div class="bt-settings-title">
+          <div class="bt-title-primary">{{ 'common.menu' | translate }}</div>
+          <div class="bt-title-secondary">
+            {{ 'userpanel.menu-info' | translate }}
+          </div>
+        </div>
+        <aside class="menu">
+          <ul class="menu-list">
+            <li
+              (click)="switchMenu(0)"
+              [ngClass]="{ 'bt-active-menu-tab': activePanel === 0 }"
+            >
+              <a>{{ 'userpanel.personal' | translate }}</a>
+            </li>
+            <li
+              (click)="switchMenu(1)"
+              [ngClass]="{ 'bt-active-menu-tab': activePanel === 1 }"
+            >
+              <a>{{ 'userpanel.organized' | translate }}</a>
+            </li>
+            <li
+              (click)="switchMenu(2)"
+              [ngClass]="{ 'bt-active-menu-tab': activePanel === 2 }"
+            >
+              <a>{{ 'userpanel.enrolled' | translate }}</a>
+            </li>
+          </ul>
+        </aside>
+      </div>
+      <div
+        class="column is-4 bt-shadow bt-center-panel"
+        [ngClass]="{ 'is-8': activePanel !== 0 }"
+      >
+        <div *ngIf="activePanel === 0">
+          <div class="bt-title-primary">{{ 'userpanel.personal' | translate }}</div>
+          <div class="bt-title-secondary">{{ 'userpanel.personal-info' | translate }}</div>
+          <app-personal></app-personal>
+        </div>
+        <div *ngIf="activePanel === 1">
+          <div class="bt-title-primary">{{ 'userpanel.organized' | translate }}</div>
+          <div class="bt-title-secondary">{{ 'userpanel.organized-info' | translate }}</div>
+          <div>
+            <app-meeting-card-list
+              [meetings]="organizedMeetings"
+            ></app-meeting-card-list>
+          </div>
+        </div>
+        <div *ngIf="activePanel === 2">
+          <div class="bt-title-primary">{{ 'userpanel.enrolled' | translate }}</div>
+          <div class="bt-title-secondary">{{ 'userpanel.enrolled-info' | translate }}</div>
+          <div>
+            <app-meeting-card-list
+              [meetings]="enrolledMeetings"
+            ></app-meeting-card-list>
+          </div>
         </div>
       </div>
-
-      <input
-        class="input wrapper"
-        formControlName="lastname"
-        type="text"
-        placeholder="{{ 'account.lastname' | translate }}"
-      />
-      <div *ngIf="submitted && f.lastname.errors" class="error">
-        {{
-          "common.is-required"
-            | translate: { value: "account.lastname" | translate }
-        }}
+      <div *ngIf="activePanel === 0" class="column is-3 bt-shadow">
+        <div>
+          <div class="bt-title-primary">{{ 'userpanel.profile-picture' | translate }}</div>
+          <div class="bt-title-secondary">
+            {{ 'userpanel.profile-picture-info' | translate }}
+          </div>
+        </div>
+        <app-avatar *ngIf="profile" [avatar]="profile.avatar"></app-avatar>
       </div>
-
-      <input #avatar type="file" formControlName="avatar" accept="image/*" />
-
-      <div class="has-text-right">
-        <button
-          [ngClass]="{ 'is-loading': isLoading }"
-          class="button is-link mt-2"
-          type="submit"
-        >
-          Update
-        </button>
-      </div>
-    </form>
-  </div>
-
-  <h1 class="title">Organized meetings</h1>
-  <div class="container">
-    <app-meeting-card-list
-      [meetings]="organizedMeetings"
-    ></app-meeting-card-list>
-  </div>
-
-  <h1 class="title">Enrolled meetings</h1>
-  <div class="container">
-    <app-meeting-card-list
-      [meetings]="enrolledMeetings"
-    ></app-meeting-card-list>
+    </div>
   </div>
 </div>

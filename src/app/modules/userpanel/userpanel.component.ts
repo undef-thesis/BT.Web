@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Profile } from 'src/app/core/models/Profile';
+import { Component, OnInit} from '@angular/core';
 import { MeetingsService } from 'src/app/core/services/meetings.service';
 import { UserProfileService } from 'src/app/core/services/user-profile.service';
+import { MenuOptions } from './helpers/MenuOptions';
 
 @Component({
   selector: 'app-userpanel',
@@ -10,56 +9,37 @@ import { UserProfileService } from 'src/app/core/services/user-profile.service';
   styleUrls: ['./userpanel.component.scss'],
 })
 export class UserpanelComponent implements OnInit {
-  public organizedMeetings;
-  public enrolledMeetings;
+  public organizedMeetings: Array<object> = [];
+  public enrolledMeetings: Array<object> = [];
   public profile = null;
 
-  public profileForm: FormGroup;
-  public submitted: boolean = false;
-  public isLoading: boolean = false;
-  public apiError;
+  public activePanel: MenuOptions = MenuOptions.Personal;
 
   constructor(
     private meetingsServie: MeetingsService,
     private userProfileService: UserProfileService,
-    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.profileForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      avatar: ['', Validators.required],
-    });
-
     this.getOrganizedMeetings();
     this.getEnrolledMeetings();
     this.getUserProfile();
   }
 
-  public onSubmit(avatar): void {
-    this.submitted = true;
-    this.isLoading = true;
-
-    const profile = new Profile(
-      this.f.firstname.value,
-      this.f.lastname.value,
-      avatar.files[0]
-    );
-    console.log(avatar.files[0]);
-
-    this.userProfileService
-      .addProfile(profile)
-      .subscribe(
-        () => {
-        },
-        (error) => {
-          this.apiError = error.error;
-        }
-      )
-      .add(() => {
-        this.isLoading = false;
-      });
+  public switchMenu(menuOptions: MenuOptions): void {
+    switch (menuOptions) {
+      case MenuOptions.Personal:
+        this.activePanel = MenuOptions.Personal;
+        break;
+      case MenuOptions.Organized:
+        this.activePanel = MenuOptions.Organized;
+        break;
+      case MenuOptions.Enrolled:
+        this.activePanel = MenuOptions.Enrolled;
+        break;
+      default:
+        this.activePanel = MenuOptions.Personal;
+    }
   }
 
   private getUserProfile(): void {
@@ -78,9 +58,5 @@ export class UserpanelComponent implements OnInit {
     this.meetingsServie.getEnrolledMeetings().subscribe((meeting) => {
       this.enrolledMeetings = meeting;
     });
-  }
-
-  get f() {
-    return this.profileForm.controls;
   }
 }

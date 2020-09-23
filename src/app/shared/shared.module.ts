@@ -8,6 +8,9 @@ import { MeetingCardListComponent } from './meeting-card-list/meeting-card-list.
 import { CarouselComponent } from './carousel/carousel.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './map/map.component';
+import { RouterModule } from '@angular/router';
+import { TextErrorComponent } from './text-error/text-error.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -16,6 +19,7 @@ import { MapComponent } from './map/map.component';
     ModalComponent,
     CarouselComponent,
     MapComponent,
+    TextErrorComponent,
   ],
   imports: [
     SlideshowModule,
@@ -23,12 +27,16 @@ import { MapComponent } from './map/map.component';
     FormsModule,
     CommonModule,
     GoogleMapsModule,
+    RouterModule,
+    TranslateModule,
   ],
   exports: [
     MeetingCardListComponent,
     ModalComponent,
     CarouselComponent,
     MapComponent,
+    TextErrorComponent,
+    TranslateModule,
   ],
 })
 export class SharedModule {}

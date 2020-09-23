@@ -1,0 +1,25 @@
+.bt-avatar-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.bt-avatar-frame {
+  border: 5px solid lightgrey;
+  border-radius: 290491px;
+  overflow: hidden;
+}
+
+.bt-avatar-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.bt-virtual-input {
+  display: none;
+}
+
+.bt-add-avatar-button {
+  margin-top: 0.7rem;
+  text-align: end;
+}
