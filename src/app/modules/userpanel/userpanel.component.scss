@@ -1,5 +1,19 @@
 @import "../../../styles/variables.scss";
 
+.bt-settings-panel {
+  padding: 0;
+  max-width: 19rem;
+  max-height: 13rem;
+
+  @media only screen and (max-width: 769px) {
+    max-width: none;
+  }
+}
+
+.bt-settings-title {
+  padding: 0.75rem 0.75rem 0 0.75rem;
+}
+
 .bt-panel {
   justify-content: center;
 }
@@ -24,8 +38,12 @@
   }
 }
 
-.bt-settings-title {
-  padding: 0.75rem 0.75rem 0 0.75rem;
+.bt-avatar-panel {
+  max-height: 18rem;
+
+  @media only screen and (min-width: 1408px) {
+    max-height: 16.5rem;
+  }
 }
 
 .bt-title-primary {
@@ -37,16 +55,6 @@
   font-weight: 300;
   font-size: small;
   padding-bottom: 0.75rem;
-}
-
-.bt-settings-panel {
-  padding: 0;
-  max-width: 19rem;
-  max-height: 13rem;
-
-  @media only screen and (max-width: 769px) {
-    max-width: none;
-  }
 }
 
 .bt-shadow {

@@ -61,6 +61,8 @@
     "enrolled-info": "Spotkania do których jesteś zapisany",
     "menu-info": "Zaaktualizuj swoje konto lub sprawdź spotkania",
     "profile-picture": "Zdjęcie profilowe",
-    "profile-picture-info": "Dodaj swoje zdjęcie aby znajomi mogli łatwiej cie rozpoznać"
+    "profile-picture-info": "Dodaj swoje zdjęcie aby znajomi mogli cie rozpoznać",
+    "change-password": "Zmień hasło",
+    "delete-account": "Usuń konto"
   }
 }

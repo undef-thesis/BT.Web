@@ -3,9 +3,9 @@
     <div class="columns bt-panel">
       <div class="column is-3 bt-settings-panel bt-shadow">
         <div class="bt-settings-title">
-          <div class="bt-title-primary">{{ 'common.menu' | translate }}</div>
+          <div class="bt-title-primary">{{ "common.menu" | translate }}</div>
           <div class="bt-title-secondary">
-            {{ 'userpanel.menu-info' | translate }}
+            {{ "userpanel.menu-info" | translate }}
           </div>
         </div>
         <aside class="menu">
@@ -14,19 +14,19 @@
               (click)="switchMenu(0)"
               [ngClass]="{ 'bt-active-menu-tab': activePanel === 0 }"
             >
-              <a>{{ 'userpanel.personal' | translate }}</a>
+              <a>{{ "userpanel.personal" | translate }}</a>
             </li>
             <li
               (click)="switchMenu(1)"
               [ngClass]="{ 'bt-active-menu-tab': activePanel === 1 }"
             >
-              <a>{{ 'userpanel.organized' | translate }}</a>
+              <a>{{ "userpanel.organized" | translate }}</a>
             </li>
             <li
               (click)="switchMenu(2)"
               [ngClass]="{ 'bt-active-menu-tab': activePanel === 2 }"
             >
-              <a>{{ 'userpanel.enrolled' | translate }}</a>
+              <a>{{ "userpanel.enrolled" | translate }}</a>
             </li>
           </ul>
         </aside>
@@ -36,13 +36,29 @@
         [ngClass]="{ 'is-8': activePanel !== 0 }"
       >
         <div *ngIf="activePanel === 0">
-          <div class="bt-title-primary">{{ 'userpanel.personal' | translate }}</div>
-          <div class="bt-title-secondary">{{ 'userpanel.personal-info' | translate }}</div>
+          <div class="bt-title-primary">
+            {{ "userpanel.personal" | translate }}
+          </div>
+          <div class="bt-title-secondary">
+            {{ "userpanel.personal-info" | translate }}
+          </div>
           <app-personal></app-personal>
+          <br />
+          <div class="bt-title-secondary">
+            {{ "userpanel.change-password" | translate }}
+          </div>
+          <br />
+          <div class="bt-title-secondary">
+            {{ "userpanel.delete-account" | translate }}
+          </div>
         </div>
         <div *ngIf="activePanel === 1">
-          <div class="bt-title-primary">{{ 'userpanel.organized' | translate }}</div>
-          <div class="bt-title-secondary">{{ 'userpanel.organized-info' | translate }}</div>
+          <div class="bt-title-primary">
+            {{ "userpanel.organized" | translate }}
+          </div>
+          <div class="bt-title-secondary">
+            {{ "userpanel.organized-info" | translate }}
+          </div>
           <div>
             <app-meeting-card-list
               [meetings]="organizedMeetings"
@@ -50,8 +66,12 @@
           </div>
         </div>
         <div *ngIf="activePanel === 2">
-          <div class="bt-title-primary">{{ 'userpanel.enrolled' | translate }}</div>
-          <div class="bt-title-secondary">{{ 'userpanel.enrolled-info' | translate }}</div>
+          <div class="bt-title-primary">
+            {{ "userpanel.enrolled" | translate }}
+          </div>
+          <div class="bt-title-secondary">
+            {{ "userpanel.enrolled-info" | translate }}
+          </div>
           <div>
             <app-meeting-card-list
               [meetings]="enrolledMeetings"
@@ -59,11 +79,16 @@
           </div>
         </div>
       </div>
-      <div *ngIf="activePanel === 0" class="column is-3 bt-shadow">
+      <div
+        *ngIf="activePanel === 0"
+        class="column is-3 bt-avatar-panel bt-shadow"
+      >
         <div>
-          <div class="bt-title-primary">{{ 'userpanel.profile-picture' | translate }}</div>
+          <div class="bt-title-primary">
+            {{ "userpanel.profile-picture" | translate }}
+          </div>
           <div class="bt-title-secondary">
-            {{ 'userpanel.profile-picture-info' | translate }}
+            {{ "userpanel.profile-picture-info" | translate }}
           </div>
         </div>
         <app-avatar *ngIf="profile" [avatar]="profile.avatar"></app-avatar>
