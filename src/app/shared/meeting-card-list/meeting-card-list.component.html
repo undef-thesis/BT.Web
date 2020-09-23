@@ -1,11 +1,13 @@
-<div class="grid2x2">
+<div class="bt-grid">
   <ng-container *ngFor="let meeting of meetings; let i = index">
     <app-meeting-card
-      class="card-size"
       [id]="meeting.id"
       [name]="meeting.name"
       [description]="meeting.description"
-      [meeting]="meeting"
+      [maxParticipants]="meeting.maxParticipants"
+      [date]="meeting.date"
+      [category]="meeting.category"
+      [images]="meeting.images"
     ></app-meeting-card>
   </ng-container>
 </div>

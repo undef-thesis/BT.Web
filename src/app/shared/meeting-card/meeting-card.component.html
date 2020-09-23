@@ -1,25 +1,31 @@
-<div class="card card-size">
-  <div class="card-image">
+<div class="bt-card">
+  <div>
     <slideshow
-      *ngIf="images.length"
-      [minHeight]="'22vh'"
+      *ngIf="base64images.length"
+      [minHeight]="'12rem'"
       [showArrows]="true"
-      [imageUrls]="images"
+      [imageUrls]="base64images"
     >
     </slideshow>
   </div>
-
-  <div class="card-content">
-    <div class="title">
+  <div class="bt-card-content">
+    <div class="bt-card-title bt-card-text">
       <a [routerLink]="['/meetings/', id]">
-        <b>{{ meeting.name }}</b>
+        <b>{{ name }}</b>
       </a>
     </div>
-    Chetnych: 28
-    <div class="content">
-      {{ meeting.description }}
-      <div><a href="#">#responsive</a></div>
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    <div>
+      {{ "meeting.free-places" | translate }}: {{ maxParticipants }}
+    </div>
+    <div class="bt-card-text">{{ description }}</div>
+
+    <div>
+      <time><b>{{ parseDate }}</b></time>
+    </div>
+    <div>
+      <a [routerLink]="['/meetings/category/', category.id]">
+        #{{ category.name }}
+      </a>
     </div>
   </div>
 </div>

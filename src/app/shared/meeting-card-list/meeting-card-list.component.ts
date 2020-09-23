@@ -7,7 +7,7 @@ import Meeting from 'src/app/core/models/Meeting';
   styleUrls: ['./meeting-card-list.component.scss'],
 })
 export class MeetingCardListComponent implements OnInit {
-  @Input() meetings;
+  @Input() meetings: Array<Meeting>;
 
   constructor() {}
 

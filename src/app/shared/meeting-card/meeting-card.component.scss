@@ -1,10 +1,25 @@
-.card-size {
-  max-width: 20rem !important;
-  min-width: 20rem !important;
-}
+@import "../../../styles/variables.scss";
 
-.content {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+.bt-card {
+  background-color: $white;
+  box-shadow: 0 0.5em 1em -0.125em $shadow-1, 0 0px 0 1px $shadow-2;
+  color: $text-color;
+  width: 18rem;
+  height: 21rem;
+
+  .bt-card-content {
+    padding: 10px 15px 10px 15px;
+    height: 50%;
+  }
+
+  .bt-card-title {
+    font-weight: 800;
+    font-size: larger;
+  }
+
+  .bt-card-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
