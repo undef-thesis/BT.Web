@@ -35,3 +35,22 @@
   color: red;
   font-size: 0.8em;
 }
+
+.section {
+  padding-top: 5rem;
+  background-color: #fcfcfc;
+}
+
+.container {
+  min-height: 65vh;
+}
+
+.button-primary, .button-primary:focus {
+  background-color: $primary;
+  color: $white;
+}
+
+.button-primary:active, .button-primary:hover {
+  background-color: $primary-strength;
+  color: $white;
+}

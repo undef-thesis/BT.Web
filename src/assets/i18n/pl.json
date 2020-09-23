@@ -14,7 +14,9 @@
     "is-required": "{{value}} jest wymagane",
     "cancel": "Anuluj",
     "choose-file": "Wybierz plik",
-    "no-file-chosen": "Nie wybrano żadnego pliku"
+    "no-file-chosen": "Nie wybrano żadnego pliku",
+    "change": "Zmień",
+    "menu": "Menu"
   },
   "auth": {
     "create-new-account": "Utwórz nowe konto",
@@ -28,7 +30,8 @@
     "firstname": "Imię",
     "lastname": "Nazwisko",
     "password": "Hasło",
-    "confirm-password": "Potwierdź hasło"
+    "confirm-password": "Potwierdź hasło",
+    "change-avatar": "Zmień avatar"
   },
   "meeting": {
     "add-meeting": "Dodaj nowy meeting",
@@ -45,6 +48,19 @@
     "province": "Województwo",
     "city": "Miasto",
     "street": "Ulica",
-    "postal-code": "Kod pocztowy"
+    "postal-code": "Kod pocztowy",
+    "images": "Zdjęcia",
+    "free-places": "Wolne miejsca"
+  },
+  "userpanel": {
+    "personal": "Dane konta",
+    "organized": "Utworzone spotkania",
+    "enrolled": "Zapisane spotkania",
+    "personal-info": "Ogólne dane użytkownika",
+    "organized-info": "Spotkania, które organizujesz",
+    "enrolled-info": "Spotkania do których jesteś zapisany",
+    "menu-info": "Zaaktualizuj swoje konto lub sprawdź spotkania",
+    "profile-picture": "Zdjęcie profilowe",
+    "profile-picture-info": "Dodaj swoje zdjęcie aby znajomi mogli łatwiej cie rozpoznać"
   }
 }
