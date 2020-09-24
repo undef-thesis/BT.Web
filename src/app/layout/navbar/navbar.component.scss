@@ -1,3 +1,5 @@
+@import "../../../styles/variables.scss";
+
 .nav {
   background: none;
   position: fixed;
@@ -12,9 +14,13 @@
     height: 2px !important;
   }
 
-  .logo {
+  .text-color {
     color: white;
   }
+}
+
+.nav-white {
+  background: white !important;
 }
 
 nav.scrolled {
@@ -26,7 +32,23 @@ nav.scrolled {
     color: black;
   }
 
-  .logo {
-    color: black !important;
+  .text-color {
+    color: black;
   }
+}
+
+.burger-text {
+  color: black !important;
+}
+
+.bt-avatar-border {
+  border-radius: 290491px;
+  overflow: hidden;
+  border: 2px solid $primary;
+}
+
+.bt-avatar-img {
+  width: 29px;
+  height: 29px;
+  object-fit: cover;
 }
