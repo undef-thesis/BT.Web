@@ -8,9 +8,13 @@
 <div class="bt-avatar-panel">
   <figure
     class="bt-avatar-frame image is-128x128"
-    (click)="openFileDialog(avatarFile)"
+    (click)="openFileDialog()"
   >
-    <img class="bt-avatar-img" *ngIf="!selectedAvatar" src="data:image/JPEG;base64,{{ avatar }}" />
+    <img
+      class="bt-avatar-img"
+      *ngIf="!selectedAvatar"
+      src="data:image/JPEG;base64,{{ avatar }}"
+    />
     <img class="bt-avatar-img" *ngIf="selectedAvatar" [src]="selectedAvatar" />
   </figure>
 </div>
