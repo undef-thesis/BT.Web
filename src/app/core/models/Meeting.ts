@@ -1,45 +1,31 @@
+import Address from './Address';
+import Category from './Category';
+import Image from './Image';
+
 export default class Meeting {
   public name: string;
   public description: string;
   public maxParticipants: number;
   public date: Date;
-  public latitude: number;
-  public longitude: number;
-  public country: string;
-  public province: string;
-  public city: string;
-  public street: string;
-  public postalCode: string;
-  public categoryId: string;
-  public images: Array<any>;
+  public address?: Address;
+  public category?: Category;
+  public images?: Array<Image>;
 
   constructor(
     name: string,
     description: string,
     maxParticipants: number,
     date: Date,
-    latitude: number,
-    longitude: number,
-    country: string,
-    province: string,
-    city: string,
-    street: string,
-    postalCode: string,
-    categoryId: string,
-    images: Array<any>
+    address?: Address,
+    category?: Category,
+    images?: Array<Image>
   ) {
     this.name = name;
     this.description = description;
     this.maxParticipants = maxParticipants;
     this.date = date;
-    this.latitude = latitude;
-    this.longitude = longitude;
-    this.country = country;
-    this.province = province;
-    this.city = city;
-    this.street = street;
-    this.postalCode = postalCode;
-    this.categoryId = categoryId;
+    this.address = address;
+    this.category = category;
     this.images = images;
   }
 }

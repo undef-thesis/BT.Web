@@ -1,106 +1,215 @@
 <div class="section">
   <div class="container">
     <form (ngSubmit)="onSubmit(imagesInput)" [formGroup]="addMeetingForm">
-      <div class="columns">
-        <div class="column">
-          <div class="has-text-right">
-            <button class="button mt-2" (click)="onCancel()">
-              {{ "common.cancel" | translate }}
-            </button>
-            <button
-              [ngClass]="{ 'is-loading': isLoading }"
-              class="button is-link mt-2"
-              type="submit"
-            >
-              {{ "meeting.add-meeting" | translate }}
-            </button>
+      <div class="bt-add-meeting-form">
+        <div class="columns">
+          <!-- HEADER -->
+          <div class="column mt-2">
+            <h1 class="title is-4">{{ "meeting.add-meeting" | translate }}</h1>
           </div>
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column">
-          <input
-            class="input wrapper mb-3"
-            formControlName="name"
-            type="text"
-            placeholder="{{ 'meeting.name' | translate }}"
-          />
-          <input
-            class="input wrapper mb-3"
-            formControlName="description"
-            type="text"
-            placeholder="{{ 'meeting.description' | translate }}"
-          />
-          <input
-            class="input wrapper mb-3"
-            formControlName="maxParticipants"
-            type="number"
-            placeholder="{{ 'meeting.max-participants' | translate }}"
-          />
-          <input
-            class="input wrapper mb-3"
-            formControlName="date"
-            type="datetime-local"
-            placeholder="{{ 'meeting.date-time' | translate }}"
-          />
-          <b class="mb-3">{{ "meeting.category" | translate }}</b>
-          <div class="control has-icons-left mb-3">
-            <div class="select">
-              <select formControlName="category">
-                <option
-                  *ngFor="let category of categories"
-                  [value]="category.id"
-                >
-                  {{ category.name }}
-                </option>
-              </select>
+          <div class="column">
+            <div class="has-text-right">
+              <button class="button mt-2" (click)="onCancel()">
+                {{ "common.cancel" | translate }}
+              </button>
+              <button
+                [ngClass]="{ 'is-loading': isLoading }"
+                class="button button-primary mt-2 ml-2"
+                type="submit"
+              >
+                {{ "meeting.add-meeting" | translate }}
+              </button>
             </div>
-            <span class="icon is-left">
-              <i class="fas fa-th-list"></i>
-            </span>
           </div>
         </div>
-        <div class="column">
-          <img
-            *ngFor="let file of selectedFiles"
-            class="meeting-img"
-            [src]="file"
-          />
-
-          <div class="has-text-right">
+        <div class="columns">
+          <!-- MEETING FORM-->
+          <div class="column">
             <input
-              id="file"
-              #imagesInput
-              type="file"
-              formControlName="images"
-              accept="image/*"
-              multiple
-              (change)="onFileChange($event)"
+              class="input wrapper mb-3"
+              formControlName="name"
+              type="text"
+              placeholder="{{ 'meeting.name' | translate }}"
             />
+            <app-text-error
+              [activator]="submitted"
+              [field]="f.name"
+              translate="{{
+                'common.is-required'
+                  | translate: { value: 'meeting.name' | translate }
+              }}"
+            ></app-text-error>
+            <textarea
+              class="input wrapper mb-3"
+              formControlName="description"
+              type="text"
+              placeholder="{{ 'meeting.description' | translate }}"
+            ></textarea>
+            <app-text-error
+              [activator]="submitted"
+              [field]="f.description"
+              translate="{{
+                'common.is-required'
+                  | translate: { value: 'meeting.description' | translate }
+              }}"
+            ></app-text-error>
+            <input
+              class="input wrapper mb-3"
+              formControlName="maxParticipants"
+              type="number"
+              placeholder="{{ 'meeting.max-participants' | translate }}"
+            />
+            <app-text-error
+              [activator]="submitted"
+              [field]="f.maxParticipants"
+              translate="{{
+                'common.is-required'
+                  | translate: { value: 'meeting.maxParticipants' | translate }
+              }}"
+            ></app-text-error>
+            <input
+              class="input wrapper mb-3"
+              formControlName="date"
+              type="datetime-local"
+              placeholder="{{ 'meeting.date-time' | translate }}"
+            />
+            <app-text-error
+              [activator]="submitted"
+              [field]="f.date"
+              translate="{{
+                'common.is-required'
+                  | translate: { value: 'meeting.date-time' | translate }
+              }}"
+            ></app-text-error>
+            <!-- CATEGORIES-->
+            <b class="mb-3">{{ "meeting.category" | translate }}</b>
+            <div class="control has-icons-left mb-3">
+              <div class="select">
+                <select formControlName="category">
+                  <option
+                    *ngFor="let category of categories"
+                    [value]="category.id"
+                  >
+                    {{ category.name }}
+                  </option>
+                </select>
+              </div>
+              <span class="icon is-left">
+                <i class="fas fa-th-list"></i>
+              </span>
+              <app-text-error
+                [activator]="submitted"
+                [field]="f.category"
+                translate="{{
+                  'common.is-required'
+                    | translate: { value: 'meeting.category' | translate }
+                }}"
+              ></app-text-error>
+            </div>
+          </div>
+          <!-- IMAGES VIEWER-->
+          <div class="column bt-image-viewer">
+            <div>
+              <input
+                id="file"
+                #imagesInput
+                type="file"
+                formControlName="images"
+                accept="image/*"
+                multiple
+                (change)="onFileChange($event)"
+              />
+              <app-text-error
+                [activator]="submitted"
+                [field]="f.images"
+                translate="{{
+                  'common.is-required'
+                    | translate: { value: 'meeting.images' | translate }
+                }}"
+              ></app-text-error>
+            </div>
+            <div class="bt-image-viewer">
+              <img
+                *ngFor="let file of selectedFiles"
+                class="bt-meeting-img"
+                [src]="file"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- ADDRESSES LIST-->
+        <div class="columns">
+          <div
+            *ngFor="let address of addresses; let i = index"
+            class="card column mx-2 mb-3"
+            [ngClass]="{
+              'bt-address-card-active': selectedAddress === i,
+              'has-text-grey': selectedAddress !== i
+            }"
+            (click)="selectAddress(i)"
+          >
+            <app-address-card [address]="address"></app-address-card>
           </div>
         </div>
       </div>
-      <div class="columns">
-        <div
-          *ngFor="let address of addresses; let i = index"
-          class="card column address-card mx-2"
-          [ngClass]="{
-            'address-card-active': selectedAddress === i,
-            'has-text-grey': selectedAddress !== i
-          }"
-          (click)="selectAddress(i)"
-        >
-          <app-address-card [address]="address"></app-address-card>
-        </div>
+      <div>
+        <app-text-error
+          [activator]="submitted"
+          [field]="f.address"
+          translate="{{
+            'common.is-required'
+              | translate: { value: 'meeting.address' | translate }
+          }}"
+        ></app-text-error>
       </div>
-      <div class="columns">
-        <div class="column map">
-          <app-map
-            [readMode]="false"
-            (emittAddress)="emittAddress($event)"
-          ></app-map>
+    </form>
+
+    <!-- MAP -->
+    <div class="columns">
+      <div class="column bt-map">
+        <app-map
+          [readMode]="false"
+          (emittAddress)="emittAddress($event)"
+        ></app-map>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 
+
+        <div class="columns">
+          <div>
+            <app-text-error
+              [activator]="submitted"
+              [field]="f.address"
+              translate="{{
+                'common.is-required'
+                  | translate: { value: 'meeting.address' | translate }
+              }}"
+            ></app-text-error>
+          </div>
+          <div
+            *ngFor="let address of addresses; let i = index"
+            class="card column address-card mx-2 mb-3"
+            [ngClass]="{
+              'address-card-active': selectedAddress === i,
+              'has-text-grey': selectedAddress !== i
+            }"
+            (click)="selectAddress(i)"
+          >
+            <app-address-card [address]="address"></app-address-card>
+          </div>
         </div>
       </div>
     </form>
+
+    <div class="columns">
+      <div class="column map">
+        <app-map
+          [readMode]="false"
+          (emittAddress)="emittAddress($event)"
+        ></app-map>
+      </div>
+    </div>
   </div>
-</div>
+</div> -->

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import Meeting from 'src/app/core/models/Meeting';
 
 @Component({
   selector: 'app-meeting-card-list',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./meeting-card-list.component.scss'],
 })
 export class MeetingCardListComponent implements OnInit {
+  @Input() meetings: Array<Meeting>;
+
   constructor() {}
 
   ngOnInit(): void {}

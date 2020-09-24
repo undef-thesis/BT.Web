@@ -1,0 +1,63 @@
+@import "../../../styles/variables.scss";
+
+.bt-settings-panel {
+  padding: 0;
+  max-width: 19rem;
+  height: 13rem;
+
+  @media only screen and (max-width: 769px) {
+    max-width: none;
+  }
+}
+
+.bt-settings-title {
+  padding: 0.75rem 0.75rem 0 0.75rem;
+}
+
+.bt-panel {
+  justify-content: center;
+}
+
+.bt-center-panel {
+  @media only screen and (min-width: 769px) {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+
+  @media only screen and (max-width: 769px) {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.bt-active-menu-tab {
+  border-left: 4px solid $primary;
+
+  a {
+    padding-left: 1.5rem;
+  }
+}
+
+.bt-avatar-panel {
+  max-height: 18rem;
+
+  @media only screen and (min-width: 1408px) {
+    max-height: 16.5rem;
+  }
+}
+
+.bt-title-primary {
+  font-weight: 700;
+  font-size: large;
+}
+
+.bt-title-secondary {
+  font-weight: 300;
+  font-size: small;
+  padding-bottom: 0.75rem;
+}
+
+.bt-shadow {
+  box-shadow: 0 0.5em 1em -0.125em $shadow-1, 0 0px 0 1px $shadow-2;
+  background-color: $white;
+}

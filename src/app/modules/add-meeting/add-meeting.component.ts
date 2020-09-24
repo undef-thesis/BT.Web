@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Meeting from 'src/app/core/models/Meeting';
 import { CategoriesService } from 'src/app/core/services/categories.service';
 import Address from 'src/app/core/models/Address';
+import Category from 'src/app/core/models/Category';
+import Image from 'src/app/core/models/Image';
 
 @Component({
   selector: 'app-add-meeting',
@@ -18,7 +20,7 @@ export class AddMeetingComponent implements OnInit {
   public apiError;
 
   public selectedFiles = [];
-  
+
   public categories: Array<object>;
   public addresses: Address[];
   public selectedAddress: number = null;
@@ -39,6 +41,7 @@ export class AddMeetingComponent implements OnInit {
       date: ['', Validators.required],
       category: ['', Validators.required],
       images: ['', Validators.required],
+      address: ['', Validators.required],
     });
 
     this.categoriesServie.getCategories().subscribe(
@@ -53,26 +56,32 @@ export class AddMeetingComponent implements OnInit {
 
   public onSubmit(imagesInput): void {
     this.submitted = true;
+
+    if (this.addMeetingForm.invalid) {
+      return;
+    }
+
     this.isLoading = true;
 
+    const meeting: Meeting = new Meeting(
+      this.f.name.value,
+      this.f.description.value,
+      this.f.maxParticipants.value,
+      this.f.date.value
+    );
+
+    const address: Address = new Address(
+      this.addresses[this.selectedAddress].latitude,
+      this.addresses[this.selectedAddress].longitude,
+      this.addresses[this.selectedAddress].country,
+      this.addresses[this.selectedAddress].province,
+      this.addresses[this.selectedAddress].city,
+      this.addresses[this.selectedAddress].street,
+      this.addresses[this.selectedAddress].postalCode
+    );
+
     this.meetingServie
-      .addMeeting(
-        new Meeting(
-          this.f.name.value,
-          this.f.description.value,
-          this.f.maxParticipants.value,
-          this.f.date.value,
-          this.addresses[this.selectedAddress].latitude,
-          this.addresses[this.selectedAddress].longitude,
-          this.addresses[this.selectedAddress].country,
-          this.addresses[this.selectedAddress].province,
-          this.addresses[this.selectedAddress].city,
-          this.addresses[this.selectedAddress].street,
-          this.addresses[this.selectedAddress].postalCode,
-          this.f.category.value,
-          imagesInput.files
-        )
-      )
+      .addMeeting(meeting, address, this.f.category.value, imagesInput.files)
       .subscribe(
         () => {},
         (error) => {
@@ -90,11 +99,10 @@ export class AddMeetingComponent implements OnInit {
 
   public onFileChange(event) {
     this.selectedFiles = [];
-    console.log(event.target.files);
     if (event.target.files.length <= 3) {
       for (let i = 0; i < event.target.files.length; i++) {
         if (event.target.files && event.target.files[i]) {
-          var reader = new FileReader();
+          let reader = new FileReader();
 
           reader.onload = (event: ProgressEvent) => {
             this.selectedFiles.push((<FileReader>event.target).result);
@@ -114,6 +122,7 @@ export class AddMeetingComponent implements OnInit {
   }
 
   public selectAddress(key: number): void {
+    this.f.address.setValue(key);
     this.selectedAddress = key;
     this.cdr.detectChanges();
   }

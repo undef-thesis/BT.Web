@@ -1,0 +1,30 @@
+<input
+  class="bt-virtual-input"
+  #avatarFile
+  type="file"
+  accept="image/*"
+  (change)="onFileChange($event)"
+/>
+<div class="bt-avatar-panel">
+  <figure
+    class="bt-avatar-frame image is-128x128"
+    (click)="openFileDialog()"
+  >
+    <img
+      class="bt-avatar-img"
+      *ngIf="!selectedAvatar"
+      src="data:image/JPEG;base64,{{ avatar }}"
+    />
+    <img class="bt-avatar-img" *ngIf="selectedAvatar" [src]="selectedAvatar" />
+  </figure>
+</div>
+
+<div class="bt-add-avatar-button">
+  <button
+    class="button"
+    [ngClass]="{ 'is-loading': isLoading }"
+    (click)="onSubmit(avatarFile)"
+  >
+    {{ "account.change-avatar" | translate }}
+  </button>
+</div>

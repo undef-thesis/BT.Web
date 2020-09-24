@@ -14,7 +14,9 @@
     "is-required": "{{value}} is required",
     "cancel": "Cancel",
     "choose-file": "Choose file",
-    "no-file-chosen": "No file chosen"
+    "no-file-chosen": "No file chosen",
+    "change": "Change",
+    "menu": "Menu"
   },
   "auth": {
     "create-new-account": "Create new account",
@@ -28,7 +30,8 @@
     "firstname": "Firstname",
     "lastname": "Lastname",
     "password": "Password",
-    "confirm-password": "Confirm password"
+    "confirm-password": "Confirm password",
+    "change-avatar": "Change avatar"
   },
   "meeting": {
     "add-meeting": "Add meeting",
@@ -45,6 +48,21 @@
     "province": "Province",
     "city": "City",
     "street": "Street",
-    "postal-code": "Postal code"
+    "postal-code": "Postal code",
+    "images": "Images",
+    "free-places": "Free places"
+  },
+  "userpanel": {
+    "personal": "Presonal",
+    "organized": "Organized meetings",
+    "enrolled": "Enrolled meetings",
+    "personal-info": "General user information",
+    "organized-info": "Meetings which you organized",
+    "enrolled-info": ">Meetings which you enrolled",
+    "menu-info": "Update profile and check your meetings",
+    "profile-picture": "Profile picture",
+    "profile-picture-info": "Add a photo of you to be easily recognized",
+    "change-password": "Change password",
+    "delete-account": "Delete account"
   }
 }

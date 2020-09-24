@@ -1,12 +1,30 @@
-<google-map (mapClick)="click($event)" height="100%" width="100%" [zoom]="zoom" [center]="center" [options]="options">
-    <!-- <map-marker *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
-        [title]="marker.title" [options]="marker.options">
-    </map-marker> -->
-    <map-marker *ngIf="marker" [position]="marker.position" [label]="marker.label" [title]="marker.title"
-      [options]="marker.options">
-    </map-marker>
-    <!-- <map-circle *ngFor="let city of citymap" [center]="city.center" [radius]="city.radius" [title]="city.name">
+<google-map
+  (mapClick)="click($event)"
+  height="100%"
+  width="100%"
+  [zoom]="zoom"
+  [center]="center"
+  [options]="options"
+>
+  <map-marker
+    #somemarker="mapMarker"
+    *ngIf="marker"
+    [position]="marker.position"
+    [label]="marker.label"
+    [title]="marker.title"
+    [options]="marker.options"
+    (mapClick)="openInfo(somemarker, marker.info)"
+  >
+  </map-marker>
+  <map-info-window>{{ infoContent }}</map-info-window>
+  <!-- <map-circle
+    *ngIf="marker"
+    [center]="marker.position"
+    [radius]="500"
+    [title]="marker.title"
+    [options]="marker.options"
+    #somemarkere="mapMarker1"
+    (mapClick)="openInfo(somemarkere, marker.info)"
+  >
   </map-circle> -->
-
-    <map-info-window>{{ "info" }}</map-info-window>
 </google-map>

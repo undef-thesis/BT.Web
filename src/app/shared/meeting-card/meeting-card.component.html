@@ -1,25 +1,31 @@
-<div class="card">
-  <div class="card-image">
+<div class="bt-card">
+  <div>
     <slideshow
-      *ngIf="Images.length"
-      [minHeight]="'30vh'"
+      *ngIf="base64images.length"
+      [minHeight]="'12rem'"
       [showArrows]="true"
-      [imageUrls]="Images"
+      [imageUrls]="base64images"
     >
     </slideshow>
   </div>
-  <div class="card-content">
-    <div class="title">Koszykowka</div>
-    Chetnych: 28
-    <div class="content">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-      iaculis mauris.
-      <a href="#">#responsive</a>
-      <br />
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+  <div class="bt-card-content">
+    <div class="bt-card-title bt-card-text">
+      <a [routerLink]="['/meetings/', id]">
+        <b>{{ name }}</b>
+      </a>
+    </div>
+    <div>
+      {{ "meeting.free-places" | translate }}: {{ maxParticipants }}
+    </div>
+    <div class="bt-card-text">{{ description }}</div>
+
+    <div>
+      <time><b>{{ parseDate }}</b></time>
+    </div>
+    <div>
+      <a [routerLink]="['/meetings/category/', category.id]">
+        #{{ category.name }}
+      </a>
     </div>
   </div>
-  <footer class="card-footer">
-    <a href="#" class="card-footer-item">See more</a>
-  </footer>
 </div>

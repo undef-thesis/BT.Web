@@ -1,22 +1,86 @@
-<nav class="navbar nav px-3" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="">
-      <h1 class="title logo">{{ 'common.title' | translate }}</h1>
+<nav
+  class="navbar nav nav-border"
+  role="navigation"
+  aria-label="main navigation"
+  [ngClass]="{ 'has-background-white': isWhiteNavMode }"
+>
+  <div class="navbar-brand pl-3">
+    <a class="navbar-item" href="/">
+      <h1
+        [ngClass]="{ 'has-text-black': isWhiteNavMode }"
+        class="title text-color"
+      >
+        {{ "common.title" | translate }}
+      </h1>
     </a>
 
     <a
       role="button"
       class="navbar-burger"
+      #navBurger
       aria-label="menu"
       aria-expanded="false"
+      [ngClass]="{ 'has-text-black': isWhiteNavMode }"
+      (click)="toggleNavbar()"
     >
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
-  <div class="navbar-end">
-    <div class="navbar-item logo" (click)="openLoginModal()">{{ 'header.login' | translate }}</div>
-    <div class="navbar-item logo" (click)="openRegisterModal()"><b>{{ 'header.join-us' | translate }}</b></div>
+
+  <div
+    class="navbar-menu pr-3"
+    [ngClass]="{ 'has-background-none': !isWhiteNavMode }"
+    #navMenu
+  >
+    <div *ngIf="!isLoggedIn" class="navbar-end">
+      <div class="navbar-item" (click)="openLoginModal()">
+        <p
+          id="burger"
+          [ngClass]="{ 'has-text-black': isWhiteNavMode }"
+          class="text-color"
+        >
+          {{ "header.login" | translate }}
+        </p>
+      </div>
+      <div class="navbar-item" (click)="openRegisterModal()">
+        <b
+          id="burger"
+          [ngClass]="{ 'has-text-black': isWhiteNavMode }"
+          class="text-color"
+          >{{ "header.join-us" | translate }}</b
+        >
+      </div>
+    </div>
+    <div *ngIf="isLoggedIn" class="navbar-end">
+      <div class="navbar-item" (click)="createNewMeeting()">
+        <p
+          id="burger"
+          [ngClass]="{ 'has-text-black': isWhiteNavMode }"
+          class="text-color"
+        >
+          {{ "meeting.add-meeting" | translate }}
+        </p>
+      </div>
+      <div class="navbar-item" (click)="openUserPanel()">
+        <p
+          id="burger"
+          [ngClass]="{ 'has-text-black': isWhiteNavMode }"
+          class="text-color"
+        >
+          Userpanel
+        </p>
+      </div>
+      <p [ngClass]="{ 'has-text-black': isWhiteNavMode }" class="navbar-item text-color">|</p>
+      <div *ngIf="profile" class="navbar-item">
+        <b [ngClass]="{ 'has-text-black': isWhiteNavMode }" class="text-color mr-3">
+          {{ profile.firstname }} {{ profile.lastname }}
+        </b>
+        <figure class="image bt-avatar-border">
+          <img class="bt-avatar-img " src="data:image/JPEG;base64,{{ profile.avatar }}" />
+        </figure>
+      </div>
+    </div>
   </div>
 </nav>

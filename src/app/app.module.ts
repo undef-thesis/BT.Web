@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { CoreModule } from './core/core.module';
@@ -16,6 +16,9 @@ import { environment } from '../environments/environment';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,10 +42,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
         deps: [HttpClient],
       },
     }),
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
   ],
 
   bootstrap: [AppComponent],
   exports: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
 

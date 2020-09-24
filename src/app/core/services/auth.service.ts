@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -12,7 +13,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
   private userSubject: BehaviorSubject<boolean>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.userSubject = new BehaviorSubject<boolean>(false);
   }
 
@@ -70,5 +71,11 @@ export class AuthService {
           return response;
         })
       );
+  }
+
+  public logout(): void {
+    this.removeTokens();
+    this.userSubject.next(false);
+    this.router.navigate(['/login']);
   }
 }
