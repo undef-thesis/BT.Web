@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import Meeting from '../models/Meeting';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import Address from '../models/Address';
 
 @Injectable({
   providedIn: 'root',
@@ -42,19 +43,29 @@ export class MeetingsService {
     );
   }
 
-  public addMeeting(meeting: Meeting): any {
+  public addMeeting(
+    meeting: Meeting,
+    address: Address,
+    categoryId: string,
+    images
+  ): any {
     const formData = new FormData();
 
     Object.keys(meeting).forEach((key) => {
-      if (key !== 'images') {
+      if (meeting[key] !== undefined) {
         formData.append(key, meeting[key]);
       }
     });
+    Object.keys(address).forEach((key) => {
+      formData.append(key, address[key]);
+    });
 
-    for (var i = 0; i < meeting.images.length; i++) {
-      console.log(meeting.images[i]);
-      formData.append('images', meeting.images[i]);
+    for (var i = 0; i < images.length; i++) {
+      console.log(images[i]);
+      formData.append('images', images[i]);
     }
+
+    formData.append('categoryId', categoryId);
 
     return this.http
       .post<any>(`${environment.API_URL}/meetings`, formData)

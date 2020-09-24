@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class UserProfileService {
   constructor(private http: HttpClient) {}
 
-  public getUserProfile() {
+  public getUserProfile(): Observable<Profile> {
     return this.http.get<any>(`${environment.API_URL}/account`).pipe(
       map((response) => {
         return response;
@@ -18,14 +19,17 @@ export class UserProfileService {
     );
   }
 
-  public addProfile(profile: Profile) {
-    console.log(profile);
+  public updateProfileData(profile: Profile) {
+    return this.http.post<any>(`${environment.API_URL}/account`, profile).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
 
+  public updateAvatar(avatar) {
     const formData = new FormData();
-
-    Object.keys(profile).forEach((key) => {
-      formData.append(key, profile[key]);
-    });
+    formData.append('avatar', avatar);
 
     return this.http.post<any>(`${environment.API_URL}/account`, formData).pipe(
       map((response) => {
