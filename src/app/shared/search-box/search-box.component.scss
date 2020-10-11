@@ -1,0 +1,47 @@
+.bt-search {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 14rem;
+  bottom: 0;
+}
+
+.bt-search-box {
+  width: 35rem;
+  height: 4rem;
+  display: inline-flex;
+  align-items: center;
+  background: white;
+  border-radius: 2rem;
+  box-shadow: 10px 10px 30px 15px rgba(0, 0, 0, 0.8);
+  border: 1px solid grey;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.ng-autocomplete {
+  .autocomplete-container {
+    box-shadow: none !important;
+  }
+}
+
+.bt-search-basic {
+  text-align: center;
+  width: 100%;
+  padding-top: 2rem;
+}
+
+.bt-search-box-basic {
+  width: 35rem;
+  height: 4rem;
+  display: inline-flex;
+  align-items: center;
+  background: white;
+  border-bottom: 1px solid grey;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.ng-autocomplete {
+  .autocomplete-container {
+    box-shadow: none !important;
+  }
+}
