@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import Meeting from 'src/app/core/models/Meeting';
+import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
 import Category from 'src/app/core/models/Category';
 import Image from 'src/app/core/models/Image';
@@ -13,6 +13,7 @@ export class MeetingCardComponent implements OnInit {
   @Input() id: string;
   @Input() name: string;
   @Input() description: string;
+  @Input() participantCount: number;
   @Input() maxParticipants: number;
   @Input() date: string;
   @Input() images: Array<Image>;
@@ -20,7 +21,7 @@ export class MeetingCardComponent implements OnInit {
 
   public base64images: Array<string> = [];
 
-  constructor() {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {}
 
@@ -30,6 +31,15 @@ export class MeetingCardComponent implements OnInit {
       const img: string = 'data:image/jpg;base64,' + item.picture;
 
       this.base64images.push(img);
+    });
+  }
+
+  public checkOtherMeetingsByCategory() {
+    this.router.navigate(['/meetings'], {
+      relativeTo: this.route,
+      queryParams: {
+        category: this.category.id,
+      },
     });
   }
 

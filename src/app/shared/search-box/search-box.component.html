@@ -1,0 +1,29 @@
+<div [class]="styleBasic ? 'bt-search-basic' : 'bt-search'">
+  <div [class]="styleBasic ? 'bt-search-box-basic' : 'bt-search-box'">
+    <b class="mr-2">{{ "common.search" | translate }}::</b>
+    <input [(ngModel)]="searchTerm" class="input mr-4" />
+    <div class="ng-autocomplete">
+      <ng-autocomplete
+        [(ngModel)]="localization.city"
+        [data]="citySuggest"
+        [searchKeyword]="keyword"
+        (selected)="selectEvent($event)"
+        (inputChanged)="onChangeSearch($event)"
+        [itemTemplate]="itemTemplate"
+        [notFoundTemplate]="notFoundTemplate"
+      >
+      </ng-autocomplete>
+
+      <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item.name + ', ' + item.countryCode"></a>
+      </ng-template>
+
+      <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+      </ng-template>
+    </div>
+    <span class="icon ml-2" (click)="search()"
+      ><i class="fas fa-lg fa-search"></i
+    ></span>
+  </div>
+</div>

@@ -1,9 +1,13 @@
-<div class="bt-grid">
+<div *ngIf="title && meetings" class="bt-title-primary-big">
+  {{ title }}
+</div>
+<div *ngIf="meetings" class="bt-grid">
   <ng-container *ngFor="let meeting of meetings; let i = index">
     <app-meeting-card
       [id]="meeting.id"
       [name]="meeting.name"
       [description]="meeting.description"
+      [participantCount]="meeting.participantCount"
       [maxParticipants]="meeting.maxParticipants"
       [date]="meeting.date"
       [category]="meeting.category"

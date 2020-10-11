@@ -15,17 +15,19 @@
       </a>
     </div>
     <div>
-      {{ "meeting.free-places" | translate }}: {{ maxParticipants }}
+      {{ "meeting.free-slots" | translate }}: {{ participantCount }}/{{
+        maxParticipants
+      }}
     </div>
     <div class="bt-card-text">{{ description }}</div>
 
     <div>
-      <time><b>{{ parseDate }}</b></time>
+      <time
+        ><b>{{ parseDate }}</b></time
+      >
     </div>
     <div>
-      <a [routerLink]="['/meetings/category/', category.id]">
-        #{{ category.name }}
-      </a>
+      <a *ngIf="category" (click)="checkOtherMeetingsByCategory()"> #{{ category.name }} </a>
     </div>
   </div>
 </div>
