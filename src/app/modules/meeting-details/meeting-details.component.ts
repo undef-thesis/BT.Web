@@ -2,6 +2,7 @@ import { MeetingsService } from 'src/app/core/services/meetings.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import moment from 'moment';
 
 @Component({
   selector: 'app-meeting-details',
@@ -36,5 +37,15 @@ export class MeetingDetailsComponent implements OnInit {
       .add(() => {
         this.spinner.hide();
       });
+  }
+
+  public parseDate(date: string): string {
+    return moment(date).format('DD-mm-yyy HH:mm');
+  }
+
+  public joinMeeting(): void {
+    this.meetingsService
+      .joinMeeting(this.meeting.id)
+      .subscribe((response) => console.log(response));
   }
 }

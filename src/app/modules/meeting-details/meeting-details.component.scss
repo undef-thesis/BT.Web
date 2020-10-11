@@ -5,3 +5,13 @@
 .bt-map {
   height: 50vh;
 }
+
+.bt-header {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+
+  &-sub {
+    font-weight: 300;
+  }
+}

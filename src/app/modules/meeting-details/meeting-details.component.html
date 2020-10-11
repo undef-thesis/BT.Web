@@ -1,5 +1,6 @@
 <section class="section">
   <div class="container">
+    <!-- TODO: ADD LOADER -->
     <ngx-spinner
       bdColor="rgba(0, 0, 0, 0.1)"
       size="medium"
@@ -11,28 +12,47 @@
     </ngx-spinner>
     <div *ngIf="meeting" class="columns">
       <div class="column is-9">
-        <h1 class="title">{{ meeting.name }}</h1>
-        <div>
-          Hosted by: {{ meeting.meetingOrganizer.firstname }}
-          {{ meeting.meetingOrganizer.lastname }}
+        <div class="bt-header">
+          <h1 class="title">{{ meeting.name }}</h1>
+          <button class="button" (click)="joinMeeting()">{{ "meeting.join" | translate }}</button>
         </div>
-        <div>{{ meeting.date }}</div>
 
+        <div *ngIf="meeting.meetingOrganizer" class="bt-header bt-header-sub">
+          <div>
+            {{ "meeting.hosted-by" | translate }}:
+            <a [routerLink]="['/users/', meeting.meetingOrganizer.id]">
+              <b>
+                {{ meeting.meetingOrganizer.firstname }}
+                {{ meeting.meetingOrganizer.lastname }}
+              </b>
+            </a>
+          </div>
+          <div>
+            {{ "meeting.free-slots" | translate }}: {{ meeting.participantCount }}/{{
+              meeting.maxParticipants
+            }}
+          </div>
+        </div>
+        <div class="bt-header-sub">{{ "meeting.date" | translate }}: {{ parseDate(meeting.date) }}</div>
+
+        <br />
+        <div class="bt-title-primary">{{ "meeting.description" | translate }}</div>
         <div>{{ meeting.description }}</div>
-        <div>{{ meeting.category.name }}</div>
-        <div>{{ meeting.maxParticipants }}</div>
 
-        <div>{{ meeting.createdAt }}</div>
-        <div>{{ meeting.updatedAt }}</div>
+        <br />
+        <div>
+          <a [routerLink]="['/category/', meeting.category.id]">
+            <div>#{{ meeting.category.name }}</div>
+          </a>
+        </div>
 
-        <div>{{ meeting.category.id }}</div>
-        <div>{{ meeting.category.name }}</div>
-
+        <div>{{ "meeting.last-update" | translate }}: {{ parseDate(meeting.updatedAt) }}</div>
         <div class="bt-map">
           <app-map
             [readMode]="true"
             [latitude]="meeting.address.latitude"
             [longitude]="meeting.address.longitude"
+            [range]="meeting.address.range"
             [title]="meeting.name"
             [address]="meeting.address"
           ></app-map>
