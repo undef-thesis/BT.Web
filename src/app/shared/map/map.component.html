@@ -17,13 +17,14 @@
   >
   </map-marker>
   <map-info-window>{{ infoContent }}</map-info-window>
+  <map-circle *ngIf="marker && r" [center]="marker.position" [radius]="+r">
+  </map-circle>
   <!-- <map-circle
     *ngIf="marker"
     [center]="marker.position"
-    [radius]="500"
+    [radius]="range"
     [title]="marker.title"
     [options]="marker.options"
-    #somemarkere="mapMarker1"
     (mapClick)="openInfo(somemarkere, marker.info)"
   >
   </map-circle> -->
