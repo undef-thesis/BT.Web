@@ -11,6 +11,8 @@ import { MapComponent } from './map/map.component';
 import { RouterModule } from '@angular/router';
 import { TextErrorComponent } from './text-error/text-error.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { SearchBoxComponent } from './search-box/search-box.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CarouselComponent,
     MapComponent,
     TextErrorComponent,
+    SearchBoxComponent,
   ],
   imports: [
     SlideshowModule,
@@ -29,6 +32,7 @@ import { TranslateModule } from '@ngx-translate/core';
     GoogleMapsModule,
     RouterModule,
     TranslateModule,
+    AutocompleteLibModule
   ],
   exports: [
     MeetingCardListComponent,
@@ -37,6 +41,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MapComponent,
     TextErrorComponent,
     TranslateModule,
+    SearchBoxComponent
   ],
 })
 export class SharedModule {}

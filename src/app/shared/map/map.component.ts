@@ -5,6 +5,7 @@ import {
   EventEmitter,
   Output,
   ViewChild,
+  SimpleChanges,
 } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import Address from 'src/app/core/models/Address';
@@ -19,6 +20,7 @@ export class MapComponent implements OnInit {
   @Input() readMode: boolean = false;
   @Input() latitude: number;
   @Input() longitude: number;
+  @Input() range: number;
   @Input() title: string;
   @Input() address: Address;
   @Output() emittAddress = new EventEmitter<Array<Address>>();
@@ -26,6 +28,8 @@ export class MapComponent implements OnInit {
   public NUMBER_OF_ADDRESS_SUGGESTIONS: number = 4;
   public marker;
   public infoContent;
+
+  public r: number = 0;
 
   zoom = 12;
   center: google.maps.LatLngLiteral;
@@ -44,14 +48,41 @@ export class MapComponent implements OnInit {
         lat: this.latitude,
         lng: this.longitude,
       };
-
+// TODO: pomyslec nad wyswietleniem eventow z calego miasta do home.component
       this.marker = {
         position: {
           lat: this.latitude,
           lng: this.longitude,
         },
         title: this.title,
-        info: this.prepareAddress(),
+        info: this.address && this.prepareAddress(),
+      };
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+      });
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.range && changes.range.currentValue) {
+      this.r = changes.range.currentValue;
+    }
+
+    if (changes.latitude && changes.latitude.currentValue) {
+      this.center = {
+        lat: changes.latitude.currentValue,
+        lng: changes.longitude.currentValue,
+      };
+
+      this.marker = {
+        position: {
+          lat: changes.latitude.currentValue,
+          lng: changes.longitude.currentValue,
+        },
       };
     } else {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -65,14 +96,14 @@ export class MapComponent implements OnInit {
 
   private prepareAddress(): string {
     const { street, province, postalCode, city, country } = this.address;
-    return `${street} - ${province} - ${postalCode} - ${city} - ${country}`; 
-    // return 
+    return `${street} - ${province} - ${postalCode} - ${city} - ${country}`;
+    // return
     //   '<div>' +
     //     '<div>' + street + '</div>'+
     //     '<div>'+ province + '</div>' +
     //     '<div>'+ postalCode + '</div>' +
     //     '<div>'+ city + '</div>' +
-    //     '<div>'+ country + '</div>' + 
+    //     '<div>'+ country + '</div>' +
     //   '</div>';
   }
 

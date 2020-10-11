@@ -1,8 +1,4 @@
-.carousel {
-  position: relative;
-}
-
-.search-bar {
+.bt-search {
   position: absolute;
   text-align: center;
   width: 100%;
@@ -10,7 +6,7 @@
   bottom: 0;
 }
 
-.search-box {
+.bt-search-box {
   width: 35rem;
   height: 4rem;
   display: inline-flex;
@@ -28,6 +24,24 @@
   }
 }
 
-.bt-map {
-  height: 50vh;
+.bt-search-basic {
+  text-align: center;
+  width: 100%;
+  padding-top: 2rem;
+}
+
+.bt-search-box-basic {
+  width: 35rem;
+  height: 4rem;
+  display: inline-flex;
+  align-items: center;
+  background: white;
+  border-bottom: 1px solid grey;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.ng-autocomplete {
+  .autocomplete-container {
+    box-shadow: none !important;
+  }
 }

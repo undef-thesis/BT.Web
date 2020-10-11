@@ -14,9 +14,25 @@ import { UserpanelComponent } from './userpanel/userpanel.component';
 import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
 import { PersonalComponent } from './userpanel/components/personal/personal.component';
 import { AvatarComponent } from './userpanel/components/avatar/avatar.component';
+import { RouterModule } from '@angular/router';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { MeetingsComponent } from './meetings/meetings.component';
 
 @NgModule({
-  declarations: [HomeComponent, LoginComponent, RegisterComponent, AddMeetingComponent, AddressCardComponent, UserpanelComponent, MeetingDetailsComponent, PersonalComponent, AvatarComponent],
+  declarations: [
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent,
+    AddMeetingComponent,
+    AddressCardComponent,
+    UserpanelComponent,
+    MeetingDetailsComponent,
+    PersonalComponent,
+    AvatarComponent,
+    UserProfileComponent,
+    MeetingsComponent,
+  ],
   imports: [
     SlideshowModule,
     SharedModule,
@@ -24,7 +40,9 @@ import { AvatarComponent } from './userpanel/components/avatar/avatar.component'
     ReactiveFormsModule,
     FormsModule,
     TranslateModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    RouterModule,
+    AutocompleteLibModule,
   ],
   exports: [TranslateModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

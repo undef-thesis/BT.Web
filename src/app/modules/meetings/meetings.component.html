@@ -1,0 +1,20 @@
+<section class="section pt-6">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <app-search-box
+          [localization]="{ city: 'Wroclaw' }"
+          [styleBasic]="true"
+        ></app-search-box>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <app-meeting-card-list
+          title="Spotkania w twoim mieście: Wroclaw"
+          [meetings]="meetings"
+        ></app-meeting-card-list>
+      </div>
+    </div>
+  </div>
+</section>

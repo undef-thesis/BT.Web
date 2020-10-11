@@ -8,6 +8,7 @@ interface Address {
   latitude?: number;
   longitude?: number;
   country?: string;
+  countryCode?: string;
   province?: string;
   city?: string;
   street?: string;
@@ -24,7 +25,7 @@ export class GoogleAddressParser {
 
   constructor(
     private addressComponents: Array<AddressComponent>,
-    private coordinates: Coordinates
+    private coordinates: Coordinates,
   ) {
     this.parseAddress();
   }
@@ -74,6 +75,34 @@ export class GoogleAddressParser {
         this.address.postalCode = component.long_name;
       }
     }
+  }
+
+  public parseAddressShort() {
+    if (!Array.isArray(this.addressComponents)) {
+      throw Error('Address Components is not an array');
+    }
+
+    if (!this.addressComponents.length) {
+      throw Error('Address Components is empty');
+    }
+
+    for (let i = 0; i < this.addressComponents.length; i++) {
+      const component: AddressComponent = this.addressComponents[i];
+
+      this.address.latitude = this.coordinates.latitude;
+      this.address.longitude = this.coordinates.longitude;
+
+      if (this.isCity(component)) {
+        this.address.city = component.long_name;
+      }
+
+      if (this.isCountry(component)) {
+        this.address.country = component.long_name;
+        this.address.countryCode = component.short_name;
+      }
+    }
+
+    return this.address;
   }
 
   private isStreetNumber(component: AddressComponent): boolean {

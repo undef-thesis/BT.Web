@@ -8,6 +8,7 @@ import Meeting from 'src/app/core/models/Meeting';
 })
 export class MeetingCardListComponent implements OnInit {
   @Input() meetings: Array<Meeting>;
+  @Input() title: string;
 
   constructor() {}
 

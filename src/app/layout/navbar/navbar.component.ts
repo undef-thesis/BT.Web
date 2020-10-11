@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserProfileService } from 'src/app/core/services/user-profile.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -13,9 +15,12 @@ export class NavbarComponent implements OnInit {
   @ViewChild('navBurger') navBurger: ElementRef;
   @ViewChild('navMenu') navMenu: ElementRef;
 
+  private ngUnsubscribe = new Subject();
+
   public profile = null;
   public isLoggedIn: boolean = false;
   public isWhiteNavMode: boolean = false;
+  public isMenuOpen: boolean = false;
 
   constructor(
     private modalService: ModalService,
@@ -35,22 +40,35 @@ export class NavbarComponent implements OnInit {
       }
     };
 
-    this.authService.isLoggedIn.subscribe((response) => {
-      if (response) this.isLoggedIn = true;
-      else {
-        this.isLoggedIn = false;
-      }
-    });
+    this.authService.isLoggedIn
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((response) => {
+        this.isLoggedIn = response;
 
-    this.getUserProfile();
+        this.getUserProfile();
+      });
 
     this.navMode();
   }
 
+  public openMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  public logout(): void {
+    this.authService.logout();
+    this.isLoggedIn = false;
+  }
+
   public getUserProfile(): void {
-    this.userProfileService.getUserProfile().subscribe((userProfile) => {
-      this.profile = userProfile;
-    });
+    if (this.isLoggedIn) {
+      this.userProfileService
+        .getUserProfile()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe((userProfile) => {
+          this.profile = userProfile;
+        });
+    }
   }
 
   public toggleNavbar() {
@@ -74,6 +92,10 @@ export class NavbarComponent implements OnInit {
     this.navMode();
   }
 
+  public openHome(): void {
+    this.router.navigate(['/']);
+  }
+
   public createNewMeeting(): void {
     this.router.navigate(['/meetings/add']);
 
@@ -81,16 +103,18 @@ export class NavbarComponent implements OnInit {
   }
 
   private navMode() {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        const url: string = event.url;
+    this.router.events
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          const url: string = event.url;
 
-        if (url !== '/') {
-          this.isWhiteNavMode = true;
-          return;
+          if (url !== '/') {
+            this.isWhiteNavMode = true;
+            return;
+          }
+          this.isWhiteNavMode = false;
         }
-        this.isWhiteNavMode = false;
-      }
-    });
+      });
   }
 }

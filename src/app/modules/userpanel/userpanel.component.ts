@@ -1,4 +1,6 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { MeetingsService } from 'src/app/core/services/meetings.service';
 import { UserProfileService } from 'src/app/core/services/user-profile.service';
 import { MenuOptions } from './helpers/MenuOptions';
@@ -9,6 +11,8 @@ import { MenuOptions } from './helpers/MenuOptions';
   styleUrls: ['./userpanel.component.scss'],
 })
 export class UserpanelComponent implements OnInit {
+  private ngUnsubscribe = new Subject();
+
   public organizedMeetings: Array<object> = [];
   public enrolledMeetings: Array<object> = [];
   public profile = null;
@@ -17,7 +21,7 @@ export class UserpanelComponent implements OnInit {
 
   constructor(
     private meetingsServie: MeetingsService,
-    private userProfileService: UserProfileService,
+    private userProfileService: UserProfileService
   ) {}
 
   ngOnInit(): void {
@@ -43,20 +47,29 @@ export class UserpanelComponent implements OnInit {
   }
 
   private getUserProfile(): void {
-    this.userProfileService.getUserProfile().subscribe((userProfile) => {
-      this.profile = userProfile;
-    });
+    this.userProfileService
+      .getUserProfile()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((userProfile) => {
+        this.profile = userProfile;
+      });
   }
 
   private getOrganizedMeetings(): void {
-    this.meetingsServie.getOrganizedMeetings().subscribe((meeting) => {
-      this.organizedMeetings = meeting;
-    });
+    this.meetingsServie
+      .getOrganizedMeetings()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((meeting) => {
+        this.organizedMeetings = meeting;
+      });
   }
 
   private getEnrolledMeetings(): void {
-    this.meetingsServie.getEnrolledMeetings().subscribe((meeting) => {
-      this.enrolledMeetings = meeting;
-    });
+    this.meetingsServie
+      .getEnrolledMeetings()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((meeting) => {
+        this.enrolledMeetings = meeting;
+      });
   }
 }

@@ -16,7 +16,8 @@
     "choose-file": "Wybierz plik",
     "no-file-chosen": "Nie wybrano żadnego pliku",
     "change": "Zmień",
-    "menu": "Menu"
+    "menu": "Menu",
+    "search": "Wyszukaj"
   },
   "auth": {
     "create-new-account": "Utwórz nowe konto",
@@ -34,7 +35,7 @@
     "change-avatar": "Zmień avatar"
   },
   "meeting": {
-    "add-meeting": "Dodaj nowy meeting",
+    "add-meeting": "Dodaj nowe spotkanie",
     "name": "Nazwa",
     "description": "Opis",
     "max-participants": "Maksymalna liczba uczestników",
@@ -50,7 +51,11 @@
     "street": "Ulica",
     "postal-code": "Kod pocztowy",
     "images": "Zdjęcia",
-    "free-places": "Wolne miejsca"
+    "join": "Dołącz",
+    "hosted-by": "Założone przez",
+    "free-slots": "Wolne miejsca",
+    "date": "Data spotkania",
+    "last-update": "Ostatnia aktualizacja"
   },
   "userpanel": {
     "personal": "Dane konta",
