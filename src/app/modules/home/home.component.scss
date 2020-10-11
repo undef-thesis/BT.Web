@@ -19,5 +19,15 @@
   border-radius: 2rem;
   box-shadow: 10px 10px 30px 15px rgba(0, 0, 0, 0.8);
   border: 1px solid grey;
-  padding: 0.5rem 1rem 0.5rem 1rem;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.ng-autocomplete {
+  .autocomplete-container {
+    box-shadow: none !important;
+  }
+}
+
+.bt-map {
+  height: 50vh;
 }

@@ -1,3 +1,5 @@
+$navbar-breakpoint: 690px;
+
 @import "./styles/variables.scss";
 @import "./styles/bulma.scss";
 
@@ -45,12 +47,39 @@
   min-height: 65vh;
 }
 
-.button-primary, .button-primary:focus {
+.button-primary,
+.button-primary:focus {
   background-color: $primary;
   color: $white;
 }
 
-.button-primary:active, .button-primary:hover {
+.button-primary:active,
+.button-primary:hover {
   background-color: $primary-strength;
   color: $white;
+}
+
+.bt-title-primary {
+  font-weight: 700;
+  font-size: large;
+
+  &-big {
+    font-size: xx-large;
+    font-weight: 800;
+  }
+}
+
+.bt-title-secondary {
+  font-weight: 300;
+  font-size: small;
+  padding-bottom: 0.75rem;
+}
+
+.bt-shadow {
+  box-shadow: 0 0.5em 1em -0.125em $shadow-1, 0 0px 0 1px $shadow-2;
+  background-color: $white;
+}
+
+.bt-pointer {
+  cursor: pointer;
 }

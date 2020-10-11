@@ -8,24 +8,47 @@
       [autoPlayInterval]="7000"
     ></app-carousel>
   </div>
-  <!-- <div class="search-bar">
-    <div class="search-box">
-      <b class="mr-2">Wyszukaj:</b>
-      <input class="input" />
-      <span class="icon"><i class="fas fa-lg fa-search"></i></span>
-    </div>
-  </div> -->
+
+  <app-search-box [localization]="searchLocalization"></app-search-box>
 </section>
 
-<section class="section my-6">
+<section class="section pt-6">
   <div class="container">
     <div class="columns">
-      <div class="column"></div>
-      <div class="column"></div>
-      <div class="column"></div>
+      <div class="column">
+        <app-meeting-card-list
+          title="Spotkania w twoim mieście: Wroclaw"
+          [meetings]="meetingsCity"
+        ></app-meeting-card-list>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <app-meeting-card-list
+          title="Spotkania w twoim kraju: Polska"
+          [meetings]="meetingsCountry"
+        ></app-meeting-card-list>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <app-meeting-card-list
+          [title]="foo"
+          [meetings]="meetingsCategory"
+        ></app-meeting-card-list>
+      </div>
     </div>
   </div>
 </section>
+
+<div class="bt-map">
+  <app-map
+    *ngIf="currentLocation"
+    [readMode]="true"
+    [latitude]="currentLocation.latitude"
+    [longitude]="currentLocation.longitude"
+  ></app-map>
+</div>
 
 <app-login></app-login>
 <app-register></app-register>

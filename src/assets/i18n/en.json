@@ -16,7 +16,8 @@
     "choose-file": "Choose file",
     "no-file-chosen": "No file chosen",
     "change": "Change",
-    "menu": "Menu"
+    "menu": "Menu",
+    "search": "Search"
   },
   "auth": {
     "create-new-account": "Create new account",
@@ -50,7 +51,11 @@
     "street": "Street",
     "postal-code": "Postal code",
     "images": "Images",
-    "free-places": "Free places"
+    "join": "Join",
+    "hosted-by": "Hosted by",
+    "free-slots": "Free slots",
+    "date": "Date",
+    "last-update": "Last update"
   },
   "userpanel": {
     "personal": "Presonal",

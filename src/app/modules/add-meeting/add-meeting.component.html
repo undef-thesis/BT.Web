@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="columns">
-          <!-- MEETING FORM-->
+          <!-- MEETING FORM -->
           <div class="column">
             <input
               class="input wrapper mb-3"
@@ -81,7 +81,7 @@
                   | translate: { value: 'meeting.date-time' | translate }
               }}"
             ></app-text-error>
-            <!-- CATEGORIES-->
+            <!-- CATEGORIES -->
             <b class="mb-3">{{ "meeting.category" | translate }}</b>
             <div class="control has-icons-left mb-3">
               <div class="select">
@@ -106,8 +106,34 @@
                 }}"
               ></app-text-error>
             </div>
+            <!-- LOCALIZE ME -->
+            <p>
+              {{ "meeting.address" | translate }} ({{
+                "meeting.choose-on-map" | translate
+              }}):
+            </p>
+            <button class="button" (click)="localizeMe()">
+              Lokalizuj mnie!
+            </button>
+            <div class="select">
+              <select formControlName="range">
+                <option *ngFor="let range of ranges" [value]="range">
+                  {{ range }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <app-text-error
+                [activator]="submitted"
+                [field]="f.address"
+                translate="{{
+                  'common.is-required'
+                    | translate: { value: 'meeting.address' | translate }
+                }}"
+              ></app-text-error>
+            </div>
           </div>
-          <!-- IMAGES VIEWER-->
+          <!-- IMAGES VIEWER -->
           <div class="column bt-image-viewer">
             <div>
               <input
@@ -137,8 +163,8 @@
             </div>
           </div>
         </div>
-        <!-- ADDRESSES LIST-->
-        <div class="columns">
+        <!-- ADDRESSES LIST -->
+        <div class="columns" *ngIf="addresses">
           <div
             *ngFor="let address of addresses; let i = index"
             class="card column mx-2 mb-3"
@@ -152,64 +178,22 @@
           </div>
         </div>
       </div>
-      <div>
-        <app-text-error
-          [activator]="submitted"
-          [field]="f.address"
-          translate="{{
-            'common.is-required'
-              | translate: { value: 'meeting.address' | translate }
-          }}"
-        ></app-text-error>
-      </div>
     </form>
-
     <!-- MAP -->
     <div class="columns">
       <div class="column bt-map">
         <app-map
           [readMode]="false"
+          [latitude]="
+            selectedAddress > -1 && addresses[selectedAddress].latitude
+          "
+          [longitude]="
+            selectedAddress > -1 && addresses[selectedAddress].longitude
+          "
+          [range]="selectedAddress > -1 && f.range.value"
           (emittAddress)="emittAddress($event)"
         ></app-map>
       </div>
     </div>
   </div>
 </div>
-<!-- 
-
-        <div class="columns">
-          <div>
-            <app-text-error
-              [activator]="submitted"
-              [field]="f.address"
-              translate="{{
-                'common.is-required'
-                  | translate: { value: 'meeting.address' | translate }
-              }}"
-            ></app-text-error>
-          </div>
-          <div
-            *ngFor="let address of addresses; let i = index"
-            class="card column address-card mx-2 mb-3"
-            [ngClass]="{
-              'address-card-active': selectedAddress === i,
-              'has-text-grey': selectedAddress !== i
-            }"
-            (click)="selectAddress(i)"
-          >
-            <app-address-card [address]="address"></app-address-card>
-          </div>
-        </div>
-      </div>
-    </form>
-
-    <div class="columns">
-      <div class="column map">
-        <app-map
-          [readMode]="false"
-          (emittAddress)="emittAddress($event)"
-        ></app-map>
-      </div>
-    </div>
-  </div>
-</div> -->

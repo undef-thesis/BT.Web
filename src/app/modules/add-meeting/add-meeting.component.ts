@@ -1,12 +1,14 @@
+import { BehaviorSubject } from 'rxjs';
+import { MapService } from './../../core/services/map.service';
 import { Router } from '@angular/router';
 import { MeetingsService } from './../../core/services/meetings.service';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Meeting from 'src/app/core/models/Meeting';
 import { CategoriesService } from 'src/app/core/services/categories.service';
 import Address from 'src/app/core/models/Address';
-import Category from 'src/app/core/models/Category';
-import Image from 'src/app/core/models/Image';
+import Localization from 'src/app/core/models/Localization';
+import { GoogleAddressParser } from 'src/app/shared/map/GoogleAddressParser';
 
 @Component({
   selector: 'app-add-meeting',
@@ -21,13 +23,31 @@ export class AddMeetingComponent implements OnInit {
 
   public selectedFiles = [];
 
+  public ranges: Array<number> = [
+    0,
+    5,
+    10,
+    20,
+    50,
+    100,
+    200,
+    500,
+    750,
+    1000,
+    2500,
+    5000,
+    10000,
+  ];
   public categories: Array<object>;
-  public addresses: Address[];
-  public selectedAddress: number = null;
+  public addresses: Address[] = [];
+  public selectedAddress: number = -1;
+
+  public myLocalization: Localization;
 
   constructor(
-    private meetingServie: MeetingsService,
-    private categoriesServie: CategoriesService,
+    private meetingService: MeetingsService,
+    private categoriesService: CategoriesService,
+    private mapService: MapService,
     private formBuilder: FormBuilder,
     private router: Router,
     private cdr: ChangeDetectorRef
@@ -40,11 +60,12 @@ export class AddMeetingComponent implements OnInit {
       maxParticipants: [0, Validators.required],
       date: ['', Validators.required],
       category: ['', Validators.required],
+      range: [0],
       images: ['', Validators.required],
       address: ['', Validators.required],
     });
 
-    this.categoriesServie.getCategories().subscribe(
+    this.categoriesService.getCategories().subscribe(
       (reponse) => {
         this.categories = reponse;
       },
@@ -73,6 +94,7 @@ export class AddMeetingComponent implements OnInit {
     const address: Address = new Address(
       this.addresses[this.selectedAddress].latitude,
       this.addresses[this.selectedAddress].longitude,
+      this.f.range.value,
       this.addresses[this.selectedAddress].country,
       this.addresses[this.selectedAddress].province,
       this.addresses[this.selectedAddress].city,
@@ -80,7 +102,7 @@ export class AddMeetingComponent implements OnInit {
       this.addresses[this.selectedAddress].postalCode
     );
 
-    this.meetingServie
+    this.meetingService
       .addMeeting(meeting, address, this.f.category.value, imagesInput.files)
       .subscribe(
         () => {},
@@ -117,7 +139,9 @@ export class AddMeetingComponent implements OnInit {
   }
 
   public emittAddress(addresses: Array<Address>) {
+    this.addresses = [];
     this.addresses = addresses;
+    this.selectedAddress = 0;
     this.cdr.detectChanges();
   }
 
@@ -125,6 +149,53 @@ export class AddMeetingComponent implements OnInit {
     this.f.address.setValue(key);
     this.selectedAddress = key;
     this.cdr.detectChanges();
+  }
+
+  public async localizeMe() {
+    const getCoords = async () => {
+      const pos: any = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+
+      return {
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude,
+      };
+    };
+
+    const coords = await getCoords();
+    let geocoder = new google.maps.Geocoder();
+    let latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
+    let NUMBER_OF_ADDRESS_SUGGESTIONS: number = 4;
+
+    geocoder.geocode({ location: latlng }, (results) => {
+      if (results) {
+        this.addresses = [];
+        console.log(results);
+        const numberofAddresses = results.length;
+
+        if (NUMBER_OF_ADDRESS_SUGGESTIONS > numberofAddresses) {
+          NUMBER_OF_ADDRESS_SUGGESTIONS = numberofAddresses;
+        }
+
+        for (let i = 0; i < NUMBER_OF_ADDRESS_SUGGESTIONS; i++) {
+          const parsedAddress: Address = new GoogleAddressParser(
+            results[i].address_components,
+            coords
+          ).result();
+
+          this.addresses.push(parsedAddress);
+          this.selectedAddress = 0;
+          this.f.address.setValue(0);
+
+          this.cdr.detectChanges();
+        }
+        console.log(this.addresses);
+      } else {
+        console.log('No results found');
+        return null;
+      }
+    });
   }
 
   get f() {

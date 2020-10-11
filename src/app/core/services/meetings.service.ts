@@ -35,6 +35,38 @@ export class MeetingsService {
     );
   }
 
+  public getFilteredMeetings(type: string, value: string) {
+    return this.http
+      .get<any>(`${environment.API_URL}/meetings/filter?${type}=${value}`)
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
+  }
+
+  public citySuggest(lookingCity: string) {
+    return this.http
+      .get<any>(`${environment.API_URL}/helpers/city-suggest?lookingCity=${lookingCity}`)
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
+  }
+
+  public searchMeetings(term: string, city: string, country: string) {
+    return this.http
+      .get<any>(
+        `${environment.API_URL}/meetings/search?city=${city}&country=${country}&term=${term}`
+      )
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
+  }
+
   public getMeetingDetails(id: number) {
     return this.http.get<any>(`${environment.API_URL}/meetings/${id}`).pipe(
       map((response) => {
@@ -69,6 +101,16 @@ export class MeetingsService {
 
     return this.http
       .post<any>(`${environment.API_URL}/meetings`, formData)
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
+  }
+
+  public joinMeeting(meetingId: string): any {
+    return this.http
+      .post<any>(`${environment.API_URL}/meetings/join`, { id: meetingId })
       .pipe(
         map((response) => {
           return response;

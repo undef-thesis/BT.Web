@@ -17,6 +17,17 @@
   .text-color {
     color: white;
   }
+
+  .navbar-menu {
+    @media screen and (max-width: 1023px) {
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+
+  .navbar-end {
+    text-align: right;
+  }
 }
 
 .nav-white {
@@ -33,7 +44,7 @@ nav.scrolled {
   }
 
   .text-color {
-    color: black;
+    color: black !important;
   }
 }
 
@@ -45,10 +56,33 @@ nav.scrolled {
   border-radius: 290491px;
   overflow: hidden;
   border: 2px solid $primary;
+
+  @media only screen and (max-width: 690px) {
+    width: 5%;
+  }
 }
 
 .bt-avatar-img {
   width: 29px;
   height: 29px;
   object-fit: cover;
+}
+
+.bt-menu {
+  right: 4px;
+  position: fixed;
+  min-width: 12rem;
+}
+
+.dropdown {
+  @media only screen and (max-width: 690px) {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.bt-separator-display-none {
+  @media only screen and (max-width: 690px) {
+    display: none;
+  }
 }
