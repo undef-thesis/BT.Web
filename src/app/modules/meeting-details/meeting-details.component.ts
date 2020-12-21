@@ -14,7 +14,7 @@ export class MeetingDetailsComponent implements OnInit {
   public meeting;
 
   constructor(
-    private meetingsService: MeetingsService,
+    public meetingsService: MeetingsService,
     private router: ActivatedRoute,
     private spinner: NgxSpinnerService
   ) {}

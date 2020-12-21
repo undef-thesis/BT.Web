@@ -40,17 +40,21 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getCategories();
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.currentLocation = new Localization(
-        position.coords.latitude,
-        position.coords.longitude
-      );
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.currentLocation = new Localization(
+          position.coords.latitude,
+          position.coords.longitude
+        );
 
-      this.geocode(
-        this.currentLocation.latitude,
-        this.currentLocation.longitude
-      );
-    });
+        // this.geocode(
+        //   this.currentLocation.latitude,
+        //   this.currentLocation.longitude
+        // );
+      },
+      (error) => error,
+      { enableHighAccuracy: true }
+    );
   }
 
   private getFilteredMeetings(): void {
@@ -96,31 +100,31 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  private geocode(latitude: number, longitude: number): void {
-    let geocoder = new google.maps.Geocoder();
-    let latlng = new google.maps.LatLng(latitude, longitude);
+  // private geocode(latitude: number, longitude: number): void {
+  //   let geocoder = new google.maps.Geocoder();
+  //   let latlng = new google.maps.LatLng(latitude, longitude);
 
-    geocoder.geocode({ location: latlng }, (results) => {
-      if (results) {
-        const parsedAddress: Address = new GoogleAddressParser(
-          results[0].address_components,
-          { latitude, longitude }
-        ).parseAddressShort();
+  //   geocoder.geocode({ location: latlng }, (results) => {
+  //     if (results) {
+  //       const parsedAddress: Address = new GoogleAddressParser(
+  //         results[0].address_components,
+  //         { latitude, longitude }
+  //       ).parseAddressShort();
 
-        console.log(parsedAddress);
+  //       console.log(parsedAddress);
 
-        this.searchLocalization = {
-          city: parsedAddress.city,
-          country: parsedAddress.country,
-        };
+  //       this.searchLocalization = {
+  //         city: parsedAddress.city,
+  //         country: parsedAddress.country,
+  //       };
 
-        this.city = parsedAddress.city;
-        this.country = parsedAddress.country;
+  //       this.city = parsedAddress.city;
+  //       this.country = parsedAddress.country;
 
-        this.getFilteredMeetings();
-      } else {
-        console.log('No results found');
-      }
-    });
-  }
+  //       this.getFilteredMeetings();
+  //     } else {
+  //       console.log('No results found');
+  //     }
+  //   });
+  // }
 }

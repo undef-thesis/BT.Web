@@ -48,7 +48,7 @@ export class MapComponent implements OnInit {
         lat: this.latitude,
         lng: this.longitude,
       };
-// TODO: pomyslec nad wyswietleniem eventow z calego miasta do home.component
+      // TODO: pomyslec nad wyswietleniem eventow z calego miasta do home.component
       this.marker = {
         position: {
           lat: this.latitude,
@@ -58,12 +58,16 @@ export class MapComponent implements OnInit {
         info: this.address && this.prepareAddress(),
       };
     } else {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.center = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+        },
+        (error) => error,
+        { enableHighAccuracy: true }
+      );
     }
   }
 
@@ -85,12 +89,16 @@ export class MapComponent implements OnInit {
         },
       };
     } else {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.center = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.center = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+        },
+        (error) => error,
+        { enableHighAccuracy: true }
+      );
     }
   }
 

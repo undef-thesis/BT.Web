@@ -154,7 +154,7 @@ export class AddMeetingComponent implements OnInit {
   public async localizeMe() {
     const getCoords = async () => {
       const pos: any = await new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
+        navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true });
       });
 
       return {
