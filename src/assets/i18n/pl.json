@@ -32,7 +32,9 @@
     "lastname": "Nazwisko",
     "password": "Hasło",
     "confirm-password": "Potwierdź hasło",
-    "change-avatar": "Zmień avatar"
+    "change-avatar": "Zmień avatar",
+    "new-password": "Nowe hasło",
+    "confirm-new-password": "Potwierdź nowe hasło"
   },
   "meeting": {
     "add-meeting": "Dodaj nowe spotkanie",

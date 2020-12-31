@@ -8,7 +8,10 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { Router } from '@angular/router';
 import Address from 'src/app/core/models/Address';
+import Marker from 'src/app/core/models/Marker';
+import Meeting from 'src/app/core/models/Meeting';
 import { GoogleAddressParser } from './GoogleAddressParser';
 
 @Component({
@@ -17,84 +20,81 @@ import { GoogleAddressParser } from './GoogleAddressParser';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
+  @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
+
   @Input() readMode: boolean = false;
   @Input() latitude: number;
   @Input() longitude: number;
-  @Input() range: number;
-  @Input() title: string;
-  @Input() address: Address;
+  @Input() range?: number;
+  @Input() meetings: Array<Meeting>;
   @Output() emittAddress = new EventEmitter<Array<Address>>();
 
   public NUMBER_OF_ADDRESS_SUGGESTIONS: number = 4;
-  public marker;
-  public infoContent;
+  public markers: Array<Marker> = [];
+  public infoContent = null;
 
-  public r: number = 0;
+  public mapRange: number = 0;
 
-  zoom = 12;
-  center: google.maps.LatLngLiteral;
-  options: google.maps.MapOptions = {};
-  @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
+  public zoom: number = 12;
+  public center: google.maps.LatLngLiteral;
+  public options: google.maps.MapOptions = {};
 
-  openInfo(marker: MapMarker, content) {
-    this.infoContent = content;
-    this.infoWindow.open(marker);
-  }
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    if (this.readMode) {
-      this.center = {
-        lat: this.latitude,
-        lng: this.longitude,
-      };
-      // TODO: pomyslec nad wyswietleniem eventow z calego miasta do home.component
-      this.marker = {
-        position: {
-          lat: this.latitude,
-          lng: this.longitude,
-        },
-        title: this.title,
-        info: this.address && this.prepareAddress(),
-      };
-    } else {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.center = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-        },
-        (error) => error,
-        { enableHighAccuracy: true }
-      );
-    }
+    this.setMarkers();
+
+    this.mapRange = this.range;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.meetings && changes.meetings.currentValue) {
+      this.setMarkers(changes.meetings.currentValue);
+    }
+
+    if (
+      (changes.latitude && changes.latitude.currentValue) ||
+      (changes.longitude && changes.longitude.currentValue)
+    ) {
+      this.markers = [
+        {
+          position: {
+            lat: this.latitude,
+            lng: this.longitude,
+          },
+        },
+      ];
+    }
+
     if (changes.range && changes.range.currentValue) {
-      this.r = changes.range.currentValue;
+      this.mapRange = changes.range.currentValue;
     }
+  }
 
-    if (changes.latitude && changes.latitude.currentValue) {
-      this.center = {
-        lat: changes.latitude.currentValue,
-        lng: changes.longitude.currentValue,
-      };
+  private setMarkers(meetings?: Array<Meeting>): void {
+    this.markers = [];
 
-      this.marker = {
-        position: {
-          lat: changes.latitude.currentValue,
-          lng: changes.longitude.currentValue,
-        },
-      };
+    if (this.readMode) {
+      this.setCenter(this.latitude, this.longitude);
+
+      if (this.meetings) {
+        this.meetings.forEach((meeting) => {
+          this.markers.push({
+            id: meeting.id,
+            position: {
+              lat: meeting.address.latitude,
+              lng: meeting.address.longitude,
+            },
+            title: meeting.name,
+            info: meeting.address,
+            range: meeting.address.range ? meeting.address.range : null,
+          });
+        });
+      }
     } else {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          this.center = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
+          this.setCenter(position.coords.latitude, position.coords.longitude);
         },
         (error) => error,
         { enableHighAccuracy: true }
@@ -102,33 +102,30 @@ export class MapComponent implements OnInit {
     }
   }
 
-  private prepareAddress(): string {
-    const { street, province, postalCode, city, country } = this.address;
-    return `${street} - ${province} - ${postalCode} - ${city} - ${country}`;
-    // return
-    //   '<div>' +
-    //     '<div>' + street + '</div>'+
-    //     '<div>'+ province + '</div>' +
-    //     '<div>'+ postalCode + '</div>' +
-    //     '<div>'+ city + '</div>' +
-    //     '<div>'+ country + '</div>' +
-    //   '</div>';
+  private setCenter(latitude: number, longitude: number): void {
+    this.center = {
+      lat: latitude,
+      lng: longitude,
+    };
+  }
+
+  openInfo(marker: MapMarker, content: Address, id: string) {
+    this.infoContent = content;
+    this.infoContent.id = id;
+    this.infoWindow.open(marker);
   }
 
   public click(event: google.maps.MouseEvent): void {
     if (!this.readMode) {
       const latitude: number = event.latLng.lat();
       const longitude: number = event.latLng.lng();
-
-      this.marker = {
-        position: {
-          lat: latitude,
-          lng: longitude,
-        },
-      };
-
+      
       this.geocode(latitude, longitude);
     }
+  }
+
+  public goToMeetingDetails(id: string): void {
+    this.router.navigate([`/meetings`, id]);
   }
 
   private geocode(latitude: number, longitude: number): void {

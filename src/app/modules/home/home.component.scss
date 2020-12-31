@@ -2,32 +2,24 @@
   position: relative;
 }
 
-.search-bar {
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  margin-bottom: 14rem;
-  bottom: 0;
-}
-
-.search-box {
-  width: 35rem;
-  height: 4rem;
-  display: inline-flex;
-  align-items: center;
-  background: white;
-  border-radius: 2rem;
-  box-shadow: 10px 10px 30px 15px rgba(0, 0, 0, 0.8);
-  border: 1px solid grey;
-  padding: 0.5rem 2rem 0.5rem 2rem;
-}
-
-.ng-autocomplete {
-  .autocomplete-container {
-    box-shadow: none !important;
-  }
-}
-
 .bt-map {
   height: 50vh;
+}
+
+.bt-meetings-list {
+  @media only screen and (min-width: 1360px) {
+    width: 75rem;
+  }
+
+  @media only screen and (max-width: 1359px) {
+    width: 56em;
+  }
+
+  @media only screen and (max-width: 971px) {
+    width: 37rem;
+  }
+
+  @media only screen and (max-width: 639px) {
+    width: 19.5rem;
+  }
 }

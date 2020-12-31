@@ -1,4 +1,3 @@
-import { BehaviorSubject } from 'rxjs';
 import { MapService } from './../../core/services/map.service';
 import { Router } from '@angular/router';
 import { MeetingsService } from './../../core/services/meetings.service';
@@ -9,6 +8,7 @@ import { CategoriesService } from 'src/app/core/services/categories.service';
 import Address from 'src/app/core/models/Address';
 import Localization from 'src/app/core/models/Localization';
 import { GoogleAddressParser } from 'src/app/shared/map/GoogleAddressParser';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-meeting',
@@ -50,7 +50,8 @@ export class AddMeetingComponent implements OnInit {
     private mapService: MapService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -105,7 +106,9 @@ export class AddMeetingComponent implements OnInit {
     this.meetingService
       .addMeeting(meeting, address, this.f.category.value, imagesInput.files)
       .subscribe(
-        () => {},
+        () => {
+          this.toastr.success('Utworzono nowe spotkanie');
+        },
         (error) => {
           this.apiError = error.error;
         }
@@ -154,7 +157,9 @@ export class AddMeetingComponent implements OnInit {
   public async localizeMe() {
     const getCoords = async () => {
       const pos: any = await new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true });
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+        });
       });
 
       return {

@@ -61,6 +61,8 @@ export class LoginComponent implements OnInit {
       .subscribe(
         () => {
           this.modalService.close('login-modal');
+          this.modalService.remove('login-modal');
+          this.modalService.remove('register-modal');
         },
         ({ error }) => {
           this.apiError = error.error.Message;
@@ -75,5 +77,11 @@ export class LoginComponent implements OnInit {
     this.loginForm.reset();
     this.apiError = '';
     this.submitted = false;
+  }
+
+  openRegisterModal(): void {
+    this.onCloseModal();
+    this.modalService.close('login-modal');
+    this.modalService.open('register-modal');
   }
 }

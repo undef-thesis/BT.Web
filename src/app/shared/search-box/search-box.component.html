@@ -1,7 +1,13 @@
 <div [class]="styleBasic ? 'bt-search-basic' : 'bt-search'">
-  <div [class]="styleBasic ? 'bt-search-box-basic' : 'bt-search-box'">
-    <b class="mr-2">{{ "common.search" | translate }}::</b>
-    <input [(ngModel)]="searchTerm" class="input mr-4" />
+  <div [class]="styleBasic ? 'bt-search-box bt-search-box-basic' : 'bt-search-box'">
+    <input
+      [(ngModel)]="searchTerm"
+      class="input mr-4 bt-sarch-input"
+      placeholder="Wyszukaj"
+    />
+
+    <div class="bt-divider"></div>
+
     <div class="ng-autocomplete">
       <ng-autocomplete
         [(ngModel)]="localization.city"
@@ -11,6 +17,8 @@
         (inputChanged)="onChangeSearch($event)"
         [itemTemplate]="itemTemplate"
         [notFoundTemplate]="notFoundTemplate"
+        class="autocomplete-container"
+        placeHolder="Gdzie?"
       >
       </ng-autocomplete>
 
@@ -22,8 +30,9 @@
         <div [innerHTML]="notFound"></div>
       </ng-template>
     </div>
-    <span class="icon ml-2" (click)="search()"
-      ><i class="fas fa-lg fa-search"></i
-    ></span>
+
+    <span class="icon ml-2 mr-2" (click)="search()">
+      <i class="fas fa-lg fa-search"></i>
+    </span>
   </div>
 </div>

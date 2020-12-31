@@ -32,7 +32,9 @@
     "lastname": "Lastname",
     "password": "Password",
     "confirm-password": "Confirm password",
-    "change-avatar": "Change avatar"
+    "change-avatar": "Change avatar",
+    "new-password": "New password",
+    "confirm-new-password": "Confirm new password"
   },
   "meeting": {
     "add-meeting": "Add meeting",

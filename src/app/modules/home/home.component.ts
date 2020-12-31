@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit {
 
   public searchLocalization = { city: '', country: '' };
 
+  public mergedMeetings: Array<Meeting> = [];
+
   constructor(
     private meetingsService: MeetingsService,
     private categoriesService: CategoriesService
@@ -47,10 +49,12 @@ export class HomeComponent implements OnInit {
           position.coords.longitude
         );
 
-        // this.geocode(
-        //   this.currentLocation.latitude,
-        //   this.currentLocation.longitude
-        // );
+        if (this.currentLocation) {
+          this.geocode(
+            this.currentLocation.latitude,
+            this.currentLocation.longitude
+          );
+        }
       },
       (error) => error,
       { enableHighAccuracy: true }
@@ -62,12 +66,20 @@ export class HomeComponent implements OnInit {
       .getFilteredMeetings('city', this.city)
       .subscribe((meeting) => {
         this.meetingsCity = meeting;
+        console.log('city');
       });
 
     this.meetingsService
       .getFilteredMeetings('country', this.country)
       .subscribe((meeting) => {
         this.meetingsCountry = meeting;
+
+        const ids = new Set(this.meetingsCity.map((item) => item.id));
+        this.mergedMeetings = [
+          ...this.meetingsCity,
+          ...this.meetingsCountry.filter((item) => !ids.has(item.id)),
+        ];
+        console.log(this.mergedMeetings);
       });
   }
 
@@ -81,6 +93,7 @@ export class HomeComponent implements OnInit {
         this.randomCategory =
           Math.floor(Math.random() * this.categories.length) + 0;
         console.log(this.categories);
+
         this.meetingsService
           .getFilteredMeetings(
             'categoryId',
@@ -100,31 +113,31 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  // private geocode(latitude: number, longitude: number): void {
-  //   let geocoder = new google.maps.Geocoder();
-  //   let latlng = new google.maps.LatLng(latitude, longitude);
+  private geocode(latitude: number, longitude: number): void {
+    let geocoder = new google.maps.Geocoder();
+    let latlng = new google.maps.LatLng(latitude, longitude);
 
-  //   geocoder.geocode({ location: latlng }, (results) => {
-  //     if (results) {
-  //       const parsedAddress: Address = new GoogleAddressParser(
-  //         results[0].address_components,
-  //         { latitude, longitude }
-  //       ).parseAddressShort();
+    geocoder.geocode({ location: latlng }, (results) => {
+      if (results) {
+        const parsedAddress: Address = new GoogleAddressParser(
+          results[0].address_components,
+          { latitude, longitude }
+        ).parseAddressShort();
 
-  //       console.log(parsedAddress);
+        console.log(parsedAddress);
 
-  //       this.searchLocalization = {
-  //         city: parsedAddress.city,
-  //         country: parsedAddress.country,
-  //       };
+        this.searchLocalization = {
+          city: parsedAddress.city,
+          country: parsedAddress.country,
+        };
 
-  //       this.city = parsedAddress.city;
-  //       this.country = parsedAddress.country;
+        this.city = parsedAddress.city;
+        this.country = parsedAddress.country;
 
-  //       this.getFilteredMeetings();
-  //     } else {
-  //       console.log('No results found');
-  //     }
-  //   });
-  // }
+        this.getFilteredMeetings();
+      } else {
+        console.log('No results found');
+      }
+    });
+  }
 }

@@ -25,7 +25,7 @@ export class GoogleAddressParser {
 
   constructor(
     private addressComponents: Array<AddressComponent>,
-    private coordinates: Coordinates,
+    private coordinates: Coordinates
   ) {
     this.parseAddress();
   }
@@ -43,7 +43,7 @@ export class GoogleAddressParser {
       throw Error('Address Components is empty');
     }
 
-    let streetNumber: string;
+    let streetNumber: string = '';
 
     for (let i = 0; i < this.addressComponents.length; i++) {
       const component: AddressComponent = this.addressComponents[i];
@@ -51,11 +51,14 @@ export class GoogleAddressParser {
       this.address.latitude = this.coordinates.latitude;
       this.address.longitude = this.coordinates.longitude;
 
-      if (this.isStreetNumber(component)) {
+      if (this.isStreetNumber(component) && component.long_name !== undefined) {
         streetNumber = component.long_name;
       }
 
-      if (this.isStreetName(component)) {
+      if (
+        this.isStreetName(component) &&
+        component.long_name !== 'Unnamed Road'
+      ) {
         this.address.street = `${component.long_name} ${streetNumber}`;
       }
 

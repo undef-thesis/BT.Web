@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.registerForm = this.formBuilder.group(
       {
-        email: ['', Validators.required],
+        email: ['', Validators.required, Validators.email],
         firstname: ['', Validators.required],
         lastname: ['', Validators.required],
         password: ['', Validators.required],
@@ -101,5 +101,11 @@ export class RegisterComponent implements OnInit {
     this.registerForm.reset();
     this.apiError = {};
     this.submitted = false;
+  }
+
+  openLoginModal(): void {
+    this.onCloseModal();
+    this.modalService.close('register-modal');
+    this.modalService.open('login-modal');
   }
 }

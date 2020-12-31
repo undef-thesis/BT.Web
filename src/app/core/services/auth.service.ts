@@ -74,6 +74,7 @@ export class AuthService {
   }
 
   public logout(): void {
+    console.log('401 hehehehehehheeh')
     this.removeTokens();
     this.userSubject.next(false);
     this.router.navigate(['/']);

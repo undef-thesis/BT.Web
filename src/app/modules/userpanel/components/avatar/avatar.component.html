@@ -12,7 +12,7 @@
   >
     <img
       class="bt-avatar-img"
-      *ngIf="!selectedAvatar"
+      *ngIf="!selectedAvatar && avatar"
       src="data:image/JPEG;base64,{{ avatar }}"
     />
     <img class="bt-avatar-img" *ngIf="selectedAvatar" [src]="selectedAvatar" />

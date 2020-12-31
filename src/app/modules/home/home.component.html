@@ -2,7 +2,7 @@
   <div>
     <app-carousel
       [images]="imageUrlArray"
-      [minHeight]="'80vh'"
+      [minHeight]="'70vh'"
       [autoPlay]="true"
       [showArrows]="false"
       [autoPlayInterval]="7000"
@@ -13,11 +13,11 @@
 </section>
 
 <section class="section pt-6">
-  <div class="container">
+  <div class="container bt-meetings-list">
     <div class="columns">
       <div class="column">
         <app-meeting-card-list
-          title="Spotkania w twoim mieście: Wroclaw"
+          [title]="'Spotkania w twoim mieście: ' + city"
           [meetings]="meetingsCity"
         ></app-meeting-card-list>
       </div>
@@ -25,7 +25,7 @@
     <div class="columns">
       <div class="column">
         <app-meeting-card-list
-          title="Spotkania w twoim kraju: Polska"
+          [title]="'Spotkania w twoim kraju: ' + country"
           [meetings]="meetingsCountry"
         ></app-meeting-card-list>
       </div>
@@ -47,6 +47,7 @@
     [readMode]="true"
     [latitude]="currentLocation.latitude"
     [longitude]="currentLocation.longitude"
+    [meetings]="mergedMeetings"
   ></app-map>
 </div>
 

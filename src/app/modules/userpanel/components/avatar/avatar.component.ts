@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { UserProfileService } from 'src/app/core/services/user-profile.service';
 
 @Component({
@@ -15,7 +16,10 @@ export class AvatarComponent implements OnInit {
 
   public selectedAvatar = null;
 
-  constructor(private userProfileService: UserProfileService) {}
+  constructor(
+    private userProfileService: UserProfileService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -26,7 +30,9 @@ export class AvatarComponent implements OnInit {
     this.userProfileService
       .updateAvatar(avatar.files[0])
       .subscribe(
-        () => {},
+        () => {
+          this.toastr.success('Zmieniono avatar');
+        },
         (error) => {
           this.apiError = error.error;
         }

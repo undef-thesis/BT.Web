@@ -45,3 +45,36 @@
     max-height: 16.5rem;
   }
 }
+
+.bt-meetings-panel {
+  display: grid;
+  justify-content: center;
+}
+
+.bt-meetings-panel-0 {
+  display: contents;
+}
+
+.bt-meetings-list {
+  @media only screen and (min-width: 1360px) {
+    width: 57rem;
+  }
+
+  @media only screen and (max-width: 1359px) {
+    width: 38.3rem;
+  }
+
+  @media only screen and (max-width: 999px) {
+    width: 19.5rem;
+  }
+
+  @media only screen and (max-width: 768px) {
+    width: 38.3rem;
+  }
+
+  @media only screen and (max-width: 634px) {
+    width: 19.5rem;
+  }
+
+  display: inline-block;
+}

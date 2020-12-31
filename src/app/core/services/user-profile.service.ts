@@ -37,4 +37,32 @@ export class UserProfileService {
       })
     );
   }
+
+  public changePassword(
+    password: string,
+    newPassword: string,
+    confirmNewPassword: string
+  ) {
+    return this.http
+      .patch<any>(`${environment.API_URL}/account/change-password`, {
+        password: password,
+        newPassword: newPassword,
+        confirmNewPassword: confirmNewPassword,
+      })
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
+  }
+
+  public deleteAccount() {
+    return this.http
+      .delete<any>(`${environment.API_URL}/account/delete-account`)
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
+  }
 }

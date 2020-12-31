@@ -1,20 +1,39 @@
 <div class="card-content">
   <ul>
     <li>
-      <b>{{ "meeting.street" | translate }}: </b>{{ address.street }}
+      <b>{{ "meeting.street" | translate }}: </b>
+      <span *ngIf="address.street; else elseBlock">
+        {{ address.street }}
+      </span>
+      <ng-template #elseBlock> Brak </ng-template>
     </li>
     <li>
-      <b>{{ "meeting.city" | translate }}: </b>{{ address.city }}
+      <b>{{ "meeting.city" | translate }}: </b>
+      <span *ngIf="address.city; else elseBlock">
+        {{ address.city }}
+      </span>
+      <ng-template #elseBlock> Brak </ng-template>
     </li>
     <li>
-      <b>{{ "meeting.postal-code" | translate }}: </b>{{ address.postalCode }}
+      <b>{{ "meeting.postal-code" | translate }}: </b>
+      <span *ngIf="address.postalCode; else elseBlock">
+        {{ address.postalCode }}
+      </span>
+      <ng-template #elseBlock> Brak </ng-template>
     </li>
     <li>
       <b>{{ "meeting.province" | translate }}</b>
-      {{ address.province }}
+      <span *ngIf="address.province; else elseBlock">
+        {{ address.province }}
+      </span>
+      <ng-template #elseBlock> Brak </ng-template>
     </li>
     <li>
-      <b>{{ "meeting.country" | translate }}: </b>{{ address.country }}
+      <b>{{ "meeting.country" | translate }}: </b>
+      <span *ngIf="address.country; else elseBlock">
+        {{ address.country }}
+      </span>
+      <ng-template #elseBlock> Brak </ng-template>
     </li>
   </ul>
 </div>

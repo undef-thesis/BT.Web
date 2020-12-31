@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { MeetingsComponent } from './meetings/meetings.component';
+import { ChangePasswordComponent } from './userpanel/components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,8 @@ import { MeetingsComponent } from './meetings/meetings.component';
     AvatarComponent,
     UserProfileComponent,
     MeetingsComponent,
+    ChangePasswordComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     SlideshowModule,

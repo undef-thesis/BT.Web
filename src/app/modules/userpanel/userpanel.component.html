@@ -31,54 +31,82 @@
           </ul>
         </aside>
       </div>
-      <div
-        class="column is-4 bt-shadow bt-center-panel"
-        [ngClass]="{ 'is-8': activePanel !== 0 }"
+      <template
+        [ngClass]="
+          activePanel !== 0 ? 'bt-meetings-panel' : 'bt-meetings-panel-0'
+        "
       >
-        <div *ngIf="activePanel === 0">
-          <div class="bt-title-primary">
-            {{ "userpanel.personal" | translate }}
+        <div
+          class="column is-4 bt-shadow bt-center-panel"
+          [ngClass]="{ 'bt-meetings-list': activePanel !== 0 }"
+        >
+          <div *ngIf="activePanel === 0">
+            <div class="bt-title-primary">
+              {{ "userpanel.personal" | translate }}
+            </div>
+            <div class="bt-title-secondary">
+              {{ "userpanel.personal-info" | translate }}
+            </div>
+            <app-personal></app-personal>
+            <br />
+            <div class="bt-title-secondary">
+              {{ "userpanel.change-password" | translate }}
+            </div>
+            <app-change-password></app-change-password>
+            <br />
+
+            <div class="bt-title-secondary">
+              {{ "userpanel.delete-account" | translate }}
+            </div>
+
+            <div class="has-text-right">
+              <button
+                class="button mt-2 is-dark"
+                [ngClass]="{ 'is-loading': isLoading }"
+                type="submit"
+                (click)="deleteAccount()"
+              >
+                {{ "userpanel.delete-account" | translate }}
+              </button>
+            </div>
           </div>
-          <div class="bt-title-secondary">
-            {{ "userpanel.personal-info" | translate }}
+
+          <div *ngIf="activePanel === 1">
+            <div class="bt-title-primary">
+              {{ "userpanel.organized" | translate }}
+            </div>
+            <div class="bt-title-secondary">
+              {{ "userpanel.organized-info" | translate }}
+            </div>
+            <div *ngIf="organizedMeetings.length; else noOrganizedMeetings">
+              <app-meeting-card-list
+                [meetings]="organizedMeetings"
+              ></app-meeting-card-list>
+            </div>
+            <ng-template #noOrganizedMeetings>
+              <div>Nie utworzyłeś żadnego spotkania</div>
+            </ng-template>
           </div>
-          <app-personal></app-personal>
-          <br />
-          <div class="bt-title-secondary">
-            {{ "userpanel.change-password" | translate }}
-          </div>
-          <br />
-          <div class="bt-title-secondary">
-            {{ "userpanel.delete-account" | translate }}
+
+          <div *ngIf="activePanel === 2">
+            <div class="bt-title-primary">
+              {{ "userpanel.enrolled" | translate }}
+            </div>
+            <div class="bt-title-secondary">
+              {{ "userpanel.enrolled-info" | translate }}
+            </div>
+            <div *ngIf="enrolledMeetings.length; else noEnrolledMeetings">
+              <app-meeting-card-list
+                [meetings]="enrolledMeetings"
+              ></app-meeting-card-list>
+            </div>
+            <ng-template #noEnrolledMeetings>
+              <div>Nie zapisałeś się na żadne spotkanie</div>
+            </ng-template>
           </div>
         </div>
-        <div *ngIf="activePanel === 1">
-          <div class="bt-title-primary">
-            {{ "userpanel.organized" | translate }}
-          </div>
-          <div class="bt-title-secondary">
-            {{ "userpanel.organized-info" | translate }}
-          </div>
-          <div>
-            <app-meeting-card-list
-              [meetings]="organizedMeetings"
-            ></app-meeting-card-list>
-          </div>
-        </div>
-        <div *ngIf="activePanel === 2">
-          <div class="bt-title-primary">
-            {{ "userpanel.enrolled" | translate }}
-          </div>
-          <div class="bt-title-secondary">
-            {{ "userpanel.enrolled-info" | translate }}
-          </div>
-          <div>
-            <app-meeting-card-list
-              [meetings]="enrolledMeetings"
-            ></app-meeting-card-list>
-          </div>
-        </div>
-      </div>
+      </template>
+
       <div
         *ngIf="activePanel === 0"
         class="column is-3 bt-avatar-panel bt-shadow"

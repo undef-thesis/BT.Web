@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,12 +17,14 @@ export class UserpanelComponent implements OnInit {
   public organizedMeetings: Array<object> = [];
   public enrolledMeetings: Array<object> = [];
   public profile = null;
+  public isLoading: boolean = false;
 
   public activePanel: MenuOptions = MenuOptions.Personal;
 
   constructor(
     private meetingsServie: MeetingsService,
-    private userProfileService: UserProfileService
+    private userProfileService: UserProfileService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -70,6 +73,20 @@ export class UserpanelComponent implements OnInit {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((meeting) => {
         this.enrolledMeetings = meeting;
+      });
+  }
+
+  public deleteAccount(): void {
+    this.isLoading = false;
+
+    this.userProfileService
+      .deleteAccount()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.authService.logout();
+      })
+      .add(() => {
+        this.isLoading = false;
       });
   }
 }
