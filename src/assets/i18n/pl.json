@@ -12,6 +12,7 @@
     "title": "bachelor's thesis",
     "by": "zaprojektowane przez",
     "is-required": "{{value}} jest wymagane",
+    "is-required-2": "{{value}} jest wymagany",
     "cancel": "Anuluj",
     "choose-file": "Wybierz plik",
     "no-file-chosen": "Nie wybrano żadnego pliku",

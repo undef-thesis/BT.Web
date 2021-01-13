@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/core/services/auth.service';
 import { MeetingsService } from 'src/app/core/services/meetings.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -17,9 +18,11 @@ export class MeetingDetailsComponent implements OnInit {
   public meeting;
   public isUserBelongToTheMeeting: boolean = false;
   public isUserMeetingOrganizer: boolean = false;
+  public isLoggedIn: boolean = false;
 
   constructor(
     public meetingsService: MeetingsService,
+    public authService: AuthService,
     private router: ActivatedRoute,
     private location: Location,
     private spinner: NgxSpinnerService,
@@ -30,6 +33,11 @@ export class MeetingDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.router.params.subscribe((params) => {
       this.id = params['id'];
+    });
+
+    this.authService.isLoggedIn.subscribe((response) => {
+      this.isLoggedIn = response;
+      console.log(response);
     });
 
     this.getMeetingDetails();
@@ -82,13 +90,12 @@ export class MeetingDetailsComponent implements OnInit {
   private checkUserBelongToTheMeeting(): boolean {
     let id: string | null = '';
     const me = JSON.parse(localStorage.getItem('me'));
-    if(me !== null) {
-      id = me.id 
+    if (me !== null) {
+      id = me.id;
     }
 
     const isExists: boolean = this.meeting.participants.some(
-      (participant) =>
-        participant.userId === id
+      (participant) => participant.userId === id
     );
 
     return isExists;
@@ -97,12 +104,10 @@ export class MeetingDetailsComponent implements OnInit {
   private checkUserIsMeetingOrganizer(): boolean {
     let id: string | null = '';
     const me = JSON.parse(localStorage.getItem('me'));
-    if(me !== null) {
-      id = me.id 
+    if (me !== null) {
+      id = me.id;
     }
 
-    return this.meeting.meetingOrganizer.id === id
-      ? true
-      : false;
+    return this.meeting.meetingOrganizer.id === id ? true : false;
   }
 }

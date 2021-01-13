@@ -12,6 +12,7 @@
     "title": "bachelor's thesis",
     "by": "by",
     "is-required": "{{value}} is required",
+    "is-required-2": "{{value}} is required",
     "cancel": "Cancel",
     "choose-file": "Choose file",
     "no-file-chosen": "No file chosen",

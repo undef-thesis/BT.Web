@@ -26,13 +26,17 @@
         <b>{{ parseDate }}</b>
       </time>
     </div>
-    <div class="columns">
-      <div class="column">
-        <a *ngIf="category" (click)="checkOtherMeetingsByCategory()">
+    <div class="columns is-flex">
+      <div class="column is-6">
+        <!-- <a *ngIf="category" (click)="checkOtherMeetingsByCategory()">
           #{{ category.name }}
-        </a>
+        </a> -->
+        <p>#{{ category.name }}</p>
       </div>
-      <div *ngIf="meetingOrganizerId && isUserMeetingOrganizer" class="column has-text-right">
+      <div
+        *ngIf="meetingOrganizerId && isUserMeetingOrganizer"
+        class="column is-6 has-text-right"
+      >
         <a [routerLink]="['/meetings/edit/', id]">
           <b>Edytuj</b>
         </a>

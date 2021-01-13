@@ -70,6 +70,8 @@ export class AddMeetingComponent implements OnInit {
       address: ['', Validators.required],
     });
 
+    this.f.date.setValue(this.getNow);
+
     this.categoriesService.getCategories().subscribe(
       (reponse) => {
         this.categories = reponse;
