@@ -23,7 +23,6 @@ export class MapService {
 
     geocoder.geocode({ location: latlng }, (results) => {
       if (results) {
-        console.log(results);
         const numberofAddresses = results.length;
 
         if (NUMBER_OF_ADDRESS_SUGGESTIONS > numberofAddresses) {

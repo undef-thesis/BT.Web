@@ -51,10 +51,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                   return next.handle(this.addToken(request, response.token));
                 }),
                 catchError((e) => {
-                  if ([401].includes(e.status)) {
+                  // if ([401].includes(e.status)) {
                     this.authService.logout();
                     return throwError(error);
-                  }
+                  // }
                 })
               );
           }

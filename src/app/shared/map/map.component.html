@@ -7,25 +7,39 @@
   [options]="options"
 >
   <map-marker
-    #somemarker="mapMarker"
-    *ngIf="marker"
+    *ngFor="let marker of markers"
+    #mapmarker="mapMarker"
     [position]="marker.position"
     [label]="marker.label"
     [title]="marker.title"
     [options]="marker.options"
-    (mapClick)="openInfo(somemarker, marker.info)"
+    (mapClick)="readMode && openInfo(mapmarker, marker.info, marker.id)"
   >
   </map-marker>
-  <map-info-window>{{ infoContent }}</map-info-window>
-  <map-circle *ngIf="marker && r" [center]="marker.position" [radius]="+r">
-  </map-circle>
-  <!-- <map-circle
-    *ngIf="marker"
-    [center]="marker.position"
-    [radius]="range"
-    [title]="marker.title"
-    [options]="marker.options"
-    (mapClick)="openInfo(somemarkere, marker.info)"
-  >
-  </map-circle> -->
+
+  <map-info-window *ngIf="readMode">
+    <div *ngIf="infoContent" class="bt-infocontent-text">
+      <div>{{ infoContent.street }}</div>
+      <div>{{ infoContent.postalCode }} {{ infoContent.city }}</div>
+      <div>{{ infoContent.province }}</div>
+      <div>{{ infoContent.country }}</div>
+      <a
+        *ngIf="markers.length > 1"
+        (click)="goToMeetingDetails(infoContent.id)"
+        class="bt-meeting-details"
+        >Zobacz szczegóły</a
+      >
+    </div>
+  </map-info-window>
+
+  <map-circle
+    *ngIf="markers.length === 1 && !readMode && mapRange > 0"
+    [center]="markers[0].position"
+    [radius]="+mapRange"
+  ></map-circle>
+  <map-circle
+    *ngIf="markers.length === 1 && markers[0].range"
+    [center]="markers[0].position"
+    [radius]="markers[0].range"
+  ></map-circle>
 </google-map>

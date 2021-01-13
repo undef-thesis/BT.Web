@@ -19,7 +19,6 @@ export class NavbarComponent implements OnInit {
 
   public profile = null;
   public isLoggedIn: boolean = false;
-  public isWhiteNavMode: boolean = false;
   public isMenuOpen: boolean = false;
 
   constructor(
@@ -40,15 +39,11 @@ export class NavbarComponent implements OnInit {
       }
     };
 
-    this.authService.isLoggedIn
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((response) => {
-        this.isLoggedIn = response;
+    this.authService.isLoggedIn.pipe().subscribe((response) => {
+      this.isLoggedIn = response;
 
-        this.getUserProfile();
-      });
-
-    this.navMode();
+      this.getUserProfile();
+    });
   }
 
   public openMenu(): void {
@@ -64,8 +59,10 @@ export class NavbarComponent implements OnInit {
     if (this.isLoggedIn) {
       this.userProfileService
         .getUserProfile()
-        .pipe(takeUntil(this.ngUnsubscribe))
+        .pipe()
         .subscribe((userProfile) => {
+          localStorage.setItem('me', JSON.stringify(userProfile));
+
           this.profile = userProfile;
         });
     }
@@ -88,8 +85,6 @@ export class NavbarComponent implements OnInit {
 
   public openUserPanel(): void {
     this.router.navigate(['/userpanel']);
-
-    this.navMode();
   }
 
   public openHome(): void {
@@ -98,23 +93,12 @@ export class NavbarComponent implements OnInit {
 
   public createNewMeeting(): void {
     this.router.navigate(['/meetings/add']);
-
-    this.navMode();
   }
 
-  private navMode() {
-    this.router.events
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event) => {
-        if (event instanceof NavigationEnd) {
-          const url: string = event.url;
-
-          if (url !== '/') {
-            this.isWhiteNavMode = true;
-            return;
-          }
-          this.isWhiteNavMode = false;
-        }
-      });
+  public get getUserSignature(): string {
+    return (
+      JSON.parse(localStorage.getItem('me')).firstname[0] +
+      JSON.parse(localStorage.getItem('me')).lastname[0]
+    );
   }
 }

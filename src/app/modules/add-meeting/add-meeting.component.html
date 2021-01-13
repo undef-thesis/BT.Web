@@ -17,7 +17,12 @@
                 class="button button-primary mt-2 ml-2"
                 type="submit"
               >
-                {{ "meeting.add-meeting" | translate }}
+                <span *ngIf="!isEditMode; else elseBlock">{{
+                  "meeting.add-meeting" | translate
+                }}</span>
+                <ng-template #elseBlock>
+                  <span>{{ "meeting.edit-meeting" | translate }}</span>
+                </ng-template>
               </button>
             </div>
           </div>
@@ -53,39 +58,49 @@
                   | translate: { value: 'meeting.description' | translate }
               }}"
             ></app-text-error>
-            <input
-              class="input wrapper mb-3"
-              formControlName="maxParticipants"
-              type="number"
-              placeholder="{{ 'meeting.max-participants' | translate }}"
-            />
-            <app-text-error
-              [activator]="submitted"
-              [field]="f.maxParticipants"
-              translate="{{
-                'common.is-required'
-                  | translate: { value: 'meeting.maxParticipants' | translate }
-              }}"
-            ></app-text-error>
-            <input
-              class="input wrapper mb-3"
-              formControlName="date"
-              type="datetime-local"
-              placeholder="{{ 'meeting.date-time' | translate }}"
-            />
-            <app-text-error
-              [activator]="submitted"
-              [field]="f.date"
-              translate="{{
-                'common.is-required'
-                  | translate: { value: 'meeting.date-time' | translate }
-              }}"
-            ></app-text-error>
+
+            <div class="columns">
+              <div class="column is-6">
+                <input
+                  class="input wrapper mb-3"
+                  formControlName="maxParticipants"
+                  type="number"
+                  min="2"
+                  placeholder="{{ 'meeting.max-participants' | translate }}"
+                />
+                <app-text-error
+                  [activator]="submitted"
+                  [field]="f.maxParticipants"
+                  translate="{{
+                    'common.is-required'
+                      | translate
+                        : { value: 'meeting.maxParticipants' | translate }
+                  }}"
+                ></app-text-error>
+              </div>
+              <div class="column is-6">
+                <input
+                  class="input wrapper mb-3"
+                  formControlName="date"
+                  [min]="getNow"
+                  type="datetime-local"
+                  placeholder="{{ 'meeting.date-time' | translate }}"
+                />
+                <app-text-error
+                  [activator]="submitted"
+                  [field]="f.date"
+                  translate="{{
+                    'common.is-required'
+                      | translate: { value: 'meeting.date-time' | translate }
+                  }}"
+                ></app-text-error>
+              </div>
+            </div>
             <!-- CATEGORIES -->
             <b class="mb-3">{{ "meeting.category" | translate }}</b>
             <div class="control has-icons-left mb-3">
-              <div class="select">
-                <select formControlName="category">
+              <div class="select bt-select">
+                <select class="bt-select-child" formControlName="category">
                   <option
                     *ngFor="let category of categories"
                     [value]="category.id"
@@ -112,15 +127,18 @@
                 "meeting.choose-on-map" | translate
               }}):
             </p>
-            <button class="button" (click)="localizeMe()">
-              Lokalizuj mnie!
-            </button>
-            <div class="select">
-              <select formControlName="range">
-                <option *ngFor="let range of ranges" [value]="range">
-                  {{ range }}
-                </option>
-              </select>
+            <div class="bt-localize">
+              <button class="button" (click)="localizeMe()">
+                Lokalizuj mnie!
+              </button>
+
+              <div class="select bt-select">
+                <select class="bt-select-child" formControlName="range">
+                  <option *ngFor="let range of ranges" [value]="range">
+                    {{ range }}
+                  </option>
+                </select>
+              </div>
             </div>
             <div>
               <app-text-error
@@ -163,11 +181,12 @@
             </div>
           </div>
         </div>
+
         <!-- ADDRESSES LIST -->
         <div class="columns" *ngIf="addresses">
           <div
             *ngFor="let address of addresses; let i = index"
-            class="card column mx-2 mb-3"
+            class="card column mx-2 mb-3 "
             [ngClass]="{
               'bt-address-card-active': selectedAddress === i,
               'has-text-grey': selectedAddress !== i
@@ -179,6 +198,7 @@
         </div>
       </div>
     </form>
+
     <!-- MAP -->
     <div class="columns">
       <div class="column bt-map">
@@ -190,7 +210,7 @@
           [longitude]="
             selectedAddress > -1 && addresses[selectedAddress].longitude
           "
-          [range]="selectedAddress > -1 && f.range.value"
+          [range]="selectedAddress > -1 && f.range.value ? f.range.value : null"
           (emittAddress)="emittAddress($event)"
         ></app-map>
       </div>

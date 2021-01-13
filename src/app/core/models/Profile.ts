@@ -1,4 +1,5 @@
 export class Profile {
+  public id: string;
   public firstname: string;
   public lastname: string;
   public avatar?: any;

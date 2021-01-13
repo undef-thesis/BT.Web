@@ -1,20 +1,35 @@
 <section class="section">
-  <div class="container">
-    <!-- TODO: ADD LOADER -->
-    <ngx-spinner
-      bdColor="rgba(0, 0, 0, 0.1)"
-      size="medium"
-      color="#fff"
-      type="ball-clip-rotate"
-      [fullScreen]="false"
-    >
-      <p style="color: white">Loading...</p>
-    </ngx-spinner>
-    <div *ngIf="meeting" class="columns">
-      <div class="column is-9">
+  <div *ngIf="meeting" class="container">
+    <div class="columns">
+      <div class="column is-8 bt-meeting-info">
         <div class="bt-header">
           <h1 class="title">{{ meeting.name }}</h1>
-          <button class="button" (click)="joinMeeting()">{{ "meeting.join" | translate }}</button>
+
+          <button
+            *ngIf="
+              !isUserBelongToTheMeeting &&
+              !isUserMeetingOrganizer &&
+              meeting.participantCount < meeting.maxParticipants
+            "
+            class="button"
+            (click)="joinMeeting()"
+          >
+            {{ "meeting.join" | translate }}
+          </button>
+          <button
+            *ngIf="isUserBelongToTheMeeting && !isUserMeetingOrganizer"
+            class="button"
+            (click)="quitMeeting()"
+          >
+            {{ "meeting.quit" | translate }}
+          </button>
+          <button
+            *ngIf="isUserMeetingOrganizer"
+            class="button"
+            (click)="deleteMeeting()"
+          >
+            {{ "meeting.delete" | translate }}
+          </button>
         </div>
 
         <div *ngIf="meeting.meetingOrganizer" class="bt-header bt-header-sub">
@@ -28,42 +43,60 @@
             </a>
           </div>
           <div>
-            {{ "meeting.free-slots" | translate }}: {{ meeting.participantCount }}/{{
-              meeting.maxParticipants
-            }}
+            {{ "meeting.free-slots" | translate }}:
+            {{ meeting.participantCount }}/{{ meeting.maxParticipants }}
           </div>
         </div>
-        <div class="bt-header-sub">{{ "meeting.date" | translate }}: {{ parseDate(meeting.date) }}</div>
+        <div class="bt-header-sub">
+          {{ "meeting.date" | translate }}: {{ parseDate(meeting.date) }}
+        </div>
 
         <br />
-        <div class="bt-title-primary">{{ "meeting.description" | translate }}</div>
+        <div class="bt-title-primary">
+          {{ "meeting.description" | translate }}
+        </div>
         <div>{{ meeting.description }}</div>
 
         <br />
-        <div>
+        <div class="bt-meeting-footer">
           <a [routerLink]="['/category/', meeting.category.id]">
             <div>#{{ meeting.category.name }}</div>
           </a>
-        </div>
-
-        <div>{{ "meeting.last-update" | translate }}: {{ parseDate(meeting.updatedAt) }}</div>
-        <div class="bt-map">
-          <app-map
-            [readMode]="true"
-            [latitude]="meeting.address.latitude"
-            [longitude]="meeting.address.longitude"
-            [range]="meeting.address.range"
-            [title]="meeting.name"
-            [address]="meeting.address"
-          ></app-map>
+          <div>
+            {{ "meeting.last-update" | translate }}:
+            {{ parseDate(meeting.updatedAt) }}
+          </div>
         </div>
       </div>
-      <div class="column is-3">
+      <div class="column is-4 bt-images">
         <img
-          *ngFor="let image of meeting.images"
-          class="bt-image"
-          src="data:image/JPEG;base64,{{ image.picture }}"
+          *ngIf="meeting.images[0]"
+          src="data:image/JPEG;base64,{{ meeting.images[0].picture }}"
         />
+        <div class="columns">
+          <div class="column is-6 bt-pr-187">
+            <img
+              *ngIf="meeting.images[1]"
+              src="data:image/JPEG;base64,{{ meeting.images[1].picture }}"
+            />
+          </div>
+          <div class="column is-6 bt-pl-187">
+            <img
+              *ngIf="meeting.images[2]"
+              src="data:image/JPEG;base64,{{ meeting.images[2].picture }}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column bt-map">
+        <app-map
+          [readMode]="true"
+          [latitude]="meeting.address.latitude"
+          [longitude]="meeting.address.longitude"
+          [meetings]="[meeting]"
+        ></app-map>
       </div>
     </div>
   </div>

@@ -81,5 +81,39 @@ $navbar-breakpoint: 690px;
 }
 
 .bt-pointer {
-  cursor: pointer;
+  cursor: pointer !important;
+}
+
+.bt-divider {
+  width: 1px;
+  height: 100%;
+  color: grey;
+}
+
+.autocomplete-container {
+  box-shadow: none !important;
+
+  input::placeholder {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgba(54, 54, 54, 0.3);
+  }
+}
+
+.autocomplete-container .input-container input {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+.button {
+  height: 2.2em;
+}
+
+.gm-style .gm-style-iw-c {
+  width: 200px;
+  height: 120px;
+}
+ 
+.arrow-container, .next, .prev {
+  z-index: 10 !important;
 }

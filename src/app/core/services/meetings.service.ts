@@ -47,7 +47,9 @@ export class MeetingsService {
 
   public citySuggest(lookingCity: string) {
     return this.http
-      .get<any>(`${environment.API_URL}/helpers/city-suggest?lookingCity=${lookingCity}`)
+      .get<any>(
+        `${environment.API_URL}/helpers/city-suggest?lookingCity=${lookingCity}`
+      )
       .pipe(
         map((response) => {
           return response;
@@ -67,7 +69,7 @@ export class MeetingsService {
       );
   }
 
-  public getMeetingDetails(id: number) {
+  public getMeetingDetails(id: string) {
     return this.http.get<any>(`${environment.API_URL}/meetings/${id}`).pipe(
       map((response) => {
         return response;
@@ -79,7 +81,9 @@ export class MeetingsService {
     meeting: Meeting,
     address: Address,
     categoryId: string,
-    images
+    images,
+    isEditMode: boolean,
+    editedMeetingId: string
   ): any {
     const formData = new FormData();
 
@@ -93,14 +97,36 @@ export class MeetingsService {
     });
 
     for (var i = 0; i < images.length; i++) {
-      console.log(images[i]);
       formData.append('images', images[i]);
     }
 
     formData.append('categoryId', categoryId);
 
+    if (!isEditMode) {
+      return this.http
+        .post<any>(`${environment.API_URL}/meetings`, formData)
+        .pipe(
+          map((response) => {
+            return response;
+          })
+        );
+    } else {
+      return this.http
+        .patch<any>(
+          `${environment.API_URL}/meetings/${editedMeetingId}`,
+          formData
+        )
+        .pipe(
+          map((response) => {
+            return response;
+          })
+        );
+    }
+  }
+
+  public joinMeeting(meetingId: string): any {
     return this.http
-      .post<any>(`${environment.API_URL}/meetings`, formData)
+      .post<any>(`${environment.API_URL}/meetings/join`, { id: meetingId })
       .pipe(
         map((response) => {
           return response;
@@ -108,9 +134,19 @@ export class MeetingsService {
       );
   }
 
-  public joinMeeting(meetingId: string): any {
+  public quitMeeting(meetingId: string): any {
     return this.http
-      .post<any>(`${environment.API_URL}/meetings/join`, { id: meetingId })
+      .delete<any>(`${environment.API_URL}/meetings/quit/${meetingId}`)
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
+  }
+
+  public deleteMeeting(meetingId: string): any {
+    return this.http
+      .delete<any>(`${environment.API_URL}/meetings/${meetingId}`)
       .pipe(
         map((response) => {
           return response;

@@ -3,6 +3,7 @@ import Category from './Category';
 import Image from './Image';
 
 export default class Meeting {
+  public id: string;
   public name: string;
   public description: string;
   public maxParticipants: number;

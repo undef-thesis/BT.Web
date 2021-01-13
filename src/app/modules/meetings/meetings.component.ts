@@ -18,7 +18,12 @@ export class MeetingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      const { city, country, term, category } = params;
+      let { city, country, term, category } = params;
+
+      city = city === undefined ? '' : city;
+      country = country === undefined ? '' : country;
+      term = term === undefined ? '' : term;
+      category = category === undefined ? '' : category;
 
       if (category) {
         this.meetingsService

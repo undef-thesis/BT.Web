@@ -2,7 +2,7 @@
   <div>
     <app-carousel
       [images]="imageUrlArray"
-      [minHeight]="'80vh'"
+      [minHeight]="'70vh'"
       [autoPlay]="true"
       [showArrows]="false"
       [autoPlayInterval]="7000"
@@ -13,28 +13,49 @@
 </section>
 
 <section class="section pt-6">
-  <div class="container">
+  <div class="container bt-meetings-list">
     <div class="columns">
       <div class="column">
+        <div class="bt-meeting-header">
+          <div *ngIf="meetingsCity" class="bt-title-primary-big">
+            Spotkania w twoim mieście: {{ city }}
+          </div>
+          <div class="bt-meeting-header-see-more">
+            <a (click)="searchByCity()">Zobacz więcej</a>
+          </div>
+        </div>
         <app-meeting-card-list
-          title="Spotkania w twoim mieście: Wroclaw"
-          [meetings]="meetingsCity"
+          [meetings]="meetingsCity.slice(0, 8)"
         ></app-meeting-card-list>
       </div>
     </div>
     <div class="columns">
       <div class="column">
+        <div class="bt-meeting-header">
+          <div *ngIf="meetingsCountry" class="bt-title-primary-big">
+            Spotkania w twoim kraju: {{ country }}
+          </div>
+          <div class="bt-meeting-header-see-more">
+            <a (click)="searchByCountry()">Zobacz więcej</a>
+          </div>
+        </div>
         <app-meeting-card-list
-          title="Spotkania w twoim kraju: Polska"
-          [meetings]="meetingsCountry"
+          [meetings]="meetingsCountry.slice(0, 8)"
         ></app-meeting-card-list>
       </div>
     </div>
     <div class="columns">
       <div class="column">
+        <div class="bt-meeting-header">
+          <div *ngIf="meetingsCategory" class="bt-title-primary-big">
+            Spotkania wylosowanej kategorii: {{ category }}
+          </div>
+          <div class="bt-meeting-header-see-more">
+            <a>Zobacz więcej</a>
+          </div>
+        </div>
         <app-meeting-card-list
-          [title]="foo"
-          [meetings]="meetingsCategory"
+          [meetings]="meetingsCategory.slice(0, 8)"
         ></app-meeting-card-list>
       </div>
     </div>
@@ -47,6 +68,7 @@
     [readMode]="true"
     [latitude]="currentLocation.latitude"
     [longitude]="currentLocation.longitude"
+    [meetings]="mergedMeetings"
   ></app-map>
 </div>
 

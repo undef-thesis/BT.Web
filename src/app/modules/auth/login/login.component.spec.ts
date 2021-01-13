@@ -1,9 +1,6 @@
-import { CarouselComponent } from './../../../shared/carousel/carousel.component';
-import { MeetingCardListComponent } from './../../../shared/meeting-card-list/meeting-card-list.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthService } from './../../../core/services/auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
@@ -19,6 +16,8 @@ describe('LoginComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
+        FormsModule,
+        ReactiveFormsModule,
         TranslateModule.forRoot(),
       ],
       providers: [FormBuilder],
@@ -35,11 +34,10 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('form should be invalid', () => {
+  it('login form should be invalid', () => {
     component.loginForm.controls.email.setValue('');
     component.loginForm.controls.password.setValue('');
 
     expect(component.loginForm.valid).toBeFalsy();
   });
-  
 });

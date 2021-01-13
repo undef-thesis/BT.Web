@@ -39,7 +39,6 @@ export class SearchBoxComponent implements OnInit {
   }
 
   public selectEvent(item) {
-    console.log(item.name);
     this.city = item.name;
     this.country = item.country;
   }
