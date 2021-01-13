@@ -5,6 +5,8 @@ import { takeUntil } from 'rxjs/operators';
 import { MeetingsService } from 'src/app/core/services/meetings.service';
 import { UserProfileService } from 'src/app/core/services/user-profile.service';
 import { MenuOptions } from './helpers/MenuOptions';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-userpanel',
@@ -24,7 +26,9 @@ export class UserpanelComponent implements OnInit {
   constructor(
     private meetingsServie: MeetingsService,
     private userProfileService: UserProfileService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -83,6 +87,9 @@ export class UserpanelComponent implements OnInit {
       .deleteAccount()
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
+        this.toastr.success(
+          this.translate.instant('notification.delete-account')
+        );
         this.authService.logout();
       })
       .add(() => {

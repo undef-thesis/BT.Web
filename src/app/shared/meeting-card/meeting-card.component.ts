@@ -18,6 +18,7 @@ export class MeetingCardComponent implements OnInit {
   @Input() date: string;
   @Input() images: Array<Image>;
   @Input() category: Category;
+  @Input() meetingOrganizerId: string;
 
   public base64images: Array<string> = [];
 
@@ -44,6 +45,18 @@ export class MeetingCardComponent implements OnInit {
   }
 
   public get parseDate(): string {
-    return moment(this.date).format('DD.mm.yyy HH:mm').toString();
+    return moment(this.date).format('DD.MM.yyy HH:mm').toString();
+  }
+
+  public get isUserMeetingOrganizer(): boolean {
+    let id: string | null = '';
+    const me = JSON.parse(localStorage.getItem('me'));
+    if(me !== null) {
+      id = me.id 
+    }
+
+    return this.meetingOrganizerId === id
+      ? true
+      : false;
   }
 }

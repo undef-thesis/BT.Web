@@ -5,6 +5,8 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { UserProfileService } from 'src/app/core/services/user-profile.service';
 
 @Component({
@@ -14,12 +16,15 @@ import { UserProfileService } from 'src/app/core/services/user-profile.service';
 })
 export class ChangePasswordComponent implements OnInit {
   public changePasswordForm: FormGroup;
+  public submitted: boolean = false;
   public isLoading: boolean = false;
   public apiError: string;
 
   constructor(
     private userProfileService: UserProfileService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -34,9 +39,13 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this.isLoading = true;
+    this.submitted = true;
 
-    console.log(this.f.password.value);
+    if (this.changePasswordForm.invalid) {
+      return;
+    }
+
+    this.isLoading = true;
 
     this.userProfileService
       .changePassword(
@@ -45,12 +54,20 @@ export class ChangePasswordComponent implements OnInit {
         this.f.confirmNewPassword.value
       )
       .subscribe(
-        () => {},
+        () => {
+          this.toastr.success(
+            this.translate.instant('notification.change-password')
+          );
+        },
         (error) => {
+          this.toastr.error(
+            this.translate.instant('notification.change-password-error')
+          );
           this.apiError = error.error;
         }
       )
       .add(() => {
+        this.submitted = false;
         this.isLoading = false;
       });
   }

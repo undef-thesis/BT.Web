@@ -17,7 +17,8 @@
     "no-file-chosen": "Nie wybrano żadnego pliku",
     "change": "Zmień",
     "menu": "Menu",
-    "search": "Wyszukaj"
+    "search": "Wyszukaj",
+    "all-fields": "Wszystkie pola są wymagane"
   },
   "auth": {
     "create-new-account": "Utwórz nowe konto",
@@ -57,7 +58,8 @@
     "hosted-by": "Założone przez",
     "free-slots": "Wolne miejsca",
     "date": "Data spotkania",
-    "last-update": "Ostatnia aktualizacja"
+    "last-update": "Ostatnia aktualizacja",
+    "delete": "Usuń spotkanie"
   },
   "userpanel": {
     "personal": "Dane konta",
@@ -71,5 +73,15 @@
     "profile-picture-info": "Dodaj swoje zdjęcie aby znajomi mogli cie rozpoznać",
     "change-password": "Zmień hasło",
     "delete-account": "Usuń konto"
+  },
+  "notification": {
+    "join": "Dołączono do spotkania",
+    "delete": "Usunięto ze spotkania",
+    "quit": "Wypisano ze spotkania",
+    "change-password": "Hasło zostało zmienione",
+    "change-password-error": "Wystąpił problem podczas zmiany hasła",
+    "delete-account": "Konto zostało usunięte",
+    "change-avatar": "Avatar został zmieniony",
+    "change-avatar-error": "Wystąpił błąd podczas zmiany avatara"
   }
 }

@@ -4,8 +4,31 @@
       <div class="column is-8 bt-meeting-info">
         <div class="bt-header">
           <h1 class="title">{{ meeting.name }}</h1>
-          <button class="button" (click)="joinMeeting()">
+
+          <button
+            *ngIf="
+              !isUserBelongToTheMeeting &&
+              !isUserMeetingOrganizer &&
+              meeting.participantCount < meeting.maxParticipants
+            "
+            class="button"
+            (click)="joinMeeting()"
+          >
             {{ "meeting.join" | translate }}
+          </button>
+          <button
+            *ngIf="isUserBelongToTheMeeting && !isUserMeetingOrganizer"
+            class="button"
+            (click)="quitMeeting()"
+          >
+            {{ "meeting.quit" | translate }}
+          </button>
+          <button
+            *ngIf="isUserMeetingOrganizer"
+            class="button"
+            (click)="deleteMeeting()"
+          >
+            {{ "meeting.delete" | translate }}
           </button>
         </div>
 

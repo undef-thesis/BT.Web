@@ -23,3 +23,25 @@
     width: 19.5rem;
   }
 }
+
+.bt-meeting-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  @media only screen and (max-width: 639px) {
+    flex-wrap: wrap;
+  }
+
+  &-see-more {
+    align-self: center;
+    text-align: right;
+    width: 125px;
+    padding-right: 0.7rem;
+
+    @media only screen and (max-width: 639px) {
+      width: 100%;
+      padding-right: 1.7rem;
+    }
+  }
+}

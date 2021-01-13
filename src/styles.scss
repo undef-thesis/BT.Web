@@ -114,3 +114,6 @@ $navbar-breakpoint: 690px;
   height: 120px;
 }
  
+.arrow-container, .next, .prev {
+  z-index: 10 !important;
+}

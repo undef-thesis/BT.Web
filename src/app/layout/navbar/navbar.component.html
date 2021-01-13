@@ -58,6 +58,10 @@
             class="bt-avatar-img"
             src="data:image/JPEG;base64,{{ profile.avatar }}"
           />
+
+          <b *ngIf="!profile.avatar" class="bt-no-avatar">
+            {{ getUserSignature }}
+          </b>
         </figure>
 
         <div class="dropdown-menu" id="dropdown-menu" role="menu">

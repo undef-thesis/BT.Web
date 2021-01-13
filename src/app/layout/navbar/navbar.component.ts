@@ -61,6 +61,8 @@ export class NavbarComponent implements OnInit {
         .getUserProfile()
         .pipe()
         .subscribe((userProfile) => {
+          localStorage.setItem('me', JSON.stringify(userProfile));
+
           this.profile = userProfile;
         });
     }
@@ -91,5 +93,12 @@ export class NavbarComponent implements OnInit {
 
   public createNewMeeting(): void {
     this.router.navigate(['/meetings/add']);
+  }
+
+  public get getUserSignature(): string {
+    return (
+      JSON.parse(localStorage.getItem('me')).firstname[0] +
+      JSON.parse(localStorage.getItem('me')).lastname[0]
+    );
   }
 }

@@ -1,5 +1,5 @@
 import { MapService } from './../../core/services/map.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MeetingsService } from './../../core/services/meetings.service';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import Address from 'src/app/core/models/Address';
 import Localization from 'src/app/core/models/Localization';
 import { GoogleAddressParser } from 'src/app/shared/map/GoogleAddressParser';
 import { ToastrService } from 'ngx-toastr';
+import moment from 'moment';
 
 @Component({
   selector: 'app-add-meeting',
@@ -19,6 +20,8 @@ export class AddMeetingComponent implements OnInit {
   public addMeetingForm: FormGroup;
   public submitted: boolean = false;
   public isLoading: boolean = false;
+  public isEditMode: boolean = false;
+  public editedMeetingId: string = null;
   public apiError;
 
   public selectedFiles = [];
@@ -51,14 +54,15 @@ export class AddMeetingComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.addMeetingForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      maxParticipants: [0, Validators.required],
+      maxParticipants: [2, [Validators.required, Validators.min(2)]],
       date: ['', Validators.required],
       category: ['', Validators.required],
       range: [0],
@@ -74,6 +78,29 @@ export class AddMeetingComponent implements OnInit {
         this.apiError = error.error;
       }
     );
+
+    this.route.params.subscribe((params) => {
+      this.editedMeetingId = params['id'];
+
+      if (this.editedMeetingId !== undefined) {
+        this.isEditMode = true;
+        this.fetchMeeting(this.editedMeetingId);
+      }
+    });
+  }
+
+  public fetchMeeting(id: string): void {
+    this.meetingService.getMeetingDetails(id).subscribe((response) => {
+      this.f.name.setValue(response.name);
+      this.f.description.setValue(response.description);
+      this.f.maxParticipants.setValue(response.maxParticipants);
+      this.f.date.setValue(response.date);
+      this.f.category.setValue(response.category.id);
+      this.f.range.setValue(response.address.range);
+
+      this.addresses.push(response.address);
+      this.selectedAddress = 0;
+    });
   }
 
   public onSubmit(imagesInput): void {
@@ -104,10 +131,19 @@ export class AddMeetingComponent implements OnInit {
     );
 
     this.meetingService
-      .addMeeting(meeting, address, this.f.category.value, imagesInput.files)
+      .addMeeting(
+        meeting,
+        address,
+        this.f.category.value,
+        imagesInput.files,
+        this.isEditMode,
+        this.editedMeetingId
+      )
       .subscribe(
         () => {
-          this.toastr.success('Utworzono nowe spotkanie');
+          !this.isEditMode
+            ? this.toastr.success('Utworzono nowe spotkanie')
+            : this.toastr.success('Edytowano spotkanie');
         },
         (error) => {
           this.apiError = error.error;
@@ -137,7 +173,7 @@ export class AddMeetingComponent implements OnInit {
         }
       }
     } else {
-      console.log('too much images');
+      console.error('too much images');
     }
   }
 
@@ -145,6 +181,7 @@ export class AddMeetingComponent implements OnInit {
     this.addresses = [];
     this.addresses = addresses;
     this.selectedAddress = 0;
+    this.f.address.setValue(this.selectAddress);
     this.cdr.detectChanges();
   }
 
@@ -176,7 +213,6 @@ export class AddMeetingComponent implements OnInit {
     geocoder.geocode({ location: latlng }, (results) => {
       if (results) {
         this.addresses = [];
-        console.log(results);
         const numberofAddresses = results.length;
 
         if (NUMBER_OF_ADDRESS_SUGGESTIONS > numberofAddresses) {
@@ -195,12 +231,15 @@ export class AddMeetingComponent implements OnInit {
 
           this.cdr.detectChanges();
         }
-        console.log(this.addresses);
       } else {
         console.log('No results found');
         return null;
       }
     });
+  }
+
+  public get getNow(): string {
+    return moment().format('yyyy-MM-DDTHH:mm');
   }
 
   get f() {

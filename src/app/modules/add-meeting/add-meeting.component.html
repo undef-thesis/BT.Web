@@ -17,7 +17,12 @@
                 class="button button-primary mt-2 ml-2"
                 type="submit"
               >
-                {{ "meeting.add-meeting" | translate }}
+                <span *ngIf="!isEditMode; else elseBlock">{{
+                  "meeting.add-meeting" | translate
+                }}</span>
+                <ng-template #elseBlock>
+                  <span>{{ "meeting.edit-meeting" | translate }}</span>
+                </ng-template>
               </button>
             </div>
           </div>
@@ -60,6 +65,7 @@
                   class="input wrapper mb-3"
                   formControlName="maxParticipants"
                   type="number"
+                  min="2"
                   placeholder="{{ 'meeting.max-participants' | translate }}"
                 />
                 <app-text-error
@@ -76,6 +82,7 @@
                 <input
                   class="input wrapper mb-3"
                   formControlName="date"
+                  [min]="getNow"
                   type="datetime-local"
                   placeholder="{{ 'meeting.date-time' | translate }}"
                 />
@@ -179,7 +186,7 @@
         <div class="columns" *ngIf="addresses">
           <div
             *ngFor="let address of addresses; let i = index"
-            class="card column mx-2 mb-3"
+            class="card column mx-2 mb-3 "
             [ngClass]="{
               'bt-address-card-active': selectedAddress === i,
               'has-text-grey': selectedAddress !== i

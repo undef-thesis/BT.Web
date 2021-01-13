@@ -22,12 +22,21 @@
     <div class="bt-card-text">{{ description }}</div>
 
     <div>
-      <time
-        ><b>{{ parseDate }}</b></time
-      >
+      <time>
+        <b>{{ parseDate }}</b>
+      </time>
     </div>
-    <div>
-      <a *ngIf="category" (click)="checkOtherMeetingsByCategory()"> #{{ category.name }} </a>
+    <div class="columns">
+      <div class="column">
+        <a *ngIf="category" (click)="checkOtherMeetingsByCategory()">
+          #{{ category.name }}
+        </a>
+      </div>
+      <div *ngIf="meetingOrganizerId && isUserMeetingOrganizer" class="column has-text-right">
+        <a [routerLink]="['/meetings/edit/', id]">
+          <b>Edytuj</b>
+        </a>
+      </div>
     </div>
   </div>
 </div>

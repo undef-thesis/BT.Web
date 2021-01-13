@@ -1,4 +1,4 @@
-@import '../../../../../styles/variables.scss';
+@import "../../../../../styles/variables.scss";
 
 .bt-avatar-panel {
   display: flex;
@@ -24,4 +24,13 @@
 .bt-add-avatar-button {
   margin-top: 0.7rem;
   text-align: end;
+}
+
+.bt-no-avatar {
+  font-size: xxx-large;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

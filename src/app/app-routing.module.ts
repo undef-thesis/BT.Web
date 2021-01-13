@@ -20,6 +20,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'meetings/edit/:id',
+    component: AddMeetingComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'meetings/:id',
     component: MeetingDetailsComponent,
   },

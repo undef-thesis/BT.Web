@@ -17,7 +17,8 @@
     "no-file-chosen": "No file chosen",
     "change": "Change",
     "menu": "Menu",
-    "search": "Search"
+    "search": "Search",
+    "all-fields": "All fields are required"
   },
   "auth": {
     "create-new-account": "Create new account",
@@ -57,7 +58,8 @@
     "hosted-by": "Hosted by",
     "free-slots": "Free slots",
     "date": "Date",
-    "last-update": "Last update"
+    "last-update": "Last update",
+    "delete": "Delete meeting"
   },
   "userpanel": {
     "personal": "Presonal",
@@ -71,5 +73,15 @@
     "profile-picture-info": "Add a photo of you to be easily recognized",
     "change-password": "Change password",
     "delete-account": "Delete account"
+  },
+    "notification": {
+    "join": "You joined the meeting",
+    "delete": "You delete the meeting",
+    "quit": "You quit the meeting",
+    "change-password": "Password has been changed",
+    "change-password-error": "An error occurred while changing password",
+    "delete-account": "Your account has been deleted successfully",
+    "change-avatar": "You change avatar",
+    "change-avatar-error": "An error occurred while changing avatar"
   }
 }

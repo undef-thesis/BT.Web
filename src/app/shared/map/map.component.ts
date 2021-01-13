@@ -56,6 +56,8 @@ export class MapComponent implements OnInit {
       (changes.latitude && changes.latitude.currentValue) ||
       (changes.longitude && changes.longitude.currentValue)
     ) {
+      this.setCenter(this.latitude, this.longitude);
+
       this.markers = [
         {
           position: {
@@ -119,7 +121,7 @@ export class MapComponent implements OnInit {
     if (!this.readMode) {
       const latitude: number = event.latLng.lat();
       const longitude: number = event.latLng.lng();
-      
+
       this.geocode(latitude, longitude);
     }
   }
