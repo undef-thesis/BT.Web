@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://localhost:5001/api/v1',
+  API_URL: 'https://bt-server-l4g8l.ondigitalocean.app/api/v1',
 };
 
 /*
