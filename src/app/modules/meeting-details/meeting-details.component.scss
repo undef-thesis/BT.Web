@@ -1,0 +1,44 @@
+.bt-images {
+  @media only screen and (max-width: 769px) {
+    text-align: center;
+  }
+}
+
+.bt-map {
+  height: 50vh;
+}
+
+.bt-header {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+
+  &-sub {
+    font-weight: 300;
+  }
+}
+
+.bt-pr-187 {
+  padding-right: 0.187rem;
+
+  @media only screen and (max-width: 769px) {
+    padding-right: 0.75rem;
+  }
+}
+
+.bt-pl-187 {
+  padding-left: 0.187rem;
+
+  @media only screen and (max-width: 769px) {
+    padding-left: 0.75rem;
+  }
+}
+
+.bt-meeting-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bt-meeting-footer {
+  margin-top: auto;
+}

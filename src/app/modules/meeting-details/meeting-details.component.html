@@ -1,0 +1,103 @@
+<section class="section">
+  <div *ngIf="meeting" class="container">
+    <div class="columns">
+      <div class="column is-8 bt-meeting-info">
+        <div class="bt-header">
+          <h1 class="title">{{ meeting.name }}</h1>
+
+          <button
+            *ngIf="
+              !isUserBelongToTheMeeting &&
+              !isUserMeetingOrganizer &&
+              meeting.participantCount < meeting.maxParticipants
+            "
+            class="button"
+            (click)="joinMeeting()"
+          >
+            {{ "meeting.join" | translate }}
+          </button>
+          <button
+            *ngIf="isUserBelongToTheMeeting && !isUserMeetingOrganizer"
+            class="button"
+            (click)="quitMeeting()"
+          >
+            {{ "meeting.quit" | translate }}
+          </button>
+          <button
+            *ngIf="isUserMeetingOrganizer"
+            class="button"
+            (click)="deleteMeeting()"
+          >
+            {{ "meeting.delete" | translate }}
+          </button>
+        </div>
+
+        <div *ngIf="meeting.meetingOrganizer" class="bt-header bt-header-sub">
+          <div>
+            {{ "meeting.hosted-by" | translate }}:
+            <a [routerLink]="['/users/', meeting.meetingOrganizer.id]">
+              <b>
+                {{ meeting.meetingOrganizer.firstname }}
+                {{ meeting.meetingOrganizer.lastname }}
+              </b>
+            </a>
+          </div>
+          <div>
+            {{ "meeting.free-slots" | translate }}:
+            {{ meeting.participantCount }}/{{ meeting.maxParticipants }}
+          </div>
+        </div>
+        <div class="bt-header-sub">
+          {{ "meeting.date" | translate }}: {{ parseDate(meeting.date) }}
+        </div>
+
+        <br />
+        <div class="bt-title-primary">
+          {{ "meeting.description" | translate }}
+        </div>
+        <div>{{ meeting.description }}</div>
+
+        <br />
+        <div class="bt-meeting-footer">
+          <a [routerLink]="['/category/', meeting.category.id]">
+            <div>#{{ meeting.category.name }}</div>
+          </a>
+          <div>
+            {{ "meeting.last-update" | translate }}:
+            {{ parseDate(meeting.updatedAt) }}
+          </div>
+        </div>
+      </div>
+      <div class="column is-4 bt-images">
+        <img
+          *ngIf="meeting.images[0]"
+          src="data:image/JPEG;base64,{{ meeting.images[0].picture }}"
+        />
+        <div class="columns">
+          <div class="column is-6 bt-pr-187">
+            <img
+              *ngIf="meeting.images[1]"
+              src="data:image/JPEG;base64,{{ meeting.images[1].picture }}"
+            />
+          </div>
+          <div class="column is-6 bt-pl-187">
+            <img
+              *ngIf="meeting.images[2]"
+              src="data:image/JPEG;base64,{{ meeting.images[2].picture }}"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column bt-map">
+        <app-map
+          [readMode]="true"
+          [latitude]="meeting.address.latitude"
+          [longitude]="meeting.address.longitude"
+          [meetings]="[meeting]"
+        ></app-map>
+      </div>
+    </div>
+  </div>
+</section>

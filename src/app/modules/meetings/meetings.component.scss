@@ -1,0 +1,17 @@
+.bt-meetings-list {
+  @media only screen and (min-width: 1360px) {
+    width: 74.3rem;
+  }
+
+  @media only screen and (max-width: 1359px) {
+    width: 56em;
+  }
+
+  @media only screen and (max-width: 971px) {
+    width: 37rem;
+  }
+
+  @media only screen and (max-width: 639px) {
+    width: 19.5rem;
+  }
+}

@@ -1,0 +1,51 @@
+<form
+  [class]="styleBasic ? 'bt-search-basic' : 'bt-search'"
+  (submit)="search()"
+>
+  <div
+    [class]="styleBasic ? 'bt-search-box bt-search-box-basic' : 'bt-search-box'"
+  >
+    <input
+      [(ngModel)]="searchTerm"
+      class="input mr-4 bt-sarch-input"
+      placeholder="Wyszukaj"
+      name="searchTerm"
+    />
+
+    <div class="bt-divider"></div>
+
+    <div class="ng-autocomplete">
+      <ng-autocomplete
+        [(ngModel)]="localization.city"
+        [data]="citySuggest"
+        [searchKeyword]="keyword"
+        (selected)="selectEvent($event)"
+        (inputChanged)="onChangeSearch($event)"
+        [itemTemplate]="itemTemplate"
+        [notFoundTemplate]="notFoundTemplate"
+        class="autocomplete-container"
+        placeHolder="Gdzie?"
+        name="city"
+      >
+      </ng-autocomplete>
+
+      <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item.name + ', ' + item.countryCode"></a>
+      </ng-template>
+
+      <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+      </ng-template>
+    </div>
+
+    <button class="button bt-disable-outline" type="submit">
+      <span class="icon ml-2 mr-2">
+        <i class="fas fa-lg fa-search" (keyup.enter)="search()"></i>
+      </span>
+    </button>
+
+    <!-- <span class="icon ml-2 mr-2" type="submit">
+      <i class="fas fa-lg fa-search" (keyup.enter)="search()"></i>
+    </span> -->
+  </div>
+</form>

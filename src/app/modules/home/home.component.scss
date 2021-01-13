@@ -1,0 +1,47 @@
+.carousel {
+  position: relative;
+}
+
+.bt-map {
+  height: 50vh;
+}
+
+.bt-meetings-list {
+  @media only screen and (min-width: 1360px) {
+    width: 75rem;
+  }
+
+  @media only screen and (max-width: 1359px) {
+    width: 56em;
+  }
+
+  @media only screen and (max-width: 971px) {
+    width: 37rem;
+  }
+
+  @media only screen and (max-width: 639px) {
+    width: 19.5rem;
+  }
+}
+
+.bt-meeting-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  @media only screen and (max-width: 639px) {
+    flex-wrap: wrap;
+  }
+
+  &-see-more {
+    align-self: center;
+    text-align: right;
+    width: 125px;
+    padding-right: 0.7rem;
+
+    @media only screen and (max-width: 639px) {
+      width: 100%;
+      padding-right: 1.7rem;
+    }
+  }
+}

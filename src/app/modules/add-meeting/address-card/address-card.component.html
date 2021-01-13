@@ -1,0 +1,58 @@
+<div class="card-content">
+  <ul>
+    <li>
+      <b>{{ "meeting.street" | translate }}: </b>
+      <span
+        *ngIf="address.street && address.street !== 'undefined'; else elseBlock"
+      >
+        {{ address.street }}
+      </span>
+      <ng-template #elseBlock> Brak </ng-template>
+    </li>
+    <li>
+      <b>{{ "meeting.city" | translate }}: </b>
+      <span
+        *ngIf="address.city && address.city !== 'undefined'; else elseBlock"
+      >
+        {{ address.city }}
+      </span>
+      <ng-template #elseBlock> Brak </ng-template>
+    </li>
+    <li>
+      <b>{{ "meeting.postal-code" | translate }}: </b>
+      <span
+        *ngIf="
+          address.postalCode && address.postalCode !== 'undefined';
+          else elseBlock
+        "
+      >
+        {{ address.postalCode }}
+      </span>
+      <ng-template #elseBlock> Brak </ng-template>
+    </li>
+    <li>
+      <b>{{ "meeting.province" | translate }}</b>
+      <span
+        *ngIf="
+          address.province && address.province !== 'undefined';
+          else elseBlock
+        "
+      >
+        {{ address.province }}
+      </span>
+      <ng-template #elseBlock> Brak </ng-template>
+    </li>
+    <li>
+      <b>{{ "meeting.country" | translate }}: </b>
+      <span
+        *ngIf="
+          address.country && address.country !== 'undefined';
+          else elseBlock
+        "
+      >
+        {{ address.country }}
+      </span>
+      <ng-template #elseBlock> Brak </ng-template>
+    </li>
+  </ul>
+</div>

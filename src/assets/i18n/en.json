@@ -1,0 +1,87 @@
+{
+  "header": {
+    "login": "Login",
+    "join-us": "Join us"
+  },
+  "footer": {
+    "author": "Aleksander Szatko",
+    "university": "Wrocław University of Sciencec and Technology",
+    "faculty": "Faculty of Microsystem Electronics and Photonics"
+  },
+  "common": {
+    "title": "bachelor's thesis",
+    "by": "by",
+    "is-required": "{{value}} is required",
+    "cancel": "Cancel",
+    "choose-file": "Choose file",
+    "no-file-chosen": "No file chosen",
+    "change": "Change",
+    "menu": "Menu",
+    "search": "Search",
+    "all-fields": "All fields are required"
+  },
+  "auth": {
+    "create-new-account": "Create new account",
+    "already-have-an-account": "Already have an account?",
+    "dont-have-an-account": "Don't have an account",
+    "diffrent-password": "Password doesn't match",
+    "login-to-your-account": "Login to your account"
+  },
+  "account": {
+    "email": "Email",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "password": "Password",
+    "confirm-password": "Confirm password",
+    "change-avatar": "Change avatar",
+    "new-password": "New password",
+    "confirm-new-password": "Confirm new password"
+  },
+  "meeting": {
+    "add-meeting": "Add meeting",
+    "name": "Name",
+    "description": "Description",
+    "max-participants": "Max participants",
+    "date-time": "Datetime",
+    "category": "Category",
+    "address": "Adres",
+    "choose-on-map": "Choose on map",
+    "country": "country",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "province": "Province",
+    "city": "City",
+    "street": "Street",
+    "postal-code": "Postal code",
+    "images": "Images",
+    "join": "Join",
+    "hosted-by": "Hosted by",
+    "free-slots": "Free slots",
+    "date": "Date",
+    "last-update": "Last update",
+    "delete": "Delete meeting"
+  },
+  "userpanel": {
+    "personal": "Presonal",
+    "organized": "Organized meetings",
+    "enrolled": "Enrolled meetings",
+    "personal-info": "General user information",
+    "organized-info": "Meetings which you organized",
+    "enrolled-info": ">Meetings which you enrolled",
+    "menu-info": "Update profile and check your meetings",
+    "profile-picture": "Profile picture",
+    "profile-picture-info": "Add a photo of you to be easily recognized",
+    "change-password": "Change password",
+    "delete-account": "Delete account"
+  },
+    "notification": {
+    "join": "You joined the meeting",
+    "delete": "You delete the meeting",
+    "quit": "You quit the meeting",
+    "change-password": "Password has been changed",
+    "change-password-error": "An error occurred while changing password",
+    "delete-account": "Your account has been deleted successfully",
+    "change-avatar": "You change avatar",
+    "change-avatar-error": "An error occurred while changing avatar"
+  }
+}

@@ -1,0 +1,42 @@
+<div class="bt-card">
+  <div>
+    <slideshow
+      *ngIf="base64images.length"
+      [minHeight]="'12rem'"
+      [showArrows]="true"
+      [imageUrls]="base64images"
+    >
+    </slideshow>
+  </div>
+  <div class="bt-card-content">
+    <div class="bt-card-title bt-card-text">
+      <a [routerLink]="['/meetings/', id]">
+        <b>{{ name }}</b>
+      </a>
+    </div>
+    <div>
+      {{ "meeting.free-slots" | translate }}: {{ participantCount }}/{{
+        maxParticipants
+      }}
+    </div>
+    <div class="bt-card-text">{{ description }}</div>
+
+    <div>
+      <time>
+        <b>{{ parseDate }}</b>
+      </time>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <a *ngIf="category" (click)="checkOtherMeetingsByCategory()">
+          #{{ category.name }}
+        </a>
+      </div>
+      <div *ngIf="meetingOrganizerId && isUserMeetingOrganizer" class="column has-text-right">
+        <a [routerLink]="['/meetings/edit/', id]">
+          <b>Edytuj</b>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

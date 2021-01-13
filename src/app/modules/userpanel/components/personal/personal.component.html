@@ -1,0 +1,25 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
+  <input
+    class="input wrapper"
+    formControlName="firstname"
+    type="text"
+    placeholder="{{ 'account.firstname' | translate }}"
+  />
+
+  <input
+    class="input wrapper"
+    formControlName="lastname"
+    type="text"
+    placeholder="{{ 'account.lastname' | translate }}"
+  />
+
+  <div class="has-text-right">
+    <button
+      [ngClass]="{ 'is-loading': isLoading }"
+      class="button button-primary mt-2"
+      type="submit"
+    >
+      {{ "common.change" | translate }}
+    </button>
+  </div>
+</form>

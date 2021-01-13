@@ -1,5 +1,9 @@
+$navbar-breakpoint: 690px;
+
 @import "./styles/variables.scss";
 @import "./styles/bulma.scss";
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
 @import "~node_modules/bulma/sass/utilities/_all";
 @import "~node_modules/bulma/sass/base/_all";
@@ -15,4 +19,101 @@
 *::after,
 *::before {
   box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
+.input,
+.input:focus,
+.input:hover {
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  box-shadow: none;
+  border-radius: 0;
+  border-bottom: 1.4px solid rgba($color: #000000, $alpha: 0.3);
+}
+
+.error {
+  color: red;
+  font-size: 0.8em;
+}
+
+.section {
+  padding-top: 5rem;
+  background-color: #fcfcfc;
+}
+
+.container {
+  min-height: 65vh;
+}
+
+.button-primary,
+.button-primary:focus {
+  background-color: $primary;
+  color: $white;
+}
+
+.button-primary:active,
+.button-primary:hover {
+  background-color: $primary-strength;
+  color: $white;
+}
+
+.bt-title-primary {
+  font-weight: 700;
+  font-size: large;
+
+  &-big {
+    font-size: xx-large;
+    font-weight: 800;
+  }
+}
+
+.bt-title-secondary {
+  font-weight: 300;
+  font-size: small;
+  padding-bottom: 0.75rem;
+}
+
+.bt-shadow {
+  box-shadow: 0 0.5em 1em -0.125em $shadow-1, 0 0px 0 1px $shadow-2;
+  background-color: $white;
+}
+
+.bt-pointer {
+  cursor: pointer !important;
+}
+
+.bt-divider {
+  width: 1px;
+  height: 100%;
+  color: grey;
+}
+
+.autocomplete-container {
+  box-shadow: none !important;
+
+  input::placeholder {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgba(54, 54, 54, 0.3);
+  }
+}
+
+.autocomplete-container .input-container input {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+.button {
+  height: 2.2em;
+}
+
+.gm-style .gm-style-iw-c {
+  width: 200px;
+  height: 120px;
+}
+ 
+.arrow-container, .next, .prev {
+  z-index: 10 !important;
 }

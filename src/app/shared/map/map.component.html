@@ -1,0 +1,45 @@
+<google-map
+  (mapClick)="click($event)"
+  height="100%"
+  width="100%"
+  [zoom]="zoom"
+  [center]="center"
+  [options]="options"
+>
+  <map-marker
+    *ngFor="let marker of markers"
+    #mapmarker="mapMarker"
+    [position]="marker.position"
+    [label]="marker.label"
+    [title]="marker.title"
+    [options]="marker.options"
+    (mapClick)="readMode && openInfo(mapmarker, marker.info, marker.id)"
+  >
+  </map-marker>
+
+  <map-info-window *ngIf="readMode">
+    <div *ngIf="infoContent" class="bt-infocontent-text">
+      <div>{{ infoContent.street }}</div>
+      <div>{{ infoContent.postalCode }} {{ infoContent.city }}</div>
+      <div>{{ infoContent.province }}</div>
+      <div>{{ infoContent.country }}</div>
+      <a
+        *ngIf="markers.length > 1"
+        (click)="goToMeetingDetails(infoContent.id)"
+        class="bt-meeting-details"
+        >Zobacz szczegóły</a
+      >
+    </div>
+  </map-info-window>
+
+  <map-circle
+    *ngIf="markers.length === 1 && !readMode && mapRange > 0"
+    [center]="markers[0].position"
+    [radius]="+mapRange"
+  ></map-circle>
+  <map-circle
+    *ngIf="markers.length === 1 && markers[0].range"
+    [center]="markers[0].position"
+    [radius]="markers[0].range"
+  ></map-circle>
+</google-map>

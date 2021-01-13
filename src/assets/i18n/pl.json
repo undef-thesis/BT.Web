@@ -1,0 +1,87 @@
+{
+  "header": {
+    "login": "Zaloguj",
+    "join-us": "Dołącz do nas"
+  },
+  "footer": {
+    "author": "Aleksander Szatko",
+    "university": "Politechnika Wrocławska",
+    "faculty": "Wydział Elektroniki, Mikrosystemów i Fotoniki"
+  },
+  "common": {
+    "title": "bachelor's thesis",
+    "by": "zaprojektowane przez",
+    "is-required": "{{value}} jest wymagane",
+    "cancel": "Anuluj",
+    "choose-file": "Wybierz plik",
+    "no-file-chosen": "Nie wybrano żadnego pliku",
+    "change": "Zmień",
+    "menu": "Menu",
+    "search": "Wyszukaj",
+    "all-fields": "Wszystkie pola są wymagane"
+  },
+  "auth": {
+    "create-new-account": "Utwórz nowe konto",
+    "already-have-an-account": "Masz już swoje konto?",
+    "dont-have-an-account": "Nie masz jeszcze konta?",
+    "diffrent-password": "Podane hasła są różne",
+    "login-to-your-account": "Zaloguj się do swojego konta"
+  },
+  "account": {
+    "email": "Email",
+    "firstname": "Imię",
+    "lastname": "Nazwisko",
+    "password": "Hasło",
+    "confirm-password": "Potwierdź hasło",
+    "change-avatar": "Zmień avatar",
+    "new-password": "Nowe hasło",
+    "confirm-new-password": "Potwierdź nowe hasło"
+  },
+  "meeting": {
+    "add-meeting": "Dodaj nowe spotkanie",
+    "name": "Nazwa",
+    "description": "Opis",
+    "max-participants": "Maksymalna liczba uczestników",
+    "date-time": "Data i godzina",
+    "category": "Kategoria",
+    "address": "Adres",
+    "choose-on-map": "Wybierz na mapie",
+    "country": "Państwo",
+    "latitude": "Szerokość geograficzna",
+    "longitude": "Długość geograficzna",
+    "province": "Województwo",
+    "city": "Miasto",
+    "street": "Ulica",
+    "postal-code": "Kod pocztowy",
+    "images": "Zdjęcia",
+    "join": "Dołącz",
+    "hosted-by": "Założone przez",
+    "free-slots": "Wolne miejsca",
+    "date": "Data spotkania",
+    "last-update": "Ostatnia aktualizacja",
+    "delete": "Usuń spotkanie"
+  },
+  "userpanel": {
+    "personal": "Dane konta",
+    "organized": "Utworzone spotkania",
+    "enrolled": "Zapisane spotkania",
+    "personal-info": "Ogólne dane użytkownika",
+    "organized-info": "Spotkania, które organizujesz",
+    "enrolled-info": "Spotkania do których jesteś zapisany",
+    "menu-info": "Zaaktualizuj swoje konto lub sprawdź spotkania",
+    "profile-picture": "Zdjęcie profilowe",
+    "profile-picture-info": "Dodaj swoje zdjęcie aby znajomi mogli cie rozpoznać",
+    "change-password": "Zmień hasło",
+    "delete-account": "Usuń konto"
+  },
+  "notification": {
+    "join": "Dołączono do spotkania",
+    "delete": "Usunięto ze spotkania",
+    "quit": "Wypisano ze spotkania",
+    "change-password": "Hasło zostało zmienione",
+    "change-password-error": "Wystąpił problem podczas zmiany hasła",
+    "delete-account": "Konto zostało usunięte",
+    "change-avatar": "Avatar został zmieniony",
+    "change-avatar-error": "Wystąpił błąd podczas zmiany avatara"
+  }
+}

@@ -1,0 +1,44 @@
+@import "../../../styles/variables.scss";
+
+.bt-map {
+  height: 50vh;
+}
+
+.bt-meeting-img {
+  height: 10rem;
+}
+
+.bt-address-card-active {
+  background-color: #00cbcb;
+  font-weight: 600;
+}
+
+.bt-add-meeting-form {
+  box-shadow: 0 0.5em 1em -0.125em $shadow-1, 0 0px 0 1px $shadow-2;
+  background-color: $white;
+  padding: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.bt-image-viewer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.bt-select {
+  height: 2.3em;
+}
+
+.bt-select-child {
+  height: 2.2rem;
+}
+
+.bt-localize {
+  justify-content: space-between;
+  display: flex;
+}
+
+.card {
+  max-width: 25%;
+}
