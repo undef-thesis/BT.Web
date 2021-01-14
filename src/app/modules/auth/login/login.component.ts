@@ -34,10 +34,10 @@ export class LoginComponent implements OnInit {
           this.onCloseModal();
         }
       });
-
+    // a.szatko71@gmail.com ZAQ!2wsx
     this.loginForm = this.formBuilder.group({
-      email: ['a.szatko71@gmail.com', [Validators.required, Validators.email]],
-      password: ['ZAQ!2wsx', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
     });
   }
 
