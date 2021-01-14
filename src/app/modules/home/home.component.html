@@ -24,9 +24,15 @@
             <a (click)="searchByCity()">Zobacz więcej</a>
           </div>
         </div>
+
         <app-meeting-card-list
+          *ngIf="meetingsCity.length; else noMeetingsCity"
           [meetings]="meetingsCity.slice(0, 8)"
         ></app-meeting-card-list>
+
+        <ng-template #noMeetingsCity>
+          <div>Brak wydarzeń w Twoim mieście</div>
+        </ng-template>
       </div>
     </div>
     <div class="columns">
@@ -40,8 +46,13 @@
           </div>
         </div>
         <app-meeting-card-list
+          *ngIf="meetingsCountry.length; else noMeetingsCountry"
           [meetings]="meetingsCountry.slice(0, 8)"
         ></app-meeting-card-list>
+
+        <ng-template #noMeetingsCountry>
+          <div>Brak wydarzeń w Twoim kraju</div>
+        </ng-template>
       </div>
     </div>
     <!-- <div class="columns">

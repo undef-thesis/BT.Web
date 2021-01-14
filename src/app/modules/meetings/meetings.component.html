@@ -1,17 +1,22 @@
 <section class="section pt-6">
   <div>
     <app-search-box
-      [localization]="{ city: 'Wroclaw' }"
+      [localization]="{ city: city }"
       [styleBasic]="true"
     ></app-search-box>
   </div>
   <div class="container bt-meetings-list mt-4">
     <div class="columns">
       <div class="column">
-        <app-meeting-card-list
-          title="Wyszukane spotkania"
-          [meetings]="meetings"
-        ></app-meeting-card-list>
+        <div *ngIf="meetings.length; else noMeetings">
+          <app-meeting-card-list
+            title="Wyszukane spotkania"
+            [meetings]="meetings"
+          ></app-meeting-card-list>
+        </div>
+        <ng-template #noMeetings>
+          <div>Nie znaloziono żadnych spotkań</div>
+        </ng-template>
       </div>
     </div>
   </div>

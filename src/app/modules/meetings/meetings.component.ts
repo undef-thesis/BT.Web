@@ -10,6 +10,7 @@ import { MeetingsService } from 'src/app/core/services/meetings.service';
 })
 export class MeetingsComponent implements OnInit {
   public meetings: Array<Meeting> = [];
+  public city: string = '';
 
   constructor(
     private meetingsService: MeetingsService,
@@ -20,6 +21,7 @@ export class MeetingsComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       let { city, country, term, category } = params;
 
+      this.city = city ? city : 'Wroclaw';
       city = city === undefined ? '' : city;
       country = country === undefined ? '' : country;
       term = term === undefined ? '' : term;
