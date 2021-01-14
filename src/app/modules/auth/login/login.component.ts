@@ -61,8 +61,8 @@ export class LoginComponent implements OnInit {
       .subscribe(
         () => {
           this.modalService.close('login-modal');
-          this.modalService.remove('login-modal');
-          this.modalService.remove('register-modal');
+          // this.modalService.remove('login-modal');
+          // this.modalService.remove('register-modal');
         },
         ({ error }) => {
           this.apiError = error.error.Message;

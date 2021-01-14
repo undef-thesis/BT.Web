@@ -73,6 +73,12 @@ export class HomeComponent implements OnInit {
       .getFilteredMeetings('city', this.city)
       .subscribe((meeting) => {
         this.meetingsCity = meeting;
+
+        const ids = new Set(this.meetingsCountry.map((item) => item.id));
+        this.mergedMeetings = [
+          ...this.meetingsCountry,
+          ...this.meetingsCity.filter((item) => !ids.has(item.id)),
+        ];
       });
 
     this.meetingsService

@@ -60,7 +60,8 @@
     "free-slots": "Wolne miejsca",
     "date": "Data spotkania",
     "last-update": "Ostatnia aktualizacja",
-    "delete": "Usuń spotkanie"
+    "delete": "Usuń spotkanie",
+    "edit-meeting": "Edytuj spotkanie"
   },
   "userpanel": {
     "personal": "Dane konta",

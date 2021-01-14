@@ -5,7 +5,15 @@
         <div class="columns">
           <!-- HEADER -->
           <div class="column mt-2">
-            <h1 class="title is-4">{{ "meeting.add-meeting" | translate }}</h1>
+            <h1 class="title is-4" *ngIf="!isEditMode; else elseBlock">
+              {{ "meeting.add-meeting" | translate }}
+            </h1>
+
+            <ng-template #elseBlock>
+              <h1 class="title is-4">
+                {{ "meeting.edit-meeting" | translate }}
+              </h1>
+            </ng-template>
           </div>
           <div class="column">
             <div class="has-text-right">
@@ -17,12 +25,10 @@
                 class="button button-primary mt-2 ml-2"
                 type="submit"
               >
-                <span *ngIf="!isEditMode; else elseBlock">{{
+                <span *ngIf="!isEditMode; else elseBlockBtn">{{
                   "meeting.add-meeting" | translate
                 }}</span>
-                <ng-template #elseBlock>
-                  <span>{{ "meeting.edit-meeting" | translate }}</span>
-                </ng-template>
+                <ng-template #elseBlockBtn> Edytuj </ng-template>
               </button>
             </div>
           </div>
@@ -186,7 +192,7 @@
         <div class="columns" *ngIf="addresses">
           <div
             *ngFor="let address of addresses; let i = index"
-            class="card column mx-2 mb-3 "
+            class="card column mx-2 mb-3"
             [ngClass]="{
               'bt-address-card-active': selectedAddress === i,
               'has-text-grey': selectedAddress !== i
