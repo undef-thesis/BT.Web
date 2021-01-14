@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
@@ -27,7 +28,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private modalService: ModalService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) {
     this.modalSubscription = this.modalService
       .getModalState()
@@ -87,9 +89,11 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         () => {
           this.modalService.close('register-modal');
+          this.toastr.success('Utworzono konto!. Możesz zalogować się do systemu');
         },
         (error) => {
           this.apiError = error.error;
+          this.toastr.success('Wystąpił bład podczas zakładania konta');
         }
       )
       .add(() => {

@@ -61,7 +61,8 @@
     "date": "Data spotkania",
     "last-update": "Ostatnia aktualizacja",
     "delete": "Usuń spotkanie",
-    "edit-meeting": "Edytuj spotkanie"
+    "edit-meeting": "Edytuj spotkanie",
+    "quit": "Rezygnuj"
   },
   "userpanel": {
     "personal": "Dane konta",

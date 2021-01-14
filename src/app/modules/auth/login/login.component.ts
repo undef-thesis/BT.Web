@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ModalService } from './../../../core/services/modal.service';
 import { Router } from '@angular/router';
 import { AuthService } from './../../../core/services/auth.service';
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private modalService: ModalService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.modalSubscription = this.modalService
       .getModalState()
@@ -63,9 +65,11 @@ export class LoginComponent implements OnInit {
           this.modalService.close('login-modal');
           // this.modalService.remove('login-modal');
           // this.modalService.remove('register-modal');
+          this.toastr.success('Zalogowano do apliakcji');
         },
         ({ error }) => {
           this.apiError = error.error.Message;
+          this.toastr.error('Wystpi problem podczas logowania do aplikacji');
         }
       )
       .add(() => {
