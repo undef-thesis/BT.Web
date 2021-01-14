@@ -128,17 +128,25 @@
               ></app-text-error>
             </div>
             <!-- LOCALIZE ME -->
+            <!-- <div class="columns mb-0">
+              <div class="column pb-0"> -->
             <p>
               {{ "meeting.address" | translate }} ({{
                 "meeting.choose-on-map" | translate
               }}):
             </p>
+            <!-- </div>
+              <div class="column pb-0 has-text-right">
+                <p class="">Zakres</p>
+              </div>
+            </div> -->
+
             <div class="bt-localize">
-              <button class="button" (click)="localizeMe()">
+              <button class="button btn-size" (click)="localizeMe()">
                 Lokalizuj mnie!
               </button>
 
-              <div class="select bt-select">
+              <div class="select bt-select ml-2">
                 <select class="bt-select-child" formControlName="range">
                   <option *ngFor="let range of ranges" [value]="range">
                     {{ range }}
