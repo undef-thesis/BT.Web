@@ -31,9 +31,6 @@ export class ModalService {
   public open(id: string): void {
     const modal = this.modals.find((x) => x.id === id);
     this.modalState.next({ isOpen: true });
-
-    console.log(modal);
-
     modal.open();
   }
 
