@@ -1,26 +1,6 @@
 .bt-grid {
-  // display: flex;
-  // flex-wrap: wrap;
   display: grid;
   grid-template-columns: repeat(auto-fill, 287px);
   justify-content: center;
-  //flex-direction: row;
   gap: 14px;
-  // justify-content: flex-start;
 }
-
-// .bt-grid > app-meeting-card {
-//   margin: 14px;
-// }
-// .bt-grid > div {
-//   display: flex;
-//   flex-basis: calc(50% - 40px);
-//   justify-content: center;
-//   flex-direction: column;
-// }
-
-// .bt-grid > div > div {
-//   display: flex;
-//   justify-content: center;
-//   flex-direction: row;
-// }

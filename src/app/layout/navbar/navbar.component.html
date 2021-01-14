@@ -27,9 +27,9 @@
   <div class="bt-navbar-menu navbar-menu pr-3" #navMenu>
     <div *ngIf="!isLoggedIn" class="navbar-end">
       <div class="navbar-item" (click)="openLoginModal()">
-        <b id="burger" class="bt-pointer">
+        <button id="burger" class="bt-pointer">
           {{ "header.login" | translate }}
-        </b>
+        </button>
       </div>
       <div class="navbar-item" (click)="openRegisterModal()">
         <b id="burger" class="bt-pointer">
