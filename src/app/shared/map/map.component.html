@@ -19,10 +19,10 @@
 
   <map-info-window *ngIf="readMode">
     <div *ngIf="infoContent" class="bt-infocontent-text">
-      <div>{{ infoContent.street }}</div>
-      <div>{{ infoContent.postalCode }} {{ infoContent.city }}</div>
-      <div>{{ infoContent.province }}</div>
-      <div>{{ infoContent.country }}</div>
+      <div *ngIf="infoContent.street !== 'undefined'">{{ infoContent.street }}</div>
+      <div *ngIf="infoContent.postalCode !== 'undefined'">{{ infoContent.postalCode }} {{ infoContent.city }}</div>
+      <div *ngIf="infoContent.province !== 'undefined'">{{ infoContent.province }}</div>
+      <div *ngIf="infoContent.province !== 'undefined'">{{ infoContent.country }}</div>
       <a
         *ngIf="markers.length > 1"
         (click)="goToMeetingDetails(infoContent.id)"
